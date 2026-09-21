@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tehneo d.o.o. — Ulaganje u čistu energiju</title>
+<meta name="description" content="Tehneo d.o.o. ulaže u obnovljive izvore energije i upravlja vlastitim solarnim elektranama.">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" href="/assets/favicon-192.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0F2A1E;
+    --forest-deep:#091A12;
+    --green:#2F6E4E;
+    --sage:#9CC5A8;
+    --paper:#F6F6F3;
+    --paper-dim:#EDEEE9;
+    --ink:#15201A;
+    --slate:#5B6660;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .font-display{ font-family:'Space Grotesk', sans-serif; }
+
+  /* ---- Header ---- */
+  #site-header{
+    transition: background-color .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+  }
+  #site-header.solid{
+    background-color: rgba(246,246,243,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  #site-header .brand, #site-header .nav-link, #site-header .menu-line{
+    transition: color .4s ease, background-color .4s ease;
+  }
+  #site-header.solid .brand, #site-header.solid .nav-link{ color: var(--forest); }
+  #site-header.solid .menu-line{ background-color: var(--forest); }
+
+  .brand-logo{ height: 30px; width: auto; transition: opacity .4s ease; }
+  .brand-logo-solid{ position:absolute; top:0; left:0; opacity:0; }
+  #site-header.solid .brand-logo-default{ opacity:0; }
+  #site-header.solid .brand-logo-solid{ opacity:1; }
+
+  .nav-link{ position:relative; color:var(--paper); }
+  .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-4px;
+    width:0%; height:1px;
+    background:currentColor;
+    opacity:.6;
+    transition:width .2s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* ---- Hero ---- */
+  .hero-media{
+    background-image:
+      linear-gradient(180deg, rgba(9,26,18,0.55) 0%, rgba(9,26,18,0.35) 40%, rgba(9,26,18,0.88) 100%),
+      url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=2400&q=80&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+  }
+
+  .scroll-cue{
+    animation: cue-move 2.2s ease-in-out infinite;
+  }
+  @keyframes cue-move{
+    0%,100%{ transform:translateY(0); opacity:.55; }
+    50%{ transform:translateY(8px); opacity:1; }
+  }
+
+  /* ---- Cards ---- */
+  .card-focus{
+    border-top: 2px solid var(--green);
+    transition: border-color .25s ease;
+  }
+  .card-focus:hover{ border-top-color: var(--sage); }
+
+  /* ---- Vizija parallax panel ---- */
+  .vizija-media{
+    background-image:
+      linear-gradient(120deg, rgba(9,26,18,0.92) 20%, rgba(9,26,18,0.55) 100%),
+      url('https://images.unsplash.com/photo-1780922576222-09432d2f9b82?w=2400&q=80&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+  }
+  @media (max-width: 768px){
+    .vizija-media{ background-attachment: scroll; }
+  }
+
+  .stat-num{ font-variant-numeric: tabular-nums; }
+
+  .footer-divider{ border-color: rgba(156,197,168,0.22); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .scroll-cue{ animation:none; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- HEADER -->
+<header id="site-header" class="fixed top-0 inset-x-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <a href="/solar/" class="brand flex items-center gap-2.5 font-display text-xl tracking-tight font-semibold text-[var(--paper)]">
+      <span class="relative inline-block">
+        <img src="/assets/tehneo-symbol-reversed.svg" alt="" class="brand-logo brand-logo-default">
+        <img src="/assets/tehneo-symbol.svg" alt="" class="brand-logo brand-logo-solid">
+      </span>
+      TEHNEO
+    </a>
+    <nav class="hidden md:flex items-center gap-10 text-sm">
+      <a href="#o-nama" class="nav-link">O nama</a>
+      <a href="#vizija" class="nav-link">Vizija</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+      <a href="/" class="nav-link">Data annotation &rarr;</a>
+    </nav>
+    <a href="#kontakt" class="hidden md:inline-flex items-center px-5 py-2 text-sm font-medium text-[var(--forest)] bg-[var(--paper)] hover:bg-[var(--sage)] transition-colors">
+      Kontaktirajte nas
+    </a>
+
+    <button id="menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-[5px]" aria-label="Otvori izbornik" aria-expanded="false">
+      <span class="menu-line block w-6 h-[1.5px] bg-[var(--paper)]"></span>
+      <span class="menu-line block w-6 h-[1.5px] bg-[var(--paper)]"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden bg-[var(--paper)] border-t border-black/5">
+    <div class="px-6 py-5 flex flex-col gap-4 text-sm text-[var(--ink)]">
+      <a href="#o-nama" class="py-1">O nama</a>
+      <a href="#vizija" class="py-1">Vizija</a>
+      <a href="#kontakt" class="py-1">Kontakt</a>
+      <a href="/" class="py-1">Data annotation &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-media relative min-h-[100svh] flex flex-col justify-end text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 pb-20 md:pb-28 w-full">
+    <p class="text-[var(--sage)] text-sm mb-6 max-w-md">Fotonaponski sustavi · Pasivni prihod · Dugoročno vlasništvo</p>
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-medium leading-[1.05] max-w-4xl">
+      Ulaganje u čistu energiju i održivu budućnost
+    </h1>
+    <p class="mt-7 text-base md:text-lg text-[var(--paper)]/75 max-w-xl leading-relaxed">
+      Tehneo razvija, gradi i dugoročno upravlja vlastitim solarnim elektranama.
+      Naš pristup ulaganju u fotonaponske sustave stvara stabilan pasivni prihod
+      i konkretan doprinos energetskoj tranziciji.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#vizija" class="inline-flex items-center px-6 py-3 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--sage)] transition-colors">
+        Naša vizija
+      </a>
+      <a href="#kontakt" class="inline-flex items-center px-6 py-3 border border-[var(--paper)]/30 text-sm font-medium hover:border-[var(--paper)]/70 transition-colors">
+        Razgovarajmo
+      </a>
+    </div>
+  </div>
+  <a href="#o-nama" aria-label="Pomakni se prema dolje" class="scroll-cue absolute bottom-6 left-1/2 -translate-x-1/2 text-[var(--paper)]/70">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v15M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- O NAMA -->
+<section id="o-nama" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <div class="grid md:grid-cols-2 gap-14 md:gap-20 items-center mb-24 md:mb-32">
+    <div>
+      <p class="text-[var(--green)] text-sm mb-4">O nama</p>
+      <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight mb-6">
+        Vlastita elektrana, u našem vlasništvu za sljedećih dvadeset godina
+      </h2>
+      <p class="text-[var(--slate)] leading-relaxed">
+        Za razliku od izvođača koji projekt predaju nakon izgradnje, Tehneo
+        ostaje vlasnik elektrane koju je razvio. To nas tjera da svaku
+        odluku — od odabira lokacije do izbora opreme — donosimo s pogledom
+        na sljedećih dvadeset godina, ne na sljedeći kvartal. Ovo je naša
+        prva elektrana, temelj za daljnji rast portfelja.
+      </p>
+    </div>
+    <div class="aspect-[4/3] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1780922576222-09432d2f9b82?w=1400&q=80&auto=format&fit=crop"
+        alt="Izgradnja solarne elektrane, zračni pogled s dizalicom na terenu"
+        class="w-full h-full object-cover"
+        loading="lazy">
+    </div>
+  </div>
+
+  <div class="max-w-xl mb-16">
+    <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight">
+      Fokus poslovanja
+    </h2>
+    <p class="mt-4 text-[var(--slate)] leading-relaxed">
+      Naš rad počiva na tri stupa: tehnologiji koja proizvodi energiju,
+      odgovornosti prema okolišu i financijskoj stabilnosti za naše partnere.
+    </p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-px bg-black/5">
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="4.5"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Solarna energija</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Gradimo i upravljamo fotonaponskim elektranama, pretvarajući sunčevu
+        svjetlost u pouzdan izvor obnovljive energije.
+      </p>
+    </div>
+
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 21c4.5-2.2 7-5.8 7-10V6l-7-3-7 3v5c0 4.2 2.5 7.8 7 10z" stroke-linejoin="round"/>
+        <path d="M9.5 12l1.8 1.8L15 10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Održivi razvoj</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Svaki projekt planiramo s dugoročnom odgovornošću prema okolišu
+        i lokalnim zajednicama u kojima poslujemo.
+      </p>
+    </div>
+
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 19V10M11 19V5M18 19v-6" stroke-linecap="round"/>
+        <path d="M3 19h18" stroke-linecap="round"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Dugoročna stabilnost</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Vlasništvo nad vlastitim elektranama osigurava predvidiv prihod
+        i otpornost na kratkoročne tržišne oscilacije.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VIZIJA -->
+<section id="vizija" class="vizija-media relative text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-28 md:py-40">
+    <div class="max-w-xl">
+      <p class="text-[var(--sage)] text-sm mb-4">Vizija</p>
+      <h2 class="font-display text-3xl md:text-5xl font-medium leading-tight mb-8">
+        Energija koja gradi vrijednost desetljećima
+      </h2>
+      <div class="text-[var(--paper)]/75 leading-relaxed space-y-5">
+        <p>
+          Vjerujemo da obnovljivi izvori energije nisu samo odgovor na klimatske
+          izazove, već i temelj stabilnog, dugoročnog ulaganja. Svaka solarna
+          elektrana koju razvijemo ostaje u našem vlasništvu i pod našim
+          upravljanjem desetljećima nakon puštanja u pogon.
+        </p>
+        <p>
+          Taj pristup nam omogućuje da spojimo mjerljiv doprinos energetskoj
+          tranziciji s predvidivim, dugoročnim prihodom — bez posrednika i
+          bez kompromisa u kvaliteti izvedbe.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / IMPRESSUM -->
+<footer id="kontakt" class="bg-[var(--forest-deep)] text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-16 grid md:grid-cols-3 gap-12">
+
+    <div>
+      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
+        <img src="/assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
+        TEHNEO
+      </p>
+      <p class="text-sm leading-relaxed text-[var(--paper)]/80">
+        Ulaganje u obnovljive izvore energije i upravljanje solarnim
+        elektranama.
+      </p>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>E-mail: <a href="mailto:tehneo.os@gmail.com" class="hover:text-[var(--sage)] underline underline-offset-2">tehneo.os@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider border-t max-w-6xl mx-auto px-6 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
+    <p>Izrada web stranice: Tehneo d.o.o.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const header = document.getElementById('site-header');
+  const toggleHeader = () => {
+    if (window.scrollY > 40) header.classList.add('solid');
+    else header.classList.remove('solid');
+  };
+  toggleHeader();
+  window.addEventListener('scroll', toggleHeader, { passive: true });
+
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+</script>
+
+</body>
+</html>
