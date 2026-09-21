@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tehneo — Field Data Collection & Annotation for Computer Vision</title>
-<meta name="description" content="Tehneo collects and annotates real-world field data for computer vision teams: agriculture, traffic & infrastructure, retail. Bounding box, polygon segmentation, geotagging. Export to CVAT, YOLO, COCO.">
-<meta property="og:title" content="Tehneo — Field Data Collection & Annotation for Computer Vision">
-<meta property="og:description" content="On-field image collection and annotation for AI teams, based in Croatia. Agriculture, infrastructure, retail and custom capture.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://tehneo.hr/">
+<title>Tehneo d.o.o. — Ulaganje u čistu energiju</title>
+<meta name="description" content="Tehneo d.o.o. ulaže u obnovljive izvore energije i upravlja vlastitim solarnim elektranama.">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="apple-touch-icon" href="/assets/favicon-192.png">
@@ -18,51 +14,98 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#06110D;
-    --deep:#0A1A14;
-    --panel:#0E211A;
-    --line:rgba(255,255,255,0.09);
-    --emerald:#34D399;
-    --emerald-d:#10B981;
-    --mist:#E8EEEA;
-    --gray:#93A39A;
+    --forest:#0F2A1E;
+    --forest-deep:#091A12;
+    --green:#2F6E4E;
+    --sage:#9CC5A8;
+    --paper:#F6F6F3;
+    --paper-dim:#EDEEE9;
+    --ink:#15201A;
+    --slate:#5B6660;
   }
   html{scroll-behavior:smooth;}
-  body{ font-family:'Inter',sans-serif; background:var(--ink); color:var(--mist); }
-  .font-display{ font-family:'Space Grotesk',sans-serif; }
-  .grid-bg{
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .font-display{ font-family:'Space Grotesk', sans-serif; }
+
+  /* ---- Header ---- */
+  #site-header{
+    transition: background-color .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+  }
+  #site-header.solid{
+    background-color: rgba(246,246,243,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  #site-header .brand, #site-header .nav-link, #site-header .menu-line{
+    transition: color .4s ease, background-color .4s ease;
+  }
+  #site-header.solid .brand, #site-header.solid .nav-link{ color: var(--forest); }
+  #site-header.solid .menu-line{ background-color: var(--forest); }
+
+  .brand-logo{ height: 30px; width: auto; transition: opacity .4s ease; }
+  .brand-logo-solid{ position:absolute; top:0; left:0; opacity:0; }
+  #site-header.solid .brand-logo-default{ opacity:0; }
+  #site-header.solid .brand-logo-solid{ opacity:1; }
+
+  .nav-link{ position:relative; color:var(--paper); }
+  .nav-link::after{
+    content:'';
+    position:absolute; left:0; bottom:-4px;
+    width:0%; height:1px;
+    background:currentColor;
+    opacity:.6;
+    transition:width .2s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* ---- Hero ---- */
+  .hero-media{
     background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:48px 48px;
-    mask-image: radial-gradient(ellipse at 70% 30%, #000 10%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 10%, transparent 70%);
+      linear-gradient(180deg, rgba(9,26,18,0.55) 0%, rgba(9,26,18,0.35) 40%, rgba(9,26,18,0.88) 100%),
+      url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=2400&q=80&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
   }
-  .glow{ background: radial-gradient(600px circle at 75% 20%, rgba(52,211,153,0.16), transparent 60%); }
-  #site-header{ background:rgba(6,17,13,0.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
-  .nav-link{ color:var(--gray); transition:color .2s ease; }
-  .nav-link:hover{ color:var(--mist); }
-  .card{ background:var(--panel); border:1px solid var(--line); transition:border-color .25s ease, transform .25s ease; }
-  .card:hover{ border-color:rgba(52,211,153,0.45); }
-  .chip{ border:1px solid var(--line); background:rgba(255,255,255,0.03); }
-  .btn-primary{ background:var(--emerald); color:#052E1F; transition:background-color .2s ease; }
-  .btn-primary:hover{ background:#6EE7B7; }
-  .btn-ghost{ border:1px solid rgba(255,255,255,0.22); transition:border-color .2s ease, background-color .2s ease; }
-  .btn-ghost:hover{ border-color:var(--emerald); background:rgba(52,211,153,0.07); }
-  .field{
-    width:100%; background:var(--deep); border:1px solid var(--line); color:var(--mist);
-    padding:.75rem .9rem; font-size:.95rem; outline:none; transition:border-color .2s ease;
+
+  .scroll-cue{
+    animation: cue-move 2.2s ease-in-out infinite;
   }
-  .field:focus{ border-color:var(--emerald); }
-  .field::placeholder{ color:#5F7268; }
-  select.field{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2393A39A' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right .9rem center; padding-right:2.4rem; }
-  .lang-btn{ color:var(--gray); }
-  .lang-btn.active{ color:var(--emerald); }
-  .box-anim{ animation: pulse-box 3.2s ease-in-out infinite; }
-  @keyframes pulse-box{ 0%,100%{ opacity:.85; } 50%{ opacity:1; } }
+  @keyframes cue-move{
+    0%,100%{ transform:translateY(0); opacity:.55; }
+    50%{ transform:translateY(8px); opacity:1; }
+  }
+
+  /* ---- Cards ---- */
+  .card-focus{
+    border-top: 2px solid var(--green);
+    transition: border-color .25s ease;
+  }
+  .card-focus:hover{ border-top-color: var(--sage); }
+
+  /* ---- Vizija parallax panel ---- */
+  .vizija-media{
+    background-image:
+      linear-gradient(120deg, rgba(9,26,18,0.92) 20%, rgba(9,26,18,0.55) 100%),
+      url('https://images.unsplash.com/photo-1780922576222-09432d2f9b82?w=2400&q=80&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+  }
+  @media (max-width: 768px){
+    .vizija-media{ background-attachment: scroll; }
+  }
+
+  .stat-num{ font-variant-numeric: tabular-nums; }
+
+  .footer-divider{ border-color: rgba(156,197,168,0.22); }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
-    .box-anim{ animation:none; }
+    .scroll-cue{ animation:none; }
     *{ transition:none !important; }
   }
 </style>
@@ -71,324 +114,223 @@
 
 <!-- HEADER -->
 <header id="site-header" class="fixed top-0 inset-x-0 z-50">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-[var(--mist)]">
-      <img src="/assets/tehneo-symbol-reversed.svg" alt="" class="h-7 w-auto">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <a href="#" class="brand flex items-center gap-2.5 font-display text-xl tracking-tight font-semibold text-[var(--paper)]">
+      <span class="relative inline-block">
+        <img src="/assets/tehneo-symbol-reversed.svg" alt="" class="brand-logo brand-logo-default">
+        <img src="/assets/tehneo-symbol.svg" alt="" class="brand-logo brand-logo-solid">
+      </span>
       TEHNEO
     </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm">
-      <a href="#services" class="nav-link" data-hr="Usluge">Services</a>
-      <a href="#annotation" class="nav-link" data-hr="Anotacija">Annotation</a>
-      <a href="#process" class="nav-link" data-hr="Proces">Process</a>
-      <a href="/solar/" class="nav-link" data-hr="Solarna energija">Solar energy</a>
+    <nav class="hidden md:flex items-center gap-10 text-sm">
+      <a href="#o-nama" class="nav-link">O nama</a>
+      <a href="#vizija" class="nav-link">Vizija</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
     </nav>
-    <div class="flex items-center gap-4">
-      <div class="flex items-center gap-1.5 text-xs font-medium">
-        <button class="lang-btn active" data-lang="en" type="button">EN</button>
-        <span class="text-[var(--line)]">|</span>
-        <button class="lang-btn" data-lang="hr" type="button">HR</button>
-      </div>
-      <a href="#contact" data-interest="sample" class="btn-primary hidden sm:inline-flex items-center px-4 py-2 text-sm font-semibold" data-hr="Zatraži uzorak">Request sample</a>
+    <a href="#kontakt" class="hidden md:inline-flex items-center px-5 py-2 text-sm font-medium text-[var(--forest)] bg-[var(--paper)] hover:bg-[var(--sage)] transition-colors">
+      Kontaktirajte nas
+    </a>
+
+    <button id="menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-[5px]" aria-label="Otvori izbornik" aria-expanded="false">
+      <span class="menu-line block w-6 h-[1.5px] bg-[var(--paper)]"></span>
+      <span class="menu-line block w-6 h-[1.5px] bg-[var(--paper)]"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden hidden bg-[var(--paper)] border-t border-black/5">
+    <div class="px-6 py-5 flex flex-col gap-4 text-sm text-[var(--ink)]">
+      <a href="#o-nama" class="py-1">O nama</a>
+      <a href="#vizija" class="py-1">Vizija</a>
+      <a href="#kontakt" class="py-1">Kontakt</a>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="relative overflow-hidden pt-16">
-  <div class="absolute inset-0 grid-bg"></div>
-  <div class="absolute inset-0 glow"></div>
-  <div class="relative max-w-6xl mx-auto px-6 md:px-10 pt-20 pb-24 md:pt-28 md:pb-32 grid lg:grid-cols-2 gap-14 items-center">
+<section class="hero-media relative min-h-[100svh] flex flex-col justify-end text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 pb-20 md:pb-28 w-full">
+    <p class="text-[var(--sage)] text-sm mb-6 max-w-md">Fotonaponski sustavi · Pasivni prihod · Dugoročno vlasništvo</p>
+    <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-medium leading-[1.05] max-w-4xl">
+      Ulaganje u čistu energiju i održivu budućnost
+    </h1>
+    <p class="mt-7 text-base md:text-lg text-[var(--paper)]/75 max-w-xl leading-relaxed">
+      Tehneo razvija, gradi i dugoročno upravlja vlastitim solarnim elektranama.
+      Naš pristup ulaganju u fotonaponske sustave stvara stabilan pasivni prihod
+      i konkretan doprinos energetskoj tranziciji.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#vizija" class="inline-flex items-center px-6 py-3 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--sage)] transition-colors">
+        Naša vizija
+      </a>
+      <a href="#kontakt" class="inline-flex items-center px-6 py-3 border border-[var(--paper)]/30 text-sm font-medium hover:border-[var(--paper)]/70 transition-colors">
+        Razgovarajmo
+      </a>
+    </div>
+  </div>
+  <a href="#o-nama" aria-label="Pomakni se prema dolje" class="scroll-cue absolute bottom-6 left-1/2 -translate-x-1/2 text-[var(--paper)]/70">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4v15M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- O NAMA -->
+<section id="o-nama" class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <div class="grid md:grid-cols-2 gap-14 md:gap-20 items-center mb-24 md:mb-32">
     <div>
-      <p class="inline-flex items-center gap-2 chip px-3 py-1 text-xs text-[var(--emerald)] mb-7">
-        <span class="w-1.5 h-1.5 rounded-full bg-[var(--emerald)]"></span>
-        <span data-hr="Terensko prikupljanje podataka · Hrvatska i JI Europa">On-field data collection · Croatia & SE Europe</span>
+      <p class="text-[var(--green)] text-sm mb-4">O nama</p>
+      <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight mb-6">
+        Vlastita elektrana, u našem vlasništvu za sljedećih dvadeset godina
+      </h2>
+      <p class="text-[var(--slate)] leading-relaxed">
+        Za razliku od izvođača koji projekt predaju nakon izgradnje, Tehneo
+        ostaje vlasnik elektrane koju je razvio. To nas tjera da svaku
+        odluku — od odabira lokacije do izbora opreme — donosimo s pogledom
+        na sljedećih dvadeset godina, ne na sljedeći kvartal. Ovo je naša
+        prva elektrana, temelj za daljnji rast portfelja.
       </p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-medium leading-[1.06] tracking-tight" data-hr="Stvarni terenski podaci za timove računalnog vida">
-        Real-world field data for computer vision teams
-      </h1>
-      <p class="mt-6 text-base md:text-lg text-[var(--gray)] leading-relaxed max-w-xl" data-hr="Snimamo slike na lokaciji i anotiramo ih prema vašim zahtjevima. Poljoprivreda je naš temelj, uz promet, infrastrukturu, maloprodaju i potpuno prilagođeno snimanje po narudžbi.">
-        We capture images on location and annotate them to your spec. Agriculture is our core, with traffic, infrastructure, retail and fully custom collection on request.
+    </div>
+    <div class="aspect-[4/3] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1780922576222-09432d2f9b82?w=1400&q=80&auto=format&fit=crop"
+        alt="Izgradnja solarne elektrane, zračni pogled s dizalicom na terenu"
+        class="w-full h-full object-cover"
+        loading="lazy">
+    </div>
+  </div>
+
+  <div class="max-w-xl mb-16">
+    <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight">
+      Fokus poslovanja
+    </h2>
+    <p class="mt-4 text-[var(--slate)] leading-relaxed">
+      Naš rad počiva na tri stupa: tehnologiji koja proizvodi energiju,
+      odgovornosti prema okolišu i financijskoj stabilnosti za naše partnere.
+    </p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-px bg-black/5">
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="4.5"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Solarna energija</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Gradimo i upravljamo fotonaponskim elektranama, pretvarajući sunčevu
+        svjetlost u pouzdan izvor obnovljive energije.
       </p>
-      <div class="mt-9 flex flex-wrap gap-4">
-        <a href="#contact" data-interest="sample" class="btn-primary inline-flex items-center px-6 py-3 text-sm font-semibold" data-hr="Zatraži uzorak">Request sample</a>
-        <a href="#contact" data-interest="quote" class="btn-ghost inline-flex items-center px-6 py-3 text-sm font-medium" data-hr="Zatraži ponudu">Get a quote</a>
-      </div>
-      <div class="mt-10 flex flex-wrap gap-2 text-xs text-[var(--gray)]">
-        <span class="chip px-3 py-1">Bounding Box</span>
-        <span class="chip px-3 py-1">Polygon Segmentation</span>
-        <span class="chip px-3 py-1">Geotagging</span>
-        <span class="chip px-3 py-1">CVAT · YOLO · COCO</span>
-      </div>
     </div>
 
-    <!-- Annotated frame: real photograph with example annotations -->
-    <div class="relative w-full max-w-md mx-auto lg:max-w-none">
-      <div class="border border-[var(--line)] overflow-hidden">
-        <svg viewBox="0 0 900 1125" class="w-full h-auto block" role="img" aria-label="Photograph of apples on a tree with example bounding-box annotations">
-          <image href="/assets/photos/hero-apples.jpg" x="0" y="-380" width="900" height="1597" preserveAspectRatio="xMidYMid slice"/>
-          <g class="box-anim" font-family="Inter, sans-serif" font-size="22" font-weight="600">
-          <rect x="270" y="60" width="255" height="250" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="270" y="60" width="158" height="34" fill="#34D399"/><text x="280" y="84" fill="#052E1F">ripe · 0.97</text>
-          <rect x="445" y="180" width="278" height="285" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="445" y="180" width="158" height="34" fill="#34D399"/><text x="455" y="204" fill="#052E1F">ripe · 0.95</text>
-          <rect x="232" y="402" width="255" height="253" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="232" y="402" width="158" height="34" fill="#34D399"/><text x="242" y="426" fill="#052E1F">ripe · 0.96</text>
-          <rect x="490" y="465" width="238" height="260" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="490" y="465" width="158" height="34" fill="#34D399"/><text x="500" y="489" fill="#052E1F">ripe · 0.93</text>
-          <rect x="258" y="655" width="268" height="245" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="258" y="655" width="158" height="34" fill="#34D399"/><text x="268" y="679" fill="#052E1F">ripe · 0.98</text>
-          <rect x="330" y="842" width="270" height="256" fill="none" stroke="#34D399" stroke-width="4"/>
-          <rect x="330" y="842" width="158" height="34" fill="#34D399"/><text x="340" y="866" fill="#052E1F">ripe · 0.97</text>
-          <rect x="668" y="346" width="56" height="62" fill="none" stroke="#F87171" stroke-width="4"/>
-          <rect x="668" y="346" width="176" height="34" fill="#F87171"/><text x="678" y="370" fill="#3B0A0A">defect · 0.81</text>
-          </g>
-        </svg>
-      </div>
-      <p class="mt-3 text-xs text-[var(--gray)]" data-hr="Primjer anotacije na stock fotografiji (ilustrativno).">Example annotation on a stock photograph (illustrative).</p>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 21c4.5-2.2 7-5.8 7-10V6l-7-3-7 3v5c0 4.2 2.5 7.8 7 10z" stroke-linejoin="round"/>
+        <path d="M9.5 12l1.8 1.8L15 10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Održivi razvoj</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Svaki projekt planiramo s dugoročnom odgovornošću prema okolišu
+        i lokalnim zajednicama u kojima poslujemo.
+      </p>
+    </div>
+
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 19V10M11 19V5M18 19v-6" stroke-linecap="round"/>
+        <path d="M3 19h18" stroke-linecap="round"/>
+      </svg>
+      <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Dugoročna stabilnost</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">
+        Vlasništvo nad vlastitim elektranama osigurava predvidiv prihod
+        i otpornost na kratkoročne tržišne oscilacije.
+      </p>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="border-t border-[var(--line)]">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
-    <div class="max-w-2xl mb-14">
-      <p class="text-[var(--emerald)] text-sm mb-3" data-hr="Usluge">Services</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight" data-hr="Podaci prikupljeni tamo gdje će vaš model stvarno raditi">Data collected where your model will actually run</h2>
-      <p class="mt-4 text-[var(--gray)] leading-relaxed" data-hr="Terenski podaci imaju šum, svjetlo i varijacije koje studijski skupovi nemaju. Snimamo u stvarnim uvjetima i isporučujemo anotirano, provjereno i spremno za treniranje.">Field data has the noise, lighting and variation that studio datasets lack. We capture in real conditions and deliver annotated, quality-checked and ready to train on.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="card md:col-span-2 overflow-hidden grid md:grid-cols-[1.3fr_1fr]">
-        <div class="p-8 md:p-10">
-          <p class="text-xs text-[var(--emerald)] mb-3 tracking-wide uppercase" data-hr="Glavni ogranak">Core focus</p>
-          <h3 class="font-display text-2xl font-medium mb-3" data-hr="Poljoprivreda i AgriTech">Agriculture & AgriTech</h3>
-          <p class="text-[var(--gray)] leading-relaxed max-w-2xl" data-hr="Detekcija bolesti usjeva, korova, procjena zrelosti plodova i zdravlja biljaka, snimano tijekom stvarnih sezona na poljima i u voćnjacima.">Crop disease detection, weed identification, fruit ripeness and plant-health assessment, captured across real growing seasons in fields and orchards.</p>
-          <ul class="mt-6 flex gap-2 flex-wrap text-xs text-[var(--gray)]">
-            <li class="chip px-3 py-1" data-hr="Bolesti usjeva">Crop disease</li>
-            <li class="chip px-3 py-1" data-hr="Korovi">Weeds</li>
-            <li class="chip px-3 py-1" data-hr="Zrelost plodova">Ripeness</li>
-          </ul>
-        </div>
-        <div class="relative min-h-64"><img src="/assets/photos/agri-orchard.jpg" alt="Apples ripening on a tree in an orchard" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>
-      </div>
-
-      <div class="card overflow-hidden">
-        <img src="/assets/photos/traffic-road.jpg" alt="Cracked and damaged asphalt road with a traffic sign" loading="lazy" class="w-full h-48 object-cover">
-        <div class="p-8">
-          <h3 class="font-display text-xl font-medium mb-2" data-hr="Promet i infrastruktura">Traffic & Infrastructure</h3>
-          <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje stanja cesta, prometnih znakova i oštećenja na infrastrukturi, s geolokacijom za svaki kadar.">Road condition, traffic signs and infrastructure damage, captured with geolocation on every frame.</p>
-        </div>
-      </div>
-
-      <div class="card overflow-hidden">
-        <img src="/assets/photos/retail-shelves.jpg" alt="Supermarket aisle with stocked shelves" loading="lazy" class="w-full h-48 object-cover">
-        <div class="p-8">
-          <h3 class="font-display text-xl font-medium mb-2" data-hr="Maloprodaja i inventar">Retail & Inventory</h3>
-          <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje i označavanje artikala i polica na terenu za shelf monitoring i prepoznavanje proizvoda.">On-site capture and labelling of products and shelves for shelf monitoring and product recognition.</p>
-        </div>
-      </div>
-
-      <div class="card md:col-span-2 overflow-hidden grid md:grid-cols-[1fr_1.3fr]">
-        <div class="relative min-h-56"><img src="/assets/photos/custom-drone.jpg" alt="Survey drone hovering over a grass field at sunset" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="p-8 md:p-10">
-          <h3 class="font-display text-xl font-medium mb-2" data-hr="Prilagođeno terensko snimanje">Custom Field Collection</h3>
-          <p class="text-sm text-[var(--gray)] leading-relaxed max-w-2xl" data-hr="Terensko snimanje po specifikaciji klijenta u Hrvatskoj i široj regiji: lokacije, uvjeti, kutovi, oprema i količine definiramo zajedno prije početka.">Field capture to your specification in Croatia and the wider region. We agree locations, conditions, angles, equipment and volumes together before we start.</p>
-        </div>
+<!-- VIZIJA -->
+<section id="vizija" class="vizija-media relative text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-28 md:py-40">
+    <div class="max-w-xl">
+      <p class="text-[var(--sage)] text-sm mb-4">Vizija</p>
+      <h2 class="font-display text-3xl md:text-5xl font-medium leading-tight mb-8">
+        Energija koja gradi vrijednost desetljećima
+      </h2>
+      <div class="text-[var(--paper)]/75 leading-relaxed space-y-5">
+        <p>
+          Vjerujemo da obnovljivi izvori energije nisu samo odgovor na klimatske
+          izazove, već i temelj stabilnog, dugoročnog ulaganja. Svaka solarna
+          elektrana koju razvijemo ostaje u našem vlasništvu i pod našim
+          upravljanjem desetljećima nakon puštanja u pogon.
+        </p>
+        <p>
+          Taj pristup nam omogućuje da spojimo mjerljiv doprinos energetskoj
+          tranziciji s predvidivim, dugoročnim prihodom — bez posrednika i
+          bez kompromisa u kvaliteti izvedbe.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ANNOTATION -->
-<section id="annotation" class="border-t border-[var(--line)] bg-[var(--deep)]">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32 grid md:grid-cols-2 gap-14 items-start">
+<!-- FOOTER / IMPRESSUM -->
+<footer id="kontakt" class="bg-[var(--forest-deep)] text-[var(--paper)]">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-16 grid md:grid-cols-3 gap-12">
+
     <div>
-      <p class="text-[var(--emerald)] text-sm mb-3" data-hr="Anotacija">Annotation</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight mb-5" data-hr="Oznake u formatu koji vaš pipeline već čita">Labels in the format your pipeline already reads</h2>
-      <p class="text-[var(--gray)] leading-relaxed" data-hr="Anotiramo prema vašim uputama i klasama, uz kontrolu kvalitete prije isporuke. Izvoz je u standardnim formatima pa nema dodatne konverzije.">We annotate to your guidelines and class list, with a quality-control pass before delivery. Export is in standard formats, so no conversion work on your side.</p>
-    </div>
-    <div class="grid gap-px bg-[var(--line)] border border-[var(--line)]">
-      <div class="bg-[var(--panel)] p-6 flex gap-4">
-        <span class="font-display text-[var(--emerald)] text-lg w-6">01</span>
-        <div><p class="font-medium mb-1">Bounding Box</p><p class="text-sm text-[var(--gray)]" data-hr="Brze, precizne okvirne oznake za detekciju objekata.">Fast, precise boxes for object detection.</p></div>
-      </div>
-      <div class="bg-[var(--panel)] p-6 flex gap-4">
-        <span class="font-display text-[var(--emerald)] text-lg w-6">02</span>
-        <div><p class="font-medium mb-1">Polygon Segmentation</p><p class="text-sm text-[var(--gray)]" data-hr="Točni obrisi za segmentaciju biljaka, plodova i oštećenja.">Accurate outlines for plants, fruit and damage segmentation.</p></div>
-      </div>
-      <div class="bg-[var(--panel)] p-6 flex gap-4">
-        <span class="font-display text-[var(--emerald)] text-lg w-6">03</span>
-        <div><p class="font-medium mb-1">Geotagging</p><p class="text-sm text-[var(--gray)]" data-hr="Lokacija i metapodaci uz svaki kadar.">Location and metadata attached to every frame.</p></div>
-      </div>
-      <div class="bg-[var(--panel)] p-6 flex gap-4">
-        <span class="font-display text-[var(--emerald)] text-lg w-6">04</span>
-        <div>
-          <p class="font-medium mb-2" data-hr="Izvoz">Export</p>
-          <div class="flex gap-2 text-xs text-[var(--gray)]"><span class="chip px-3 py-1">CVAT</span><span class="chip px-3 py-1">YOLO</span><span class="chip px-3 py-1">COCO</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process" class="border-t border-[var(--line)]">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
-    <div class="max-w-2xl mb-14">
-      <p class="text-[var(--emerald)] text-sm mb-3" data-hr="Proces">Process</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight" data-hr="Od zahtjeva do isporučene baze podataka">From brief to delivered dataset</h2>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="card p-7">
-        <p class="font-display text-[var(--emerald)] text-sm mb-4">01</p>
-        <h3 class="font-display text-lg font-medium mb-2" data-hr="Zahtjev">Brief</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Definiramo klase, uvjete snimanja, količine i format isporuke.">We define classes, capture conditions, volumes and delivery format.</p>
-      </div>
-      <div class="card p-7">
-        <p class="font-display text-[var(--emerald)] text-sm mb-4">02</p>
-        <h3 class="font-display text-lg font-medium mb-2" data-hr="Terensko snimanje">Field capture</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimamo na stvarnim lokacijama u dogovorenim uvjetima.">We shoot on real locations under the agreed conditions.</p>
-      </div>
-      <div class="card p-7">
-        <p class="font-display text-[var(--emerald)] text-sm mb-4">03</p>
-        <h3 class="font-display text-lg font-medium mb-2" data-hr="Anotacija i kontrola kvalitete">Annotate & QA</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Anotacija prema vašim uputama uz kontrolu kvalitete.">Annotation to your guidelines with a quality-control pass.</p>
-      </div>
-      <div class="card p-7">
-        <p class="font-display text-[var(--emerald)] text-sm mb-4">04</p>
-        <h3 class="font-display text-lg font-medium mb-2" data-hr="Isporuka">Delivery</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Isporuka u CVAT, YOLO ili COCO formatu, spremno za treniranje.">Delivered as CVAT, YOLO or COCO, ready to train on.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="border-t border-[var(--line)] bg-[var(--deep)]">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32 grid lg:grid-cols-[1fr_1.2fr] gap-14">
-    <div>
-      <p class="text-[var(--emerald)] text-sm mb-3" data-hr="Kontakt">Contact</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium leading-tight mb-5" data-hr="Recite nam što vaš model treba vidjeti">Tell us what your model needs to see</h2>
-      <p class="text-[var(--gray)] leading-relaxed mb-8" data-hr="Opišite projekt i zatražite ponudu ili uzorak podataka. Odgovaramo e-mailom.">Describe your project and request a quote or a data sample. We reply by email.</p>
-      <p class="text-sm text-[var(--gray)] mb-1" data-hr="Ili izravno:">Or directly:</p>
-      <a href="mailto:tehneo.os@gmail.com" class="text-[var(--emerald)] hover:underline underline-offset-4">tehneo.os@gmail.com</a>
-    </div>
-
-    <form id="contact-form" class="grid gap-4" novalidate>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <label class="grid gap-1.5 text-sm"><span data-hr="Ime">Name</span>
-          <input class="field" name="name" type="text" required autocomplete="name">
-        </label>
-        <label class="grid gap-1.5 text-sm"><span data-hr="Tvrtka">Company</span>
-          <input class="field" name="company" type="text" required autocomplete="organization">
-        </label>
-      </div>
-      <label class="grid gap-1.5 text-sm"><span data-hr="E-mail">Email</span>
-        <input class="field" name="email" type="email" required autocomplete="email">
-      </label>
-      <label class="grid gap-1.5 text-sm"><span data-hr="Zanima me">I'm interested in</span>
-        <select class="field" name="service" id="service">
-          <option value="sample" data-hr="Besplatni uzorak podataka">Free data sample</option>
-          <option value="quote" data-hr="Ponuda za projekt">Project quote</option>
-          <option value="agri" data-hr="Poljoprivreda i AgriTech">Agriculture & AgriTech</option>
-          <option value="traffic" data-hr="Promet i infrastruktura">Traffic & Infrastructure</option>
-          <option value="retail" data-hr="Maloprodaja i inventar">Retail & Inventory</option>
-          <option value="custom" data-hr="Prilagođeno snimanje">Custom field collection</option>
-        </select>
-      </label>
-      <label class="grid gap-1.5 text-sm"><span data-hr="Poruka">Message</span>
-        <textarea class="field" name="message" rows="5" data-hr-placeholder="Klase, količine, lokacije, format izvoza..." placeholder="Classes, volumes, locations, export format..."></textarea>
-      </label>
-      <p id="form-error" class="text-sm text-red-400 hidden" data-hr="Molimo ispunite ime, tvrtku i ispravan e-mail.">Please fill in your name, company and a valid email.</p>
-      <div class="flex flex-wrap items-center gap-4">
-        <button type="submit" class="btn-primary px-7 py-3 text-sm font-semibold" data-hr="Pošalji upit">Send request</button>
-        <p class="text-xs text-[var(--gray)]" data-hr="Otvara vaš e-mail program s ispunjenim upitom.">Opens your email app with the request filled in.</p>
-      </div>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="border-t border-[var(--line)] bg-[var(--ink)]">
-  <div class="max-w-6xl mx-auto px-6 md:px-10 py-14 grid md:grid-cols-3 gap-12 text-sm">
-    <div>
-      <p class="font-display text-lg font-semibold mb-4 flex items-center gap-2.5">
+      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
         <img src="/assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
         TEHNEO
       </p>
-      <p class="text-[var(--gray)] leading-relaxed" data-hr="Terensko prikupljanje i anotacija podataka za računalni vid.">On-field data collection and annotation for computer vision.</p>
-      <a href="/solar/" class="inline-block mt-4 text-[var(--emerald)] hover:underline underline-offset-4" data-hr="Solarna energija &rarr;">Solar energy &rarr;</a>
+      <p class="text-sm leading-relaxed text-[var(--paper)]/80">
+        Ulaganje u obnovljive izvore energije i upravljanje solarnim
+        elektranama.
+      </p>
     </div>
+
     <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--emerald)] mb-4" data-hr="Podaci o tvrtki">Company details</p>
-      <ul class="space-y-2 text-[var(--gray)]">
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
         <li>Tehneo d.o.o. za proizvodnju i usluge</li>
         <li>OIB: 84386741609</li>
-        <li data-hr="Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac">Registered office: Ulica Ivana Mažuranića 25, 31220 Višnjevac, Croatia</li>
-        <li data-hr="Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230">Commercial Court in Osijek, MBS: 030268230</li>
-        <li data-hr="Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)">Share capital: €2,654.46 (fully paid)</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
       </ul>
     </div>
+
     <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--emerald)] mb-4" data-hr="Kontakt">Contact</p>
-      <ul class="space-y-2 text-[var(--gray)]">
-        <li>Email: <a href="mailto:tehneo.os@gmail.com" class="hover:text-[var(--emerald)] underline underline-offset-2">tehneo.os@gmail.com</a></li>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>E-mail: <a href="mailto:tehneo.os@gmail.com" class="hover:text-[var(--sage)] underline underline-offset-2">tehneo.os@gmail.com</a></li>
       </ul>
     </div>
   </div>
-  <div class="border-t border-[var(--line)] max-w-6xl mx-auto px-6 md:px-10 py-6 text-xs text-[var(--gray)]">
-    <p>&copy; <span id="year"></span> Tehneo d.o.o. <span data-hr="Sva prava pridržana.">All rights reserved.</span></p>
-    <p class="mt-2"><span data-hr="Fotografije:">Photos:</span> <a href="https://www.pexels.com" class="underline underline-offset-2 hover:text-[var(--emerald)]" rel="noopener">Pexels</a></p>
+
+  <div class="footer-divider border-t max-w-6xl mx-auto px-6 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
+    <p>Izrada web stranice: Tehneo d.o.o.</p>
   </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Language toggle: English text lives in the markup, Croatian in data-hr.
-  const translatable = document.querySelectorAll('[data-hr], [data-hr-placeholder]');
-  translatable.forEach(el => {
-    if (el.hasAttribute('data-hr')) el.dataset.en = el.innerHTML;
-    if (el.hasAttribute('data-hr-placeholder')) el.dataset.enPlaceholder = el.getAttribute('placeholder');
-  });
-  function setLang(lang){
-    document.documentElement.lang = lang;
-    translatable.forEach(el => {
-      if (el.hasAttribute('data-hr')) el.innerHTML = lang === 'hr' ? el.dataset.hr : el.dataset.en;
-      if (el.hasAttribute('data-hr-placeholder')) {
-        el.setAttribute('placeholder', lang === 'hr' ? el.dataset.hrPlaceholder : el.dataset.enPlaceholder);
-      }
-    });
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    try { localStorage.setItem('tehneo-lang', lang); } catch(e) {}
-  }
-  document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-  try { if (localStorage.getItem('tehneo-lang') === 'hr') setLang('hr'); } catch(e) {}
+  const header = document.getElementById('site-header');
+  const toggleHeader = () => {
+    if (window.scrollY > 40) header.classList.add('solid');
+    else header.classList.remove('solid');
+  };
+  toggleHeader();
+  window.addEventListener('scroll', toggleHeader, { passive: true });
 
-  // CTA buttons preselect the enquiry type.
-  document.querySelectorAll('[data-interest]').forEach(a => {
-    a.addEventListener('click', () => { document.getElementById('service').value = a.dataset.interest; });
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
   });
-
-  // No backend: build a mailto link from the form.
-  const form = document.getElementById('contact-form');
-  const errorEl = document.getElementById('form-error');
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const d = new FormData(form);
-    const name = (d.get('name') || '').trim();
-    const company = (d.get('company') || '').trim();
-    const email = (d.get('email') || '').trim();
-    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!name || !company || !okEmail) { errorEl.classList.remove('hidden'); return; }
-    errorEl.classList.add('hidden');
-    const svc = form.service.options[form.service.selectedIndex].text;
-    const subject = 'Tehneo enquiry: ' + svc + ' (' + company + ')';
-    const body = 'Name: ' + name + '\nCompany: ' + company + '\nEmail: ' + email +
-                 '\nInterested in: ' + svc + '\n\n' + (d.get('message') || '');
-    window.location.href = 'mailto:tehneo.os@gmail.com?subject=' + encodeURIComponent(subject) +
-                           '&body=' + encodeURIComponent(body);
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
   });
 </script>
 

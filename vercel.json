@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/solar", "destination": "/", "permanent": false },
+    { "source": "/solar/", "destination": "/", "permanent": false }
+  ]
+}
