@@ -121,43 +121,30 @@
       </div>
     </div>
 
-    <!-- Annotated frame illustration -->
-    <div class="relative">
-      <svg viewBox="0 0 480 380" class="w-full h-auto" role="img" aria-label="Illustration of an annotated field image with bounding boxes">
-        <rect x="0.5" y="0.5" width="479" height="379" fill="#0A1A14" stroke="rgba(255,255,255,0.12)"/>
-        <g stroke="rgba(52,211,153,0.10)" stroke-width="1">
-          <path d="M-20 300 L500 210"/><path d="M-20 260 L500 170"/><path d="M-20 220 L500 130"/>
-          <path d="M-20 340 L500 250"/><path d="M-20 380 L500 290"/><path d="M-20 180 L500 90"/>
-        </g>
-        <g fill="#1B5E43">
-          <circle cx="90" cy="278" r="15"/><circle cx="150" cy="268" r="13"/><circle cx="215" cy="256" r="16"/>
-          <circle cx="285" cy="244" r="13"/><circle cx="350" cy="232" r="15"/><circle cx="415" cy="222" r="13"/>
-          <circle cx="70" cy="238" r="12"/><circle cx="135" cy="228" r="14"/><circle cx="200" cy="216" r="12"/>
-          <circle cx="270" cy="204" r="15"/><circle cx="335" cy="192" r="12"/><circle cx="400" cy="182" r="14"/>
-        </g>
-        <g fill="#2FA073">
-          <circle cx="213" cy="254" r="7"/><circle cx="270" cy="202" r="6"/><circle cx="135" cy="226" r="6"/>
-        </g>
-        <path d="M296 118 q 24 -34 52 -6 q -14 30 -52 6z" fill="#7C6A2E"/>
-        <path d="M60 150 q 20 -28 44 -4 q -12 26 -44 4z" fill="#7C6A2E"/>
-        <g fill="none" stroke="#34D399" stroke-width="1.6" class="box-anim">
-          <rect x="190" y="230" width="52" height="48"/>
-          <rect x="248" y="180" width="46" height="46" stroke-dasharray="5 3"/>
-        </g>
-        <polygon points="290,124 322,88 352,112 340,146 306,148" fill="rgba(251,191,36,0.18)" stroke="#FBBF24" stroke-width="1.6" class="box-anim"/>
-        <rect x="50" y="128" width="62" height="42" fill="none" stroke="#F87171" stroke-width="1.6" class="box-anim"/>
-        <g font-family="Inter, sans-serif" font-size="10" font-weight="600">
-          <rect x="190" y="214" width="66" height="16" fill="#34D399"/><text x="195" y="225.5" fill="#052E1F">crop · 0.97</text>
-          <rect x="248" y="164" width="72" height="16" fill="#34D399"/><text x="253" y="175.5" fill="#052E1F">weed · 0.91</text>
-          <rect x="290" y="72" width="84" height="16" fill="#FBBF24"/><text x="295" y="83.5" fill="#3B2A00">ripe · segment</text>
-          <rect x="50" y="112" width="76" height="16" fill="#F87171"/><text x="55" y="123.5" fill="#3B0A0A">disease · 0.88</text>
-        </g>
-        <g font-family="Inter, sans-serif" font-size="10" fill="#93A39A">
-          <text x="16" y="360">45.5511° N, 18.6939° E</text>
-          <text x="380" y="360">frame_0142.jpg</text>
-        </g>
-      </svg>
-      <p class="mt-3 text-xs text-[var(--gray)]" data-hr="Ilustracija: primjer anotiranog kadra s terena.">Illustration: example of an annotated field frame.</p>
+    <!-- Annotated frame: real photograph with example annotations -->
+    <div class="relative w-full max-w-md mx-auto lg:max-w-none">
+      <div class="border border-[var(--line)] overflow-hidden">
+        <svg viewBox="0 0 900 1125" class="w-full h-auto block" role="img" aria-label="Photograph of apples on a tree with example bounding-box annotations">
+          <image href="/assets/photos/hero-apples.jpg" x="0" y="-380" width="900" height="1597" preserveAspectRatio="xMidYMid slice"/>
+          <g class="box-anim" font-family="Inter, sans-serif" font-size="22" font-weight="600">
+          <rect x="270" y="60" width="255" height="250" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="270" y="60" width="158" height="34" fill="#34D399"/><text x="280" y="84" fill="#052E1F">ripe · 0.97</text>
+          <rect x="445" y="180" width="278" height="285" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="445" y="180" width="158" height="34" fill="#34D399"/><text x="455" y="204" fill="#052E1F">ripe · 0.95</text>
+          <rect x="232" y="402" width="255" height="253" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="232" y="402" width="158" height="34" fill="#34D399"/><text x="242" y="426" fill="#052E1F">ripe · 0.96</text>
+          <rect x="490" y="465" width="238" height="260" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="490" y="465" width="158" height="34" fill="#34D399"/><text x="500" y="489" fill="#052E1F">ripe · 0.93</text>
+          <rect x="258" y="655" width="268" height="245" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="258" y="655" width="158" height="34" fill="#34D399"/><text x="268" y="679" fill="#052E1F">ripe · 0.98</text>
+          <rect x="330" y="842" width="270" height="256" fill="none" stroke="#34D399" stroke-width="4"/>
+          <rect x="330" y="842" width="158" height="34" fill="#34D399"/><text x="340" y="866" fill="#052E1F">ripe · 0.97</text>
+          <rect x="668" y="346" width="56" height="62" fill="none" stroke="#F87171" stroke-width="4"/>
+          <rect x="668" y="346" width="176" height="34" fill="#F87171"/><text x="678" y="370" fill="#3B0A0A">defect · 0.81</text>
+          </g>
+        </svg>
+      </div>
+      <p class="mt-3 text-xs text-[var(--gray)]" data-hr="Primjer anotacije na stock fotografiji (ilustrativno).">Example annotation on a stock photograph (illustrative).</p>
     </div>
   </div>
 </section>
@@ -172,35 +159,42 @@
     </div>
 
     <div class="grid md:grid-cols-2 gap-5">
-      <div class="card md:col-span-2 p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-start">
-        <div>
+      <div class="card md:col-span-2 overflow-hidden grid md:grid-cols-[1.3fr_1fr]">
+        <div class="p-8 md:p-10">
           <p class="text-xs text-[var(--emerald)] mb-3 tracking-wide uppercase" data-hr="Glavni ogranak">Core focus</p>
           <h3 class="font-display text-2xl font-medium mb-3" data-hr="Poljoprivreda i AgriTech">Agriculture & AgriTech</h3>
           <p class="text-[var(--gray)] leading-relaxed max-w-2xl" data-hr="Detekcija bolesti usjeva, korova, procjena zrelosti plodova i zdravlja biljaka, snimano tijekom stvarnih sezona na poljima i u voćnjacima.">Crop disease detection, weed identification, fruit ripeness and plant-health assessment, captured across real growing seasons in fields and orchards.</p>
+          <ul class="mt-6 flex gap-2 flex-wrap text-xs text-[var(--gray)]">
+            <li class="chip px-3 py-1" data-hr="Bolesti usjeva">Crop disease</li>
+            <li class="chip px-3 py-1" data-hr="Korovi">Weeds</li>
+            <li class="chip px-3 py-1" data-hr="Zrelost plodova">Ripeness</li>
+          </ul>
         </div>
-        <ul class="flex md:flex-col gap-2 flex-wrap text-xs text-[var(--gray)]">
-          <li class="chip px-3 py-1" data-hr="Bolesti usjeva">Crop disease</li>
-          <li class="chip px-3 py-1" data-hr="Korovi">Weeds</li>
-          <li class="chip px-3 py-1" data-hr="Zrelost plodova">Ripeness</li>
-        </ul>
+        <div class="relative min-h-64"><img src="/assets/photos/agri-orchard.jpg" alt="Apples ripening on a tree in an orchard" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>
       </div>
 
-      <div class="card p-8">
-        <svg class="w-7 h-7 text-[var(--emerald)] mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20L9 4M20 20L15 4M12 6v3M12 12v3M12 18v2" stroke-linecap="round"/></svg>
-        <h3 class="font-display text-xl font-medium mb-2" data-hr="Promet i infrastruktura">Traffic & Infrastructure</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje stanja cesta, prometnih znakova i oštećenja na infrastrukturi, s geolokacijom za svaki kadar.">Road condition, traffic signs and infrastructure damage, captured with geolocation on every frame.</p>
+      <div class="card overflow-hidden">
+        <img src="/assets/photos/traffic-road.jpg" alt="Cracked and damaged asphalt road with a traffic sign" loading="lazy" class="w-full h-48 object-cover">
+        <div class="p-8">
+          <h3 class="font-display text-xl font-medium mb-2" data-hr="Promet i infrastruktura">Traffic & Infrastructure</h3>
+          <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje stanja cesta, prometnih znakova i oštećenja na infrastrukturi, s geolokacijom za svaki kadar.">Road condition, traffic signs and infrastructure damage, captured with geolocation on every frame.</p>
+        </div>
       </div>
 
-      <div class="card p-8">
-        <svg class="w-7 h-7 text-[var(--emerald)] mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 9h16M4 15h16M4 4h16v16H4z" stroke-linejoin="round"/><path d="M9 4v16M15 4v16" opacity=".5"/></svg>
-        <h3 class="font-display text-xl font-medium mb-2" data-hr="Maloprodaja i inventar">Retail & Inventory</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje i označavanje artikala i polica na terenu za shelf monitoring i prepoznavanje proizvoda.">On-site capture and labelling of products and shelves for shelf monitoring and product recognition.</p>
+      <div class="card overflow-hidden">
+        <img src="/assets/photos/retail-shelves.jpg" alt="Supermarket aisle with stocked shelves" loading="lazy" class="w-full h-48 object-cover">
+        <div class="p-8">
+          <h3 class="font-display text-xl font-medium mb-2" data-hr="Maloprodaja i inventar">Retail & Inventory</h3>
+          <p class="text-sm text-[var(--gray)] leading-relaxed" data-hr="Snimanje i označavanje artikala i polica na terenu za shelf monitoring i prepoznavanje proizvoda.">On-site capture and labelling of products and shelves for shelf monitoring and product recognition.</p>
+        </div>
       </div>
 
-      <div class="card md:col-span-2 p-8">
-        <svg class="w-7 h-7 text-[var(--emerald)] mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3.5"/><path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3" stroke-linecap="round"/></svg>
-        <h3 class="font-display text-xl font-medium mb-2" data-hr="Prilagođeno terensko snimanje">Custom Field Collection</h3>
-        <p class="text-sm text-[var(--gray)] leading-relaxed max-w-2xl" data-hr="Terensko snimanje po specifikaciji klijenta u Hrvatskoj i široj regiji: lokacije, uvjeti, kutovi, oprema i količine definiramo zajedno prije početka.">Field capture to your specification in Croatia and the wider region. We agree locations, conditions, angles, equipment and volumes together before we start.</p>
+      <div class="card md:col-span-2 overflow-hidden grid md:grid-cols-[1fr_1.3fr]">
+        <div class="relative min-h-56"><img src="/assets/photos/custom-drone.jpg" alt="Survey drone hovering over a grass field at sunset" loading="lazy" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="p-8 md:p-10">
+          <h3 class="font-display text-xl font-medium mb-2" data-hr="Prilagođeno terensko snimanje">Custom Field Collection</h3>
+          <p class="text-sm text-[var(--gray)] leading-relaxed max-w-2xl" data-hr="Terensko snimanje po specifikaciji klijenta u Hrvatskoj i široj regiji: lokacije, uvjeti, kutovi, oprema i količine definiramo zajedno prije početka.">Field capture to your specification in Croatia and the wider region. We agree locations, conditions, angles, equipment and volumes together before we start.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -345,6 +339,7 @@
   </div>
   <div class="border-t border-[var(--line)] max-w-6xl mx-auto px-6 md:px-10 py-6 text-xs text-[var(--gray)]">
     <p>&copy; <span id="year"></span> Tehneo d.o.o. <span data-hr="Sva prava pridržana.">All rights reserved.</span></p>
+    <p class="mt-2"><span data-hr="Fotografije:">Photos:</span> <a href="https://www.pexels.com" class="underline underline-offset-2 hover:text-[var(--emerald)]" rel="noopener">Pexels</a></p>
   </div>
 </footer>
 
