@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tehneo Robotika — autonomna kosilica i mini bageri</title>
+<meta name="description" content="Tehneo Robotika razvija električnu autonomnu kosilicu za vinograde, voćnjake i sunčane elektrane te mini bagere na daljinsko i autonomno upravljanje. U razvoju.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16181B; --ink-2:#1E2125; --ink-3:#22262B; --line-dark:#353A41;
+    --paper:#F3F2EE; --paper-2:#E7E5DF; --line:#D9D7D0;
+    --text-2:#4A4F56; --mute:#6A6F76; --mute-dark:#A9ADB3; --soft-dark:#C9CCD0;
+    --accent:#E5600F; --accent-ink:#B8480A;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.wrap{padding:0 32px}}
+  .display{font-family:Archivo,sans-serif;font-stretch:112%;font-weight:800;letter-spacing:-.01em;margin:0}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+  .dark .eyebrow{color:var(--accent)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .btn{display:inline-flex;align-items:center;min-height:48px;padding:14px 24px;border-radius:6px;font-weight:600;font-size:16px;text-decoration:none}
+  .btn-accent{background:var(--accent);color:var(--ink)}
+  .btn-accent:hover{background:#F07A2E}
+  .btn-ghost{border:1px solid #8A8F96;color:var(--paper);font-weight:500;background:rgba(22,24,27,.35)}
+  .btn-ghost:hover{border-color:var(--paper)}
+  .btn-dark{background:var(--ink);color:var(--paper)}
+  .btn-dark:hover{background:#2A2E33}
+  .status{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:12px;padding:6px 10px;border-radius:4px;background:var(--paper-2);color:#2A2E33;white-space:nowrap}
+  .status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .dark .status{background:#2A2E33;color:var(--paper)}
+  .dark{background:var(--ink);color:var(--paper)}
+
+  /* header */
+  .site-header{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--paper);border-bottom:1px solid #2A2E33}
+  .site-header .wrap{display:flex;align-items:center;gap:24px;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--paper)}
+  .brand img{height:28px;width:auto}
+  .brand span{font-family:Archivo,sans-serif;font-stretch:112%;font-weight:800;font-size:18px;letter-spacing:.02em}
+  .brand span b{font-weight:600;color:var(--mute-dark)}
+  .nav{display:none;margin-left:auto;gap:26px;font-size:15px}
+  .nav a{color:#D8DADD;text-decoration:none}.nav a:hover{color:#fff}
+  .header-cta{display:none}
+  .menu-btn{margin-left:auto;width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:none;border:0;cursor:pointer}
+  .menu-btn span{display:block;width:24px;height:2px;background:var(--paper)}
+  .mobile-menu{display:none;border-top:1px solid #2A2E33;padding:12px 20px 20px}
+  .mobile-menu.open{display:flex;flex-direction:column}
+  .mobile-menu a{padding:12px 0;color:#D8DADD;text-decoration:none;border-bottom:1px solid #2A2E33}
+  @media(min-width:960px){.nav{display:flex}.header-cta{display:inline-flex;min-height:44px;font-size:15px;padding:10px 18px}.menu-btn{display:none}.mobile-menu,.mobile-menu.open{display:none}}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;min-height:640px;display:flex;align-items:center}
+  .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,16,19,.95) 0%,rgba(14,16,19,.82) 50%,rgba(14,16,19,.35) 100%)}
+  .hero .wrap{position:relative;z-index:1;width:100%;padding-top:72px;padding-bottom:72px}
+  .hero-copy{max-width:640px;display:flex;flex-direction:column;gap:24px}
+  .hero h1{font-size:40px;line-height:1.02}
+  @media(min-width:768px){.hero h1{font-size:60px}}
+  .hero p{margin:0;font-size:18px;line-height:1.55;color:#D2D5D9;max-width:540px}
+  .hero .actions{display:flex;flex-wrap:wrap;gap:12px}
+  .rule{display:flex;align-items:center;gap:12px}
+  .rule::before{content:"";width:28px;height:2px;background:var(--accent)}
+
+  /* strip */
+  .strip{border-top:1px solid #2A2E33}
+  .strip .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-top:24px;padding-bottom:24px}
+  @media(min-width:900px){.strip .wrap{grid-template-columns:repeat(4,1fr);gap:32px}}
+  .strip div{display:flex;flex-direction:column;gap:4px}
+  .strip small{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8A8F96}
+  .strip span{font-size:16px;font-weight:500}
+
+  /* sections */
+  section.pad{padding:80px 0}
+  @media(min-width:768px){section.pad{padding:104px 0}}
+  .head{display:flex;flex-direction:column;gap:12px;max-width:760px;margin-bottom:40px}
+  .head h2{font-size:32px;line-height:1.08}
+  @media(min-width:768px){.head h2{font-size:44px}}
+  .lead{margin:0;font-size:17px;line-height:1.6;color:var(--text-2)}
+  .dark .lead{color:var(--soft-dark)}
+
+  .machines{display:grid;gap:24px}
+  @media(min-width:900px){.machines{grid-template-columns:1fr 1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .card .fig{background:var(--ink-2);padding:24px;border-bottom:1px solid var(--line)}
+  .card .body{padding:28px;display:flex;flex-direction:column;gap:14px;flex-grow:1}
+  .card h3{margin:0;font-size:24px;font-weight:600}
+  .card p{margin:0;font-size:16px;line-height:1.55;color:var(--text-2)}
+  .card ul{margin:0;padding-left:18px;font-size:15px;line-height:1.7;color:#2A2E33}
+  .card .more{margin-top:auto;padding-top:14px;border-top:1px solid #EFEDE8;font-weight:600;color:var(--accent-ink);text-decoration:none}
+  .card .more:hover{text-decoration:underline}
+
+  .split{display:grid;gap:40px;align-items:start}
+  @media(min-width:960px){.split{grid-template-columns:7fr 5fr}}
+  figure.drawing{margin:0;background:var(--ink-2);border:1px solid var(--line-dark);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px}
+  figure.drawing figcaption{font-size:13px;color:#858A92}
+  dl.specs{margin:0;display:grid;grid-template-columns:1fr 1fr}
+  dl.specs div{padding:16px 0;border-top:1px solid var(--line-dark);display:flex;flex-direction:column;gap:4px}
+  dl.specs div:nth-last-child(-n+2){border-bottom:1px solid var(--line-dark)}
+  dl.specs dt{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#8A8F96}
+  dl.specs dd{margin:0;font-size:17px;font-weight:500}
+  .safety{margin-top:24px;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.6;color:var(--soft-dark)}
+  .safety strong{color:var(--paper)}
+  .roadmap{margin:48px 0 0;padding:0;list-style:none;display:grid;gap:24px}
+  @media(min-width:768px){.roadmap{grid-template-columns:repeat(3,1fr)}}
+  .roadmap li{border-top:3px solid #5A6068;padding-top:18px;display:flex;flex-direction:column;gap:6px}
+  .roadmap li.now{border-top-color:var(--accent)}
+  .roadmap .when{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--mute-dark)}
+  .roadmap li.now .when{color:var(--accent)}
+  .roadmap b{font-size:18px}
+  .roadmap span:last-child{font-size:15px;line-height:1.55;color:var(--mute-dark)}
+
+  .uses{margin:0;padding:0;list-style:none;display:grid;gap:0}
+  .uses li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:20px 0;border-top:1px solid #C9C6BE}
+  .uses li:last-child{border-bottom:1px solid #C9C6BE}
+  .uses .n{font-family:"IBM Plex Mono",monospace;color:var(--accent-ink);padding-top:2px}
+  .uses b{display:block;font-size:19px;margin-bottom:4px}
+  .uses span{font-size:15px;line-height:1.55;color:var(--text-2)}
+
+  .cta-band{display:flex;flex-direction:column;gap:20px;background:var(--ink-3);border:1px solid var(--line-dark);border-radius:10px;padding:28px}
+  @media(min-width:900px){.cta-band{flex-direction:row;align-items:center;justify-content:space-between}}
+  .cta-band p{margin:0;font-size:18px;line-height:1.5}
+  .cta-band p span{color:var(--soft-dark)}
+
+  .contact{display:grid;gap:32px}
+  @media(min-width:900px){.contact{grid-template-columns:5fr 7fr;gap:40px}}
+  .contact-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:18px}
+  .contact-box ol{margin:0;padding-left:20px;font-size:15px;line-height:1.8;color:#2A2E33}
+
+  footer.site-footer{background:var(--ink);color:var(--mute-dark);font-size:14px}
+  .footer-grid{display:grid;gap:32px;padding-top:56px;padding-bottom:40px}
+  @media(min-width:900px){.footer-grid{grid-template-columns:1fr 1.4fr 1fr}}
+  .footer-grid h4{margin:0 0 14px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8A8F96;font-weight:400}
+  .footer-grid ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;color:#D2D5D9}
+  .footer-grid a{text-decoration:underline;text-underline-offset:2px}
+  .footer-grid a:hover{color:var(--accent)}
+  .footer-bottom{border-top:1px solid #2A2E33;padding-top:20px;padding-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#7D828A}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Tehneo grupacija, naslovnica">
+      <img src="assets/tehneo-symbol-reversed.svg" alt="">
+      <span>TEHNEO <b>ROBOTIKA</b></span>
+    </a>
+    <nav class="nav" aria-label="Glavna navigacija">
+      <a href="#strojevi">Strojevi</a>
+      <a href="#kosilica">Kosilica</a>
+      <a href="#bageri">Mini bageri</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="index.html">Tehneo grupacija</a>
+    </nav>
+    <a href="#kontakt" class="btn btn-accent header-cta">Prijava za testiranje</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobilna navigacija">
+    <a href="#strojevi">Strojevi</a>
+    <a href="#kosilica">Kosilica</a>
+    <a href="#bageri">Mini bageri</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="index.html">Tehneo grupacija</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero dark">
+  <img src="assets/img/robotika-redovi.jpg" alt="Redovi između kojih radi kosilica, pogled odozgo">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="eyebrow rule">U razvoju · Osijek</div>
+      <h1 class="display">Autonomni strojevi za nasade, elektrane i teren</h1>
+      <p>Razvijamo električnu kosilicu na gusjenicama i mini bagere na daljinsko i autonomno upravljanje. Za poslove koji su teški, spori ili opasni za čovjeka sa strojem.</p>
+      <div class="actions">
+        <a href="#kontakt" class="btn btn-accent">Javite se za testiranje</a>
+        <a href="#kosilica" class="btn btn-ghost">Upoznajte kosilicu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="strip dark" aria-label="Ukratko">
+  <div class="wrap">
+    <div><small>Pogon</small><span>Električni, bez ispušnih plinova</span></div>
+    <div><small>Kretanje</small><span>Gusjenice, za mekan i nagnut teren</span></div>
+    <div><small>Upravljanje</small><span>Daljinsko, zatim autonomne rute</span></div>
+    <div><small>Razvoj</small><span>Projektirano i građeno u Osijeku</span></div>
+  </div>
+</section>
+
+<section id="strojevi" class="pad">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Strojevi</div>
+      <h2 class="display">Dva stroja, jedna modularna platforma</h2>
+      <p class="lead">Oba stroja su u razvoju. Opise ažuriramo kako prototipovi napreduju.</p>
+    </div>
+    <div class="machines">
+      <article class="card">
+        <div class="fig">
+          <svg viewBox="0 0 520 220" width="100%" role="img" aria-label="Shematski bočni crtež kosilice na gusjenicama">
+            <g fill="none" stroke="#D8DADD" stroke-width="2">
+              <rect x="150" y="70" width="300" height="64" rx="4"/>
+              <rect x="134" y="132" width="332" height="56" rx="28"/>
+              <circle cx="162" cy="160" r="20"/><circle cx="438" cy="160" r="24"/>
+              <circle cx="240" cy="170" r="11"/><circle cx="300" cy="170" r="11"/><circle cx="360" cy="170" r="11"/>
+              <path d="M380 70V24M370 24h20"/>
+              <path d="M150 100H112l-16 26"/>
+              <rect x="34" y="126" width="74" height="40" rx="4"/>
+              <circle cx="46" cy="178" r="10"/><circle cx="96" cy="178" r="10"/>
+            </g>
+            <rect x="220" y="84" width="140" height="36" rx="3" fill="#E5600F"/>
+            <text x="232" y="107" font-family="IBM Plex Mono, monospace" font-size="12" fill="#16181B">BATERIJA</text>
+            <path d="M20 198H500" stroke="#5A6068" stroke-dasharray="3 5"/>
+          </svg>
+        </div>
+        <div class="body">
+          <span class="status" style="align-self:flex-start">U razvoju</span>
+          <h3>Autonomna kosilica</h3>
+          <p>Za vinograde, voćnjake i sunčane elektrane. Kosi između redova i ispod panela, gdje je trimerom sporo, a traktorom teško proći bez oštećenja.</p>
+          <ul>
+            <li>niska konstrukcija, prolazi ispod panela</li>
+            <li>bez kamenčića na staklu i bez gaženja kabela</li>
+            <li>priključci se mijenjaju na istoj bazi</li>
+          </ul>
+          <a href="#kosilica" class="more">Tehnički podaci</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="fig">
+          <svg viewBox="0 0 520 220" width="100%" role="img" aria-label="Shematski bočni crtež mini bagera">
+            <g fill="none" stroke="#D8DADD" stroke-width="2">
+              <rect x="190" y="132" width="240" height="56" rx="28"/>
+              <circle cx="218" cy="160" r="20"/><circle cx="402" cy="160" r="20"/>
+              <circle cx="280" cy="170" r="10"/><circle cx="340" cy="170" r="10"/>
+              <rect x="230" y="80" width="170" height="52" rx="6"/>
+              <path d="M300 80V52h70v28"/>
+              <path d="M230 104L150 52 76 92"/>
+              <path d="M240 112L156 66"/>
+              <path d="M76 92l-12 34 40 8 4-30z"/>
+              <path d="M200 176l-40 12h-16"/>
+            </g>
+            <rect x="310" y="92" width="80" height="28" rx="3" fill="#E5600F"/>
+            <text x="318" y="111" font-family="IBM Plex Mono, monospace" font-size="12" fill="#16181B">UPRAVLJ.</text>
+            <path d="M20 198H500" stroke="#5A6068" stroke-dasharray="3 5"/>
+          </svg>
+        </div>
+        <div class="body">
+          <span class="status" style="align-self:flex-start">U razvoju</span>
+          <h3>Mini bageri na daljinsko i autonomno upravljanje</h3>
+          <p>Za iskope, kanale i radove na mjestima gdje je stroju s vozačem teško ili opasno. Rukovatelj upravlja s udaljenosti, a ponavljajuće radnje stroj izvodi sam.</p>
+          <ul>
+            <li>rad s udaljenosti, izvan zone opasnosti</li>
+            <li>ponavljanje istog iskopa bez umaranja</li>
+            <li>za uske i nepristupačne lokacije</li>
+          </ul>
+          <a href="#bageri" class="more">Gdje se koriste</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="kosilica" class="pad dark">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Kosilica · u razvoju</div>
+      <h2 class="display">Električni gusjeničar s modularnom spojnicom</h2>
+      <p class="lead">Baza nosi pogon, bateriju i upravljanje, a priključak se spaja sprijeda: prvo kosilica, zatim malčer i drugi alati. Sami ga projektiramo i servisiramo.</p>
+    </div>
+    <div class="split">
+      <figure class="drawing">
+        <svg viewBox="0 0 640 340" width="100%" role="img" aria-label="Bočni crtež kosilice s označenim dijelovima">
+          <path d="M20 300H620" stroke="#5A6068" stroke-dasharray="3 5" fill="none"/>
+          <g fill="none" stroke="#D8DADD" stroke-width="2">
+            <rect x="150" y="150" width="380" height="80" rx="4"/>
+            <rect x="130" y="228" width="420" height="68" rx="34"/>
+            <circle cx="164" cy="262" r="26"/><circle cx="516" cy="262" r="30"/>
+            <circle cx="250" cy="274" r="14"/><circle cx="330" cy="274" r="14"/><circle cx="410" cy="274" r="14"/>
+            <path d="M190 150V118h60v32"/>
+            <path d="M440 150V70"/><path d="M428 70h24"/>
+            <path d="M150 190H104l-20 30"/><path d="M150 214H110"/>
+            <rect x="30" y="220" width="90" height="46" rx="4"/>
+            <circle cx="44" cy="282" r="12"/><circle cx="106" cy="282" r="12"/>
+          </g>
+          <rect x="250" y="168" width="170" height="44" rx="3" fill="#E5600F"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#A9ADB3">
+            <text x="262" y="195" fill="#16181B" font-weight="500">LiFePO4 5,1 kWh</text>
+            <text x="462" y="62">antena RC / GPS</text>
+            <text x="476" y="140">2 × 1 kW pogon</text>
+            <text x="30" y="210">modul kosilice</text>
+            <text x="92" y="182">spojnica</text>
+          </g>
+          <g stroke="#8A8F96" stroke-width="1" fill="none"><path d="M130 320H550"/><path d="M130 314v12M550 314v12"/></g>
+          <text x="340" y="336" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#A9ADB3">oko 1.300 mm</text>
+        </svg>
+        <figcaption>Shematski crtež prototipa. Fotografije stvarnog stroja dodajemo tijekom izrade.</figcaption>
+      </figure>
+      <div>
+        <dl class="specs">
+          <div><dt>Masa baze</dt><dd>oko 180 kg</dd></div>
+          <div><dt>Pogon</dt><dd>električni, 2 × 1 kW</dd></div>
+          <div><dt>Baterija</dt><dd>LiFePO4, 5,1 kWh</dd></div>
+          <div><dt>Rad na punjenju</dt><dd>2,5–3 h košnje</dd></div>
+          <div><dt>Visina</dt><dd>oko 55 cm</dd></div>
+          <div><dt>Upravljanje</dt><dd>daljinsko, zatim GPS rute</dd></div>
+        </dl>
+        <div class="safety">
+          <strong>Sigurnost ugrađena u konstrukciju</strong>
+          <span>Tipka za nuždu, bežični stop koji gasi stroj kad izgubi signal, branik s prekidačima i nož koji staje pri naginjanju.</span>
+        </div>
+      </div>
+    </div>
+    <ol class="roadmap" aria-label="Razvoj kosilice">
+      <li class="now"><span class="when">2026. · sada</span><b>Izrada prototipa</b><span>Šasija, pogon, baterija i daljinsko upravljanje.</span></li>
+      <li><span class="when">2027.</span><b>Testiranje na terenu</b><span>Rad kod partnera koji se jave za testiranje, širi modul kosilice.</span></li>
+      <li><span class="when">kasnije</span><b>Autonomija i novi priključci</b><span>GPS rute bez stalnog nadzora, malčer i drugi alati.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="bageri" class="pad" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="split">
+      <div class="head" style="margin-bottom:0">
+        <div class="eyebrow">Mini bageri · u razvoju</div>
+        <h2 class="display">Iskop bez čovjeka u kabini</h2>
+        <p class="lead">Upravljački sustav koji mini bageru omogućuje rad na daljinsko upravljanje, a ponavljajuće radnje izvodi samostalno. Opseg i prve primjene definiramo s partnerima.</p>
+        <figure style="margin:16px 0 0;position:relative;border-radius:10px;overflow:hidden">
+          <img src="assets/img/robotika-bager.jpg" alt="Mini bager na travnatom nasipu" loading="lazy" style="width:100%;aspect-ratio:3/2;object-fit:cover">
+          <figcaption class="mono" style="position:absolute;left:12px;bottom:12px;font-size:11px;color:#fff;background:rgba(22,24,27,.8);padding:5px 9px;border-radius:4px">Ilustrativna fotografija</figcaption>
+        </figure>
+      </div>
+      <ol class="uses">
+        <li><span class="n">01</span><div><b>Kanali i rovovi</b><span>Ponavljajući iskop iste dubine i širine na duljoj trasi.</span></div></li>
+        <li><span class="n">02</span><div><b>Rizične lokacije</b><span>Rad uz nestabilne rubove, nasipe ili vodu, s rukovateljem na sigurnoj udaljenosti.</span></div></li>
+        <li><span class="n">03</span><div><b>Uski prostori</b><span>Dvorišta, nasadi i mjesta gdje veći stroj ne može ući.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="pad">
+  <div class="wrap">
+    <div class="contact">
+      <div class="head" style="margin-bottom:0">
+        <div class="eyebrow">Testiranje</div>
+        <h2 class="display">Javite se ako želite sudjelovati u testiranju</h2>
+        <p class="lead">Imate vinograd, voćnjak, elektranu ili teren na kojem bi stroj mogao raditi? Opišite nam ga ukratko.</p>
+      </div>
+      <div class="contact-box">
+        <span class="mono" style="font-size:13px;color:var(--mute)">U poruci navedite:</span>
+        <ol>
+          <li>vrstu terena (vinograd, voćnjak, elektrana, gradilište)</li>
+          <li>lokaciju i približnu površinu</li>
+          <li>koji vas posao najviše muči</li>
+        </ol>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <a class="btn btn-dark" href="mailto:tehneo.os@gmail.com?subject=Testiranje%20%E2%80%93%20Tehneo%20Robotika&amp;body=Vrsta%20terena%3A%0D%0ALokacija%3A%0D%0APovr%C5%A1ina%3A%0D%0AKoji%20posao%20vas%20mu%C4%8Di%3A%0D%0AKontakt%20telefon%3A%0D%0A">Pošaljite prijavu</a>
+          <span style="font-size:15px;color:var(--text-2)">tehneo.os@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="brand" style="margin-bottom:14px">
+        <img src="assets/tehneo-symbol-reversed.svg" alt="Tehneo">
+        <span>TEHNEO <b>ROBOTIKA</b></span>
+      </a>
+      <p style="margin:14px 0 0;line-height:1.6">Odjel Tehneo grupacije za autonomne strojeve.</p>
+      <ul style="margin-top:14px">
+        <li><a href="energija.html">Tehneo Energija</a></li>
+        <li><a href="dron.html">Tehneo Dron</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Podaci o tvrtki</h4>
+      <ul>
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li>E-mail: <a href="mailto:tehneo.os@gmail.com">tehneo.os@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</span>
+    <span>Fotografija: Pexels (ilustrativno)</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const btn = document.getElementById('menu-btn'), menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => { const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }));
+</script>
+</body>
+</html>

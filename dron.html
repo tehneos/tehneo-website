@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tehneo Dron — karte zona za vinograde i voćnjake</title>
+<meta name="description" content="Multispektralno snimanje dronom za vinograde i voćnjake u Slavoniji i Baranji: karte zona vigora, vođeno uzorkovanje i plan berbe po zonama. Pilot-projekti 2027.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#08111C; --night-2:#0E1B2A; --night-3:#132438; --line-n:#1F3247;
+    --sky:#EEF3F6; --sky-2:#E1E9EE; --line:#CBD6DE;
+    --ink:#0A1420; --text-2:#3E4C5A; --mute:#62717F; --soft-n:#A8B6C3;
+    --signal:#43E0BE; --signal-ink:#0E7E68; --amber:#FFB547;
+    --z1:#2FBF71; --z2:#E8C547; --z3:#E2683C;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--sky);color:var(--ink);font-family:Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+  @media(min-width:768px){.wrap{padding:0 32px}}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal-ink)}
+  .night .tag{color:var(--signal)}
+  h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em}
+  .night{background:var(--night);color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none}
+  .btn-signal{background:var(--signal);color:var(--night)}
+  .btn-signal:hover{background:#6CEACF}
+  .btn-line{border:1px solid rgba(255,255,255,.35);color:#fff}
+  .btn-line:hover{border-color:#fff}
+  .btn-ink{background:var(--ink);color:#fff}
+  .btn-ink:hover{background:var(--night-3)}
+  .status{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;padding:6px 12px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+  .status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .st-pilot{color:var(--signal-ink)}
+  .st-prep{color:#8A6100}
+  .night .st-pilot{color:var(--signal)}
+  .night .st-prep{color:var(--amber)}
+
+  /* header */
+  .site-header{position:sticky;top:0;z-index:20;background:rgba(8,17,28,.92);backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid var(--line-n)}
+  .site-header .wrap{display:flex;align-items:center;gap:24px;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand img{height:28px;width:auto}
+  .brand span{font-weight:700;font-size:17px;letter-spacing:.06em}
+  .brand span b{font-weight:500;color:var(--signal)}
+  .nav{display:none;margin-left:auto;gap:26px;font-size:14px}
+  .nav a{color:var(--soft-n);text-decoration:none}.nav a:hover{color:#fff}
+  .header-cta{display:none}
+  .menu-btn{margin-left:auto;width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;background:none;border:0;cursor:pointer}
+  .menu-btn span{display:block;width:24px;height:2px;background:#fff}
+  .mobile-menu{display:none;border-top:1px solid var(--line-n);padding:8px 20px 20px}
+  .mobile-menu.open{display:flex;flex-direction:column}
+  .mobile-menu a{padding:12px 0;color:var(--soft-n);text-decoration:none;border-bottom:1px solid var(--line-n)}
+  @media(min-width:960px){.nav{display:flex}.header-cta{display:inline-flex;min-height:42px;padding:10px 18px;font-size:14px}.menu-btn{display:none}.mobile-menu,.mobile-menu.open{display:none}}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden}
+  .hero-media{position:absolute;inset:0}
+  .hero-media img{width:100%;height:100%;object-fit:cover;opacity:.55}
+  .hero-media svg{position:absolute;inset:0;width:100%;height:100%}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,17,28,.55) 0%,rgba(8,17,28,.35) 45%,rgba(8,17,28,.95) 100%);pointer-events:none}
+  @media(min-width:960px){.hero::after{background:linear-gradient(90deg,rgba(8,17,28,.96) 0%,rgba(8,17,28,.8) 45%,rgba(8,17,28,.15) 100%)}}
+  .hero .wrap{position:relative;z-index:2;display:grid;gap:40px;padding-top:88px;padding-bottom:72px}
+  @media(min-width:960px){.hero .wrap{grid-template-columns:7fr 5fr;align-items:end;min-height:700px;padding-top:120px;padding-bottom:88px}}
+  .hero-copy{display:flex;flex-direction:column;gap:24px;max-width:640px}
+  .hero h1{font-size:38px;line-height:1.05}
+  @media(min-width:768px){.hero h1{font-size:58px}}
+  .hero p{margin:0;font-size:17px;line-height:1.6;color:#C9D4DD;max-width:540px}
+  .actions{display:flex;flex-wrap:wrap;gap:12px}
+  .hud{position:relative;background:rgba(8,17,28,.82);border:1px solid var(--line-n);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+  .hud::before,.hud::after{content:"";position:absolute;width:16px;height:16px;border-color:var(--signal);border-style:solid}
+  .hud::before{top:-1px;left:-1px;border-width:2px 0 0 2px;border-top-left-radius:14px}
+  .hud::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-bottom-right-radius:14px}
+  .hud-row{display:flex;justify-content:space-between;gap:12px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--soft-n)}
+  .hud-row b{color:#fff;font-weight:500}
+  .legend{display:flex;flex-direction:column;gap:8px;font-size:14px;color:#DCE4EA}
+  .legend span{display:flex;align-items:center;gap:10px}
+  .legend i{width:28px;height:10px;border-radius:2px;display:inline-block}
+  .hud small{font-size:11px;color:#7F8F9D}
+
+  /* overview */
+  .overview{display:grid;gap:1px;background:var(--line-n);border-top:1px solid var(--line-n)}
+  @media(min-width:900px){.overview{grid-template-columns:repeat(3,1fr)}}
+  .overview a{background:var(--night);padding:24px 20px;text-decoration:none;display:flex;flex-direction:column;gap:10px}
+  @media(min-width:768px){.overview a{padding:28px 32px}}
+  .overview a:hover{background:var(--night-2)}
+  .overview b{font-size:18px;font-weight:600}
+  .overview span.d{font-size:14px;color:var(--soft-n);line-height:1.5}
+
+  section.pad{padding:80px 0}
+  @media(min-width:768px){section.pad{padding:112px 0}}
+  .head{display:flex;flex-direction:column;gap:14px;max-width:760px;margin-bottom:44px}
+  .head h2{font-size:30px;line-height:1.1}
+  @media(min-width:768px){.head h2{font-size:44px}}
+  .lead{margin:0;font-size:17px;line-height:1.65;color:var(--text-2)}
+  .night .lead{color:var(--soft-n)}
+
+  /* flow */
+  .flow{margin:0 0 56px;padding:0;list-style:none;display:grid;gap:12px}
+  @media(min-width:900px){.flow{grid-template-columns:repeat(4,1fr);gap:0}}
+  .flow li{position:relative;background:#fff;border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:8px}
+  @media(min-width:900px){.flow li{border-left-width:0}.flow li:first-child{border-left-width:1px;border-radius:14px 0 0 14px}.flow li:last-child{border-radius:0 14px 14px 0}}
+  @media(max-width:899px){.flow li{border-radius:14px}}
+  .flow .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--signal-ink)}
+  .flow b{font-size:17px}
+  .flow span:last-child{font-size:14px;line-height:1.55;color:var(--text-2)}
+  .flow .who{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+  .feature{display:grid;gap:40px;align-items:center}
+  @media(min-width:960px){.feature{grid-template-columns:1fr 1fr;gap:64px}}
+  .frame{position:relative;border-radius:14px;overflow:hidden;background:var(--night)}
+  .frame img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  .frame .corners::before,.frame .corners::after,.frame::before,.frame::after{content:"";position:absolute;width:22px;height:22px;border-color:var(--signal);border-style:solid;z-index:2}
+  .frame::before{top:12px;left:12px;border-width:2px 0 0 2px}
+  .frame::after{bottom:12px;right:12px;border-width:0 2px 2px 0}
+  .frame .corners::before{top:12px;right:12px;border-width:2px 2px 0 0}
+  .frame .corners::after{bottom:12px;left:12px;border-width:0 0 2px 2px}
+  .frame .label{position:absolute;left:16px;bottom:16px;z-index:2;font-family:"JetBrains Mono",monospace;font-size:11px;color:#fff;background:rgba(8,17,28,.8);padding:6px 10px;border-radius:6px}
+  .frame svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+
+  .deliver{margin:56px 0 0;padding:0;list-style:none;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  @media(min-width:640px){.deliver{grid-template-columns:1fr 1fr}}
+  @media(min-width:1000px){.deliver{grid-template-columns:repeat(3,1fr)}}
+  .deliver li{background:#fff;padding:26px;display:flex;flex-direction:column;gap:8px}
+  .deliver .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--signal-ink)}
+  .deliver b{font-size:17px;font-weight:600}
+  .deliver span:last-child{font-size:14px;line-height:1.6;color:var(--text-2)}
+  .note{margin-top:28px;display:flex;gap:14px;align-items:flex-start;background:var(--sky-2);border-radius:14px;padding:20px 22px;max-width:820px}
+  .note svg{flex-shrink:0;margin-top:2px}
+  .note p{margin:0;font-size:15px;line-height:1.6;color:var(--text-2)}
+  .note b{color:var(--ink)}
+
+  .duo{display:grid;gap:24px}
+  @media(min-width:960px){.duo{grid-template-columns:1fr 1fr}}
+  .svc{background:var(--night-2);border:1px solid var(--line-n);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .svc .frame{border-radius:0}
+  .svc .frame img{aspect-ratio:16/9}
+  .svc .body{padding:28px;display:flex;flex-direction:column;gap:14px}
+  .svc h3{font-size:24px}
+  .svc p{margin:0;font-size:15px;line-height:1.65;color:var(--soft-n)}
+  .svc ul{margin:0;padding-left:18px;font-size:14px;line-height:1.8;color:#DCE4EA}
+
+  .pilot{display:grid;gap:32px}
+  @media(min-width:960px){.pilot{grid-template-columns:6fr 6fr;gap:56px;align-items:center}}
+  .pilot-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:18px}
+  .pilot-box ol{margin:0;padding-left:20px;font-size:15px;line-height:1.9;color:var(--text-2)}
+
+  footer.site-footer{background:var(--night);color:var(--soft-n);font-size:14px}
+  .footer-grid{display:grid;gap:32px;padding-top:56px;padding-bottom:40px}
+  @media(min-width:900px){.footer-grid{grid-template-columns:1fr 1.4fr 1fr}}
+  .footer-grid h4{margin:0 0 14px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7F8F9D;font-weight:400}
+  .footer-grid ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;color:#DCE4EA}
+  .footer-grid a{text-decoration:underline;text-underline-offset:2px}
+  .footer-grid a:hover{color:var(--signal)}
+  .footer-bottom{border-top:1px solid var(--line-n);padding-top:20px;padding-bottom:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:#7F8F9D}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Tehneo grupacija, naslovnica">
+      <img src="assets/tehneo-symbol-reversed.svg" alt="">
+      <span>TEHNEO <b>DRON</b></span>
+    </a>
+    <nav class="nav" aria-label="Glavna navigacija">
+      <a href="#nasadi">Vinogradi i voćnjaci</a>
+      <a href="#elektrane">Elektrane</a>
+      <a href="#prihrana">Prihrana</a>
+      <a href="#pilot">Kontakt</a>
+      <a href="index.html">Tehneo grupacija</a>
+    </nav>
+    <a href="#pilot" class="btn btn-signal header-cta">Prijava za pilot 2027.</a>
+    <button class="menu-btn" id="menu-btn" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobilna navigacija">
+    <a href="#nasadi">Vinogradi i voćnjaci</a>
+    <a href="#elektrane">Elektrane</a>
+    <a href="#prihrana">Prihrana</a>
+    <a href="#pilot">Kontakt</a>
+    <a href="index.html">Tehneo grupacija</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero night">
+  <div class="hero-media" aria-hidden="true">
+    <img src="assets/img/dron-vinograd.jpg" alt="">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+      <path d="M760 60 L1600 60 L1600 330 L1180 360 L900 300 Z" fill="#2FBF71" opacity=".30"/>
+      <path d="M900 300 L1180 360 L1600 330 L1600 640 L1240 610 L1000 540 Z" fill="#E8C547" opacity=".30"/>
+      <path d="M1000 540 L1240 610 L1600 640 L1600 900 L1050 900 Z" fill="#E2683C" opacity=".32"/>
+      <g fill="none" stroke="#43E0BE" stroke-width="2" opacity=".9">
+        <circle cx="1290" cy="200" r="9"/><circle cx="1360" cy="470" r="9"/><circle cx="1310" cy="760" r="9"/>
+      </g>
+      <g font-family="JetBrains Mono, monospace" font-size="20" fill="#E6FFF8">
+        <text x="1306" y="190">U1</text><text x="1376" y="460">U2</text><text x="1326" y="750">U3</text>
+      </g>
+    </svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="tag">Tehneo Dron · Slavonija i Baranja</div>
+      <h1>Vaš nasad iz zraka, podijeljen u zone</h1>
+      <p>Multispektralna snimka pokazuje gdje vinograd ili voćnjak raste jače, a gdje slabije. Znate gdje uzeti uzorke i kako organizirati berbu, umjesto da cijeli nasad tretirate jednako.</p>
+      <div class="actions">
+        <a href="#pilot" class="btn btn-signal">Prijavite nasad za pilot-suradnju</a>
+        <a href="#nasadi" class="btn btn-line">Kako radi</a>
+      </div>
+    </div>
+    <div class="hud" aria-label="Legenda karte zona">
+      <div class="hud-row"><span>KARTA ZONA VIGORA</span><b>ILUSTRACIJA</b></div>
+      <div class="legend">
+        <span><i style="background:var(--z1)"></i>jača bujnost</span>
+        <span><i style="background:var(--z2)"></i>srednja bujnost</span>
+        <span><i style="background:var(--z3)"></i>slabija bujnost</span>
+        <span><i style="background:none;border:2px solid var(--signal);width:14px;height:14px;border-radius:50%"></i>predloženo mjesto uzorkovanja</span>
+      </div>
+      <small>Zone i točke ucrtane su radi prikaza, nisu rezultat stvarnog snimanja.</small>
+    </div>
+  </div>
+</section>
+
+<nav class="overview night" aria-label="Usluge">
+  <a href="#nasadi"><span class="status st-pilot">Pilot-projekti 2027.</span><b>Vinogradi i voćnjaci</b><span class="d">Karte zona, vođeno uzorkovanje i plan berbe.</span></a>
+  <a href="#elektrane"><span class="status st-prep">U pripremi</span><b>Termalni pregled elektrana</b><span class="d">Pregrijane ćelije i neispravni moduli iz zraka.</span></a>
+  <a href="#prihrana"><span class="status st-prep">U pripremi</span><b>Prihrana dronom</b><span class="d">Folijarna gnojiva i biostimulatori.</span></a>
+</nav>
+
+<section id="nasadi" class="pad">
+  <div class="wrap">
+    <div class="feature">
+      <div class="head" style="margin-bottom:0">
+        <span class="status st-pilot" style="align-self:flex-start">Pilot-projekti 2027.</span>
+        <div class="tag">Glavna usluga</div>
+        <h2>Vinogradi i voćnjaci</h2>
+        <p class="lead">Dron snima nasad multispektralnom kamerom, a iz snimke izrađujemo kartu zona. Karta ne zamjenjuje obilazak nasada. Pokazuje vam gdje se isplati pogledati, uzeti uzorke i drugačije postupiti.</p>
+      </div>
+      <div class="frame">
+        <span class="corners"></span>
+        <img src="assets/img/dron-vocnjak.jpg" alt="Voćnjak snimljen dronom odozgo, redovi stabala" loading="lazy">
+        <span class="label">ALT ~80 m · RGB · ilustrativna fotografija</span>
+      </div>
+    </div>
+
+    <ol class="flow" style="margin-top:64px" aria-label="Od snimke do berbe">
+      <li><span class="n">01</span><span class="who">Tehneo</span><b>Let i snimanje</b><span>Multispektralna snimka cijelog nasada u dogovorenom terminu.</span></li>
+      <li><span class="n">02</span><span class="who">Tehneo</span><b>Karta zona</b><span>Nasad podijeljen u zone po bujnosti, s predloženim mjestima uzorkovanja.</span></li>
+      <li><span class="n">03</span><span class="who">Vi ili vaš laboratorij</span><b>Uzorci na terenu</b><span>Šećer i kiseline mjere se na uzorcima iz svake zone.</span></li>
+      <li><span class="n">04</span><span class="who">Zajedno</span><b>Plan berbe</b><span>Zone s različitim rezultatima beru se odvojeno ili drugim redoslijedom.</span></li>
+    </ol>
+
+    <ul class="deliver" aria-label="Što dobivate">
+      <li><span class="n">01</span><b>Multispektralno snimanje</b><span>Snimka u vidljivom i bliskom infracrvenom dijelu spektra, iz koje se računaju vegetacijski indeksi.</span></li>
+      <li><span class="n">02</span><b>Karte zona vigora</b><span>Zone jače, srednje i slabije bujnosti, prikazane po redovima i parcelama.</span></li>
+      <li><span class="n">03</span><b>Vođeno uzorkovanje šećera i kiselina</b><span>Predložena mjesta uzorkovanja za svaku zonu, da uzorci bolje predstavljaju nasad.</span></li>
+      <li><span class="n">04</span><b>Plan berbe po zonama</b><span>Podloga za odluku koje dijelove brati odvojeno i kojim redom.</span></li>
+      <li><span class="n">05</span><b>Brojanje praznih mjesta</b><span>Popis praznih mjesta u redovima, kao podloga za plan dosadnje.</span></li>
+      <li><span class="n">06</span><b>Dokumentiranje šteta</b><span>Snimka nakon tuče, oluje ili mraza, s datumom i lokacijom.</span></li>
+    </ul>
+
+    <div class="note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7E68" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5" stroke-linecap="round"/></svg>
+      <p><b>Što dron ne radi:</b> ne mjeri šećer u grožđu i ne postavlja dijagnozu bolesti. Karta pokazuje razlike u rastu, a uzrok i stanje plodova utvrđuju se na terenu.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pad night" style="padding-top:96px">
+  <div class="wrap">
+    <div class="head">
+      <div class="tag">Ostale usluge</div>
+      <h2>Sunčane elektrane i prihrana</h2>
+    </div>
+    <div class="duo">
+      <article id="elektrane" class="svc">
+        <div class="frame">
+          <span class="corners"></span>
+          <img src="assets/img/dron-elektrana.jpg" alt="Krovna sunčana elektrana snimljena dronom odozgo" loading="lazy">
+          <span class="label">Ilustrativna fotografija</span>
+        </div>
+        <div class="body">
+          <span class="status st-prep" style="align-self:flex-start">U pripremi</span>
+          <h3>Termalni pregled sunčanih elektrana</h3>
+          <p>Termalna kamera iz zraka otkriva pregrijane ćelije i module koji ne rade ispravno. Dobivate popis nalaza s lokacijom, pa serviser ide ravno na problematične module.</p>
+          <ul>
+            <li>krovne i zemljane elektrane</li>
+            <li>nalazi poredani po prioritetu</li>
+          </ul>
+        </div>
+      </article>
+      <article id="prihrana" class="svc">
+        <div class="frame">
+          <span class="corners"></span>
+          <img src="assets/img/dron-teren.jpg" alt="Dron iznad polja u zalazak sunca" loading="lazy">
+          <span class="label">Ilustrativna fotografija</span>
+        </div>
+        <div class="body">
+          <span class="status st-prep" style="align-self:flex-start">U pripremi</span>
+          <h3>Prihrana dronom</h3>
+          <p>Folijarna gnojiva i biostimulatori, nanošeni iz zraka. Korisno kad je tlo mokro ili je teren težak za traktor.</p>
+          <p>Zaštitu bilja dronom ponudit ćemo tek kad je propisi dopuste.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="pilot" class="pad">
+  <div class="wrap pilot">
+    <div class="head" style="margin-bottom:0">
+      <span class="status st-pilot" style="align-self:flex-start">Pilot-projekti 2027.</span>
+      <h2>Prijavite nasad za pilot-suradnju</h2>
+      <p class="lead">Za sezonu 2027. tražimo vinograde i voćnjake u Slavoniji i Baranji. Javite se, a mi dogovaramo parcele i termine snimanja prije početka sezone.</p>
+    </div>
+    <div class="pilot-box">
+      <span class="mono" style="font-size:13px;color:var(--mute)">U prijavi navedite:</span>
+      <ol>
+        <li>lokaciju nasada</li>
+        <li>kulturu i sortu</li>
+        <li>površinu u hektarima</li>
+        <li>kontakt telefon</li>
+      </ol>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <a class="btn btn-ink" href="mailto:tehneo.os@gmail.com?subject=Pilot-suradnja%202027.%20%E2%80%93%20nasad&amp;body=Lokacija%3A%0D%0AKultura%20i%20sorta%3A%0D%0APovr%C5%A1ina%20(ha)%3A%0D%0AKontakt%20telefon%3A%0D%0A">Prijavite nasad</a>
+        <span style="font-size:15px;color:var(--text-2)">tehneo.os@gmail.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="brand">
+        <img src="assets/tehneo-symbol-reversed.svg" alt="Tehneo">
+        <span style="color:#fff">TEHNEO <b>DRON</b></span>
+      </a>
+      <p style="margin:14px 0 0;line-height:1.6">Odjel Tehneo grupacije za snimanje i rad iz zraka.</p>
+      <ul style="margin-top:14px">
+        <li><a href="energija.html">Tehneo Energija</a></li>
+        <li><a href="robotika.html">Tehneo Robotika</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Podaci o tvrtki</h4>
+      <ul>
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li>E-mail: <a href="mailto:tehneo.os@gmail.com">tehneo.os@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</span>
+    <span>Fotografije: Pexels (ilustrativno)</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const btn = document.getElementById('menu-btn'), menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => { const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }));
+</script>
+</body>
+</html>
