@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Data Services | Tehneo</title>
+<meta name="description" content="EU-based AI data team in Croatia: annotation, LLM evaluation and RLHF in Croatian, Serbian, Bosnian and Slovenian, with experts in mathematics, agronomy and machine learning.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/favicon-192.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0F2A1E;
+    --forest-deep:#091A12;
+    --green:#2F6E4E;
+    --sage:#9CC5A8;
+    --paper:#F6F6F3;
+    --paper-dim:#EDEEE9;
+    --ink:#15201A;
+    --slate:#5B6660;
+    --div-ai:#8DB7E8;
+  }
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); }
+  .font-display{ font-family:'Space Grotesk', sans-serif; }
+
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0%; height:1px;
+    background:currentColor; opacity:.6; transition:width .2s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  .card-focus{ border-top:2px solid var(--green); transition:border-color .25s ease, background-color .25s ease; }
+  .card-focus:hover{ border-top-color:var(--sage); background:#fff; }
+
+  .hero-grid{
+    background-color:var(--forest-deep);
+    background-image:
+      linear-gradient(rgba(156,197,168,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(156,197,168,0.07) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+
+  .footer-divider{ border-color: rgba(156,197,168,0.22); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-[rgba(246,246,243,0.95)] backdrop-blur border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 h-20 flex items-center justify-between gap-6">
+    <a href="../" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo Group, home">
+      <img src="../assets/tehneo-symbol.svg" alt="" class="h-[30px] w-auto">
+      <span class="font-display text-xl font-semibold tracking-tight">TEHNEO</span>
+      <span class="hidden sm:inline text-xs uppercase tracking-[0.18em] text-[var(--slate)] border-l border-black/15 pl-3">AI Data</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-sm text-[var(--forest)]" aria-label="Main navigation">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#why" class="nav-link">Why us</a>
+      <a href="#process" class="nav-link">How we work</a>
+      <a href="#security" class="nav-link">Security</a>
+      <a href="../" class="nav-link text-[var(--slate)]">← Tehneo Group</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex items-center px-5 py-2.5 text-sm font-medium text-[var(--paper)] bg-[var(--forest)] hover:bg-[var(--green)] transition-colors">
+      Contact
+    </a>
+    <button id="menu-btn" class="lg:hidden w-11 h-11 flex flex-col justify-center items-center gap-[5px]" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
+      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-black/5">
+    <div class="px-5 py-4 flex flex-col text-[var(--ink)]">
+      <a href="#services" class="py-3 border-b border-black/5">Services</a>
+      <a href="#why" class="py-3 border-b border-black/5">Why us</a>
+      <a href="#process" class="py-3 border-b border-black/5">How we work</a>
+      <a href="#security" class="py-3 border-b border-black/5">Security</a>
+      <a href="#contact" class="py-3 border-b border-black/5">Contact</a>
+      <a href="../" class="py-3 text-[var(--slate)]">← Tehneo Group</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero-grid text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-16 md:pb-24">
+    <p class="text-[var(--sage)] text-sm mb-6 tracking-wide">EU-based AI data team · Croatia</p>
+    <h1 class="font-display text-[2.4rem] leading-[1.04] sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight max-w-5xl">
+      Human expertise for AI models in Croatian and South-East European languages
+    </h1>
+    <p class="mt-7 text-base md:text-lg text-[var(--paper)]/75 max-w-2xl leading-relaxed">
+      Annotation, LLM evaluation and RLHF by native speakers and domain experts in mathematics, agronomy and machine learning. GDPR-compliant, under NDA, with built-in quality control.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#contact" class="inline-flex items-center px-6 py-3 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--sage)] transition-colors">
+        Request a pilot
+      </a>
+      <a href="#services" class="inline-flex items-center px-6 py-3 border border-[var(--paper)]/30 text-sm font-medium hover:border-[var(--paper)]/70 transition-colors">
+        See services
+      </a>
+    </div>
+    <ul class="mt-14 flex flex-wrap gap-2 text-sm" aria-label="Languages">
+      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Croatian</li>
+      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Serbian</li>
+      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Bosnian</li>
+      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Slovenian</li>
+      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">English</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 scroll-mt-20">
+  <div class="max-w-xl mb-14">
+    <p class="text-[var(--green)] text-sm mb-4">Services</p>
+    <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">What we deliver</h2>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/10 border border-black/10">
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">LLM evaluation &amp; RLHF</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Rating and ranking model responses, writing reference answers, preference data and safety review in Croatian and regional languages.</p>
+    </div>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">Expert reasoning data</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Mathematics problems and step-by-step solution review by holders of master's degrees in mathematics.</p>
+    </div>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">Agriculture &amp; drone imagery</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Crop, weed and plant-disease labelling on field and aerial images, reviewed by an agronomist.</p>
+    </div>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">Text annotation</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Classification, sentiment, named entities, translation and localisation review for regional-language datasets.</p>
+    </div>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">Image &amp; video annotation</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Bounding boxes, polygons and segmentation in your tool or ours (Label Studio, CVAT).</p>
+    </div>
+    <div class="card-focus bg-[var(--paper)] p-8">
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-3">Speech data</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Transcription, audio labelling and native-speaker recordings across regional accents.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="bg-[var(--paper-dim)] scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <p class="text-[var(--green)] text-sm mb-4">Why Tehneo</p>
+      <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">A small team that cares about every label</h2>
+    </div>
+    <ol class="lg:col-span-7 border-t border-black/15">
+      <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
+        <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">01</span>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Native regional languages</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Croatian, Serbian, Bosnian and Slovenian from native speakers who understand dialects, culture and context.</p></div>
+      </li>
+      <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
+        <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">02</span>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Domain experts, not just labellers</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Master's degrees in mathematics, agronomy and machine learning on the team.</p></div>
+      </li>
+      <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
+        <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">03</span>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">EU-based and GDPR-ready</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Your data stays in the EU, with an NDA and a data processing agreement for every project.</p></div>
+      </li>
+      <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
+        <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">04</span>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">ML-aware workflows</h3><p class="text-[var(--slate)] leading-relaxed mt-2">A machine-learning engineer designs guidelines, pre-labelling and QA, so the data fits your training pipeline.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 scroll-mt-20">
+  <div class="max-w-xl mb-14">
+    <p class="text-[var(--green)] text-sm mb-4">How we work</p>
+    <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">From first call to delivery</h2>
+  </div>
+  <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+    <li class="border-t-2 border-[var(--green)] pt-6">
+      <p class="font-display text-sm text-[var(--green)] mb-3">01</p>
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-2">Scoping call</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Languages, data type, volume, tool, timeline and quality targets.</p>
+    </li>
+    <li class="border-t-2 border-[var(--green)] pt-6">
+      <p class="font-display text-sm text-[var(--green)] mb-3">02</p>
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-2">Pilot</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">A small paid or test batch so you can judge our quality before committing.</p>
+    </li>
+    <li class="border-t-2 border-[var(--green)] pt-6">
+      <p class="font-display text-sm text-[var(--green)] mb-3">03</p>
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-2">Production</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Trained annotators work to your guidelines, with weekly progress updates.</p>
+    </li>
+    <li class="border-t-2 border-[var(--green)] pt-6">
+      <p class="font-display text-sm text-[var(--green)] mb-3">04</p>
+      <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-2">Quality control</h3>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Gold-set checks, 10–20% second review and agreement tracking on every batch.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="bg-[var(--forest)] text-[var(--paper)] scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+    <div class="lg:col-span-5">
+      <p class="text-[var(--sage)] text-sm mb-4">Security</p>
+      <h2 class="font-display text-3xl md:text-5xl font-medium leading-[1.08]">Your data is handled with care</h2>
+    </div>
+    <ul class="lg:col-span-7 border-t border-[var(--paper)]/15">
+      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>NDA signed by every team member before any project</li>
+      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Data processing agreement (GDPR) with every client</li>
+      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Work only inside your tools, no local copies of data</li>
+      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Company accounts with two-factor authentication and encrypted devices</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-28 scroll-mt-20">
+  <div class="grid lg:grid-cols-12 gap-10 items-end border-t-2 border-[var(--green)] pt-10">
+    <div class="lg:col-span-7">
+      <p class="text-[var(--green)] text-sm mb-4">Contact</p>
+      <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">Need Croatian or regional-language data?</h2>
+      <p class="mt-5 text-[var(--slate)] leading-relaxed max-w-xl">Tell us about your project. We reply within one business day and can start with a small pilot.</p>
+    </div>
+    <div class="lg:col-span-5 lg:text-right">
+      <a href="mailto:info@tehneo.hr?subject=AI%20data%20project" class="inline-flex items-center px-6 py-3.5 bg-[var(--forest)] text-[var(--paper)] text-sm font-medium hover:bg-[var(--green)] transition-colors">
+        info@tehneo.hr
+      </a>
+      <p class="mt-4 text-sm text-[var(--slate)]">Marko Balikić · Tehneo d.o.o. · Višnjevac (Osijek), Croatia</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER / IMPRESSUM -->
+<footer class="bg-[var(--forest-deep)] text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-16 grid md:grid-cols-3 gap-12">
+    <div>
+      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
+        <img src="../assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
+        TEHNEO
+      </p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/80">
+        <li><a href="../" class="hover:text-[var(--sage)]">Tehneo Group</a></li>
+        <li><a href="../energija.html" class="hover:text-[var(--sage)]">Tehneo Energy</a></li>
+        <li><a href="./" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>E-mail: <a href="mailto:info@tehneo.hr" class="hover:text-[var(--sage)] underline underline-offset-2">info@tehneo.hr</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider border-t max-w-7xl mx-auto px-5 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
+    <p>Izrada web stranice: Tehneo d.o.o.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+</script>
+
+</body>
+</html>
