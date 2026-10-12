@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/solar", "destination": "/energija.html", "permanent": false },
-    { "source": "/solar/", "destination": "/energija.html", "permanent": false }
+    { "source": "/solar/", "destination": "/energija.html", "permanent": false },
+    { "source": "/ai-data", "destination": "/ai-data/", "permanent": true }
   ]
 }
