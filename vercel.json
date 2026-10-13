@@ -1,15 +1,8 @@
 {
-  "redirects": [
-    { "source": "/solar", "destination": "/energija.html", "permanent": false },
-    { "source": "/solar/", "destination": "/energija.html", "permanent": false },
-    { "source": "/ai-data", "destination": "/ai-data/", "permanent": true },
-    { "source": "/privatnost", "destination": "/privatnost/", "permanent": true }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "ai.tehneo.hr" }],
-      "destination": "/ai-data/"
-    }
+  "routes": [
+    { "src": "/solar/?", "status": 307, "headers": { "Location": "/energija.html" } },
+    { "src": "/ai-data", "status": 308, "headers": { "Location": "/ai-data/" } },
+    { "src": "/privatnost", "status": 308, "headers": { "Location": "/privatnost/" } },
+    { "src": "/", "has": [{ "type": "host", "value": "ai.tehneo.hr" }], "dest": "/ai-data/index.html" }
   ]
 }
