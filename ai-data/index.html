@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Data Services | Tehneo</title>
-<meta name="description" content="EU-based AI data team in Croatia: annotation, LLM evaluation and RLHF in Croatian, Serbian, Bosnian and Slovenian, with experts in mathematics, agronomy and machine learning.">
+<meta name="description" content="EU-based AI data team in Croatia: annotation, LLM evaluation and RLHF in Croatian, Serbian and Bosnian, with experts in mathematics and agronomy.">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
 <link rel="apple-touch-icon" href="../assets/favicon-192.png">
@@ -59,7 +59,7 @@
 <!-- HEADER -->
 <header class="sticky top-0 z-50 bg-[rgba(246,246,243,0.95)] backdrop-blur border-b border-black/5">
   <div class="max-w-7xl mx-auto px-5 md:px-10 h-20 flex items-center justify-between gap-6">
-    <a href="../" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo Group, home">
+    <a href="./" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo AI Data, home">
       <img src="../assets/tehneo-symbol.svg" alt="" class="h-[30px] w-auto">
       <span class="font-display text-xl font-semibold tracking-tight">TEHNEO</span>
       <span class="hidden sm:inline text-xs uppercase tracking-[0.18em] text-[var(--slate)] border-l border-black/15 pl-3">AI Data</span>
@@ -70,7 +70,6 @@
       <a href="#chatbot-audit" class="nav-link">Chatbot audit</a>
       <a href="#process" class="nav-link">How we work</a>
       <a href="#security" class="nav-link">Security</a>
-      <a href="../" class="nav-link text-[var(--slate)]">← Tehneo Group</a>
     </nav>
     <a href="#contact" class="hidden lg:inline-flex items-center px-5 py-2.5 text-sm font-medium text-[var(--paper)] bg-[var(--forest)] hover:bg-[var(--green)] transition-colors">
       Contact
@@ -87,8 +86,7 @@
       <a href="#chatbot-audit" class="py-3 border-b border-black/5">Chatbot audit</a>
       <a href="#process" class="py-3 border-b border-black/5">How we work</a>
       <a href="#security" class="py-3 border-b border-black/5">Security</a>
-      <a href="#contact" class="py-3 border-b border-black/5">Contact</a>
-      <a href="../" class="py-3 text-[var(--slate)]">← Tehneo Group</a>
+      <a href="#contact" class="py-3">Contact</a>
     </div>
   </div>
 </header>
@@ -102,7 +100,7 @@
       Human expertise for AI models in Croatian and South-East European languages
     </h1>
     <p class="mt-7 text-base md:text-lg text-[var(--paper)]/75 max-w-2xl leading-relaxed">
-      Annotation, LLM evaluation and RLHF by native speakers and domain experts in mathematics, agronomy and machine learning. GDPR-compliant, under NDA, with built-in quality control.
+      Annotation, LLM evaluation and RLHF by native speakers, under NDA and GDPR, with built-in quality control.
     </p>
     <div class="mt-10 flex flex-wrap gap-4">
       <a href="#contact" class="inline-flex items-center px-6 py-3 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--sage)] transition-colors">
@@ -116,7 +114,6 @@
       <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Croatian</li>
       <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Serbian</li>
       <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Bosnian</li>
-      <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">Slovenian</li>
       <li class="px-3 py-1.5 border border-[var(--div-ai)]/40 text-[var(--div-ai)]">English</li>
     </ul>
   </div>
@@ -191,6 +188,76 @@
   </div>
 </section>
 
+<!-- SAMPLE OUTPUT -->
+<section id="sample-output" class="border-t border-black/10 scroll-mt-20">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32">
+    <div class="max-w-xl mb-14">
+      <p class="text-[var(--green)] text-sm mb-4">Sample output</p>
+      <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">What our work looks like</h2>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-px bg-black/10 border border-black/10">
+
+      <!-- RLHF primjer -->
+      <article class="card-focus bg-[var(--paper)] p-8 flex flex-col gap-5">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-display text-xl text-[var(--forest)] font-medium">RLHF preference rating</h3>
+          <span class="text-xs uppercase tracking-[0.14em] text-[var(--slate)]">Croatian</span>
+        </div>
+        <div class="border border-black/10 bg-[var(--paper-dim)] px-4 py-3">
+          <p class="text-xs uppercase tracking-[0.14em] text-[var(--slate)] mb-1">Prompt</p>
+          <p class="text-[var(--ink)]" lang="hr">Koliko dugo se kuha grah?</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="border-2 border-[var(--green)] px-4 py-3">
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--green)] mb-1">Response A</p>
+            <p class="text-sm text-[var(--ink)] leading-relaxed" lang="hr">Suhi grah namočite preko noći, a zatim ga kuhajte 1 do 1,5 sat dok ne omekša.</p>
+          </div>
+          <div class="border border-black/15 px-4 py-3">
+            <p class="text-xs uppercase tracking-[0.14em] text-[var(--slate)] mb-1">Response B</p>
+            <p class="text-sm text-[var(--ink)] leading-relaxed" lang="hr">Grah nije potrebno namakati, kuhajte ga 15 minuta i gotov je.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-start gap-3 mt-auto pt-2">
+          <span class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-[var(--forest)] text-[var(--paper)] whitespace-nowrap">Preferred: A</span>
+          <p class="text-sm text-[var(--slate)] leading-relaxed flex-1 min-w-[200px]">A gives the soaking step and a realistic cooking time, while B's 15 minutes would leave dry beans undercooked.</p>
+        </div>
+      </article>
+
+      <!-- Ilustracija anotacije slike -->
+      <article class="card-focus bg-[var(--paper)] p-8 flex flex-col gap-5">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-display text-xl text-[var(--forest)] font-medium">Image annotation</h3>
+          <span class="text-xs uppercase tracking-[0.14em] text-[var(--slate)]">Illustration</span>
+        </div>
+        <svg viewBox="0 0 480 270" class="w-full h-auto block bg-[var(--paper-dim)] border border-black/10" role="img" aria-label="Illustration of an annotated street scene with a car and a person in bounding boxes">
+          <rect x="0" y="190" width="480" height="80" fill="#E2E4DE"/>
+          <path d="M0 190H480" stroke="#C9CCC5" stroke-width="2"/>
+          <path d="M40 232H120M180 232H260M320 232H400" stroke="#F6F6F3" stroke-width="4"/>
+          <g fill="#C3C8C1">
+            <path d="M92 196V170q4-18 26-20h70q20 2 30 20l10 4q10 4 10 14v8z"/>
+            <circle cx="122" cy="198" r="13" fill="#9EA49C"/>
+            <circle cx="210" cy="198" r="13" fill="#9EA49C"/>
+            <circle cx="346" cy="102" r="11"/>
+            <rect x="336" y="116" width="20" height="44" rx="6"/>
+            <rect x="337" y="158" width="7" height="40" rx="3"/>
+            <rect x="348" y="158" width="7" height="40" rx="3"/>
+          </g>
+          <rect x="86" y="146" width="160" height="66" fill="none" stroke="#2F6E4E" stroke-width="2.5"/>
+          <rect x="330" y="88" width="32" height="112" fill="none" stroke="#5B87B8" stroke-width="2.5"/>
+          <g font-family="Inter, sans-serif" font-size="13" font-weight="600">
+            <rect x="86" y="126" width="42" height="20" fill="#2F6E4E"/>
+            <text x="94" y="140" fill="#F6F6F3">car</text>
+            <rect x="330" y="68" width="62" height="20" fill="#5B87B8"/>
+            <text x="337" y="82" fill="#F6F6F3">person</text>
+          </g>
+        </svg>
+        <p class="text-sm text-[var(--slate)] leading-relaxed mt-auto">Tight bounding boxes, occlusion flags, 10–20% second review.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- WHY US -->
 <section id="why" class="bg-[var(--paper-dim)] scroll-mt-20">
   <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16">
@@ -201,11 +268,11 @@
     <ol class="lg:col-span-7 border-t border-black/15">
       <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
         <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">01</span>
-        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Native regional languages</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Croatian, Serbian, Bosnian and Slovenian from native speakers who understand dialects, culture and context.</p></div>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Native regional languages</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Croatian, Serbian and Bosnian from native speakers who understand dialects, culture and context.</p></div>
       </li>
       <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
         <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">02</span>
-        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Domain experts, not just labellers</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Master's degrees in mathematics, agronomy and machine learning on the team.</p></div>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">Domain experts, not just labellers</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Master's degrees in mathematics and agronomy, plus hands-on experience in construction, hospitality and automotive services.</p></div>
       </li>
       <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
         <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">03</span>
@@ -213,7 +280,7 @@
       </li>
       <li class="grid grid-cols-12 gap-4 py-7 border-b border-black/15">
         <span class="col-span-2 sm:col-span-1 font-display text-sm text-[var(--green)] pt-1">04</span>
-        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">ML-aware workflows</h3><p class="text-[var(--slate)] leading-relaxed mt-2">We design guidelines, pre-labelling and QA with ML training pipelines in mind, so the data fits how models actually learn.</p></div>
+        <div class="col-span-10 sm:col-span-11"><h3 class="font-display text-xl text-[var(--forest)] font-medium">ML-aware workflows</h3><p class="text-[var(--slate)] leading-relaxed mt-2">Guidelines, pre-labelling and QA designed for machine-learning use, so the data fits how models are trained.</p></div>
       </li>
     </ol>
   </div>
@@ -234,7 +301,7 @@
     <li class="border-t-2 border-[var(--green)] pt-6">
       <p class="font-display text-sm text-[var(--green)] mb-3">02</p>
       <h3 class="font-display text-xl text-[var(--forest)] font-medium mb-2">Pilot</h3>
-      <p class="text-sm text-[var(--slate)] leading-relaxed">A small paid or test batch so you can judge our quality before committing.</p>
+      <p class="text-sm text-[var(--slate)] leading-relaxed">Free 50-item pilot so you can judge our quality before committing.</p>
     </li>
     <li class="border-t-2 border-[var(--green)] pt-6">
       <p class="font-display text-sm text-[var(--green)] mb-3">03</p>
@@ -259,7 +326,7 @@
     <ul class="lg:col-span-7 border-t border-[var(--paper)]/15">
       <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>NDA signed by every team member before any project</li>
       <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Data processing agreement (GDPR) with every client</li>
-      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Work only inside your tools, no local copies of data</li>
+      <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>We work in your tools, or in our access-controlled, EU-hosted annotation workspace.</li>
       <li class="flex gap-4 py-5 border-b border-[var(--paper)]/15 text-[var(--paper)]/85"><span class="text-[var(--sage)]" aria-hidden="true">✓</span>Company accounts with two-factor authentication and encrypted devices</li>
     </ul>
   </div>
@@ -292,34 +359,35 @@
         TEHNEO
       </p>
       <ul class="text-sm space-y-2 text-[var(--paper)]/80">
-        <li><a href="../" class="hover:text-[var(--sage)]">Tehneo Group</a></li>
-        <li><a href="../energija.html" class="hover:text-[var(--sage)]">Tehneo Energy</a></li>
+        <li><a href="https://www.tehneo.hr/" class="hover:text-[var(--sage)]">Tehneo Group</a></li>
+        <li><a href="https://www.tehneo.hr/energija.html" class="hover:text-[var(--sage)]">Tehneo Energy</a></li>
         <li><a href="./" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Company details</p>
       <ul class="text-sm space-y-2 text-[var(--paper)]/90">
         <li>Tehneo d.o.o. za proizvodnju i usluge</li>
         <li>OIB: 84386741609</li>
-        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
-        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
-        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+        <li>Registered office: Ulica Ivana Mažuranića 25, 31220 Višnjevac, Croatia</li>
+        <li>Registered at the Commercial Court in Osijek, MBS: 030268230</li>
+        <li>Share capital: EUR 2,654.46 (fully paid in)</li>
       </ul>
     </div>
 
     <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Contact</p>
       <ul class="text-sm space-y-2 text-[var(--paper)]/90">
         <li>E-mail: <a href="mailto:info@tehneo.hr" class="hover:text-[var(--sage)] underline underline-offset-2">info@tehneo.hr</a></li>
+        <li><a href="https://www.tehneo.hr/privatnost/" class="hover:text-[var(--sage)] underline underline-offset-2">Privacy policy</a> <span class="text-[var(--paper)]/50">(in Croatian)</span></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-divider border-t max-w-7xl mx-auto px-5 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
-    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
-    <p>Izrada web stranice: Tehneo d.o.o.</p>
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. All rights reserved.</p>
+    <p>Website by Tehneo d.o.o.</p>
   </div>
 </footer>
 

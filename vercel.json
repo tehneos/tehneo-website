@@ -2,6 +2,14 @@
   "redirects": [
     { "source": "/solar", "destination": "/energija.html", "permanent": false },
     { "source": "/solar/", "destination": "/energija.html", "permanent": false },
-    { "source": "/ai-data", "destination": "/ai-data/", "permanent": true }
+    { "source": "/ai-data", "destination": "/ai-data/", "permanent": true },
+    { "source": "/privatnost", "destination": "/privatnost/", "permanent": true }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "ai.tehneo.hr" }],
+      "destination": "/ai-data/"
+    }
   ]
 }
