@@ -196,7 +196,7 @@
       <p class="text-[var(--green)] text-sm mb-4">Sample output</p>
       <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">What our work looks like</h2>
     </div>
-    <div class="grid lg:grid-cols-2 gap-px bg-black/10 border border-black/10">
+    <div class="grid gap-px bg-black/10 border border-black/10">
 
       <!-- RLHF primjer -->
       <article class="card-focus bg-[var(--paper)] p-8 flex flex-col gap-5">
@@ -228,31 +228,54 @@
       <article class="card-focus bg-[var(--paper)] p-8 flex flex-col gap-5">
         <div class="flex items-center justify-between gap-4">
           <h3 class="font-display text-xl text-[var(--forest)] font-medium">Image annotation</h3>
-          <span class="text-xs uppercase tracking-[0.14em] text-[var(--slate)]">Illustration</span>
+          <span class="text-xs uppercase tracking-[0.14em] text-[var(--slate)]">Example</span>
         </div>
-        <svg viewBox="0 0 480 270" class="w-full h-auto block bg-[var(--paper-dim)] border border-black/10" role="img" aria-label="Illustration of an annotated street scene with a car and a person in bounding boxes">
-          <rect x="0" y="190" width="480" height="80" fill="#E2E4DE"/>
-          <path d="M0 190H480" stroke="#C9CCC5" stroke-width="2"/>
-          <path d="M40 232H120M180 232H260M320 232H400" stroke="#F6F6F3" stroke-width="4"/>
-          <g fill="#C3C8C1">
-            <path d="M92 196V170q4-18 26-20h70q20 2 30 20l10 4q10 4 10 14v8z"/>
-            <circle cx="122" cy="198" r="13" fill="#9EA49C"/>
-            <circle cx="210" cy="198" r="13" fill="#9EA49C"/>
-            <circle cx="346" cy="102" r="11"/>
-            <rect x="336" y="116" width="20" height="44" rx="6"/>
-            <rect x="337" y="158" width="7" height="40" rx="3"/>
-            <rect x="348" y="158" width="7" height="40" rx="3"/>
-          </g>
-          <rect x="86" y="146" width="160" height="66" fill="none" stroke="#2F6E4E" stroke-width="2.5"/>
-          <rect x="330" y="88" width="32" height="112" fill="none" stroke="#5B87B8" stroke-width="2.5"/>
-          <g font-family="Inter, sans-serif" font-size="13" font-weight="600">
-            <rect x="86" y="126" width="42" height="20" fill="#2F6E4E"/>
-            <text x="94" y="140" fill="#F6F6F3">car</text>
-            <rect x="330" y="68" width="62" height="20" fill="#5B87B8"/>
-            <text x="337" y="82" fill="#F6F6F3">person</text>
-          </g>
-        </svg>
-        <p class="text-sm text-[var(--slate)] leading-relaxed mt-auto">Tight bounding boxes, occlusion flags, 10–20% second review.</p>
+        <div class="grid md:grid-cols-2 gap-6">
+        <figure class="m-0">
+          <div class="relative border border-black/10 bg-[var(--paper-dim)]">
+            <img src="../assets/img/ai-sample-street.jpg" alt="Street photo with a parked car and a person walking in front of it" width="1200" height="675" loading="lazy" class="block w-full h-auto">
+            <svg viewBox="0 0 1200 675" class="absolute inset-0 w-full h-full" aria-hidden="true">
+              <g fill="none" stroke-width="5">
+                <rect x="132" y="232" width="730" height="268" stroke="#2F6E4E"/>
+                <rect x="542" y="82" width="170" height="423" stroke="#5B87B8"/>
+              </g>
+              <g font-family="Inter, sans-serif" font-size="28" font-weight="600">
+                <rect x="132" y="190" width="253" height="42" fill="#2F6E4E"/><text x="144" y="220" fill="#F6F6F3">car · occluded</text>
+                <rect x="542" y="40" width="121" height="42" fill="#5B87B8"/><text x="554" y="70" fill="#F6F6F3">person</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption class="mt-2 text-xs text-[var(--slate)]">Object detection with an occlusion flag</figcaption>
+        </figure>
+        <figure class="m-0">
+          <div class="relative border border-black/10 bg-[var(--paper-dim)]">
+            <img src="../assets/img/ai-sample-roof.jpg" alt="Drone photo of a rooftop with solar panel arrays and skylights" width="1200" height="675" loading="lazy" class="block w-full h-auto">
+            <svg viewBox="0 0 1200 675" class="absolute inset-0 w-full h-full" aria-hidden="true">
+              <g fill="none" stroke-width="5" stroke="#2F6E4E">
+                <rect x="58" y="42" width="142" height="140"/>
+                <rect x="332" y="40" width="203" height="142"/>
+                <rect x="545" y="40" width="203" height="142"/>
+                <rect x="58" y="203" width="340" height="137"/>
+                <rect x="410" y="203" width="338" height="137"/>
+                <rect x="58" y="360" width="340" height="138"/>
+                <rect x="410" y="360" width="338" height="138"/>
+              </g>
+              <g fill="none" stroke-width="5" stroke="#5B87B8">
+                <rect x="816" y="15" width="380" height="133"/>
+                <rect x="816" y="175" width="380" height="127"/>
+              </g>
+              <rect x="211" y="66" width="40" height="70" fill="none" stroke-width="5" stroke="#C97A1E"/>
+              <g font-family="Inter, sans-serif" font-size="28" font-weight="600">
+                <rect x="410" y="195" width="203" height="42" fill="#2F6E4E"/><text x="422" y="225" fill="#F6F6F3">solar array</text>
+                <rect x="816" y="167" width="144" height="42" fill="#5B87B8"/><text x="828" y="197" fill="#F6F6F3">skylight</text>
+                <rect x="258" y="76" width="172" height="42" fill="#C97A1E"/><text x="270" y="106" fill="#F6F6F3">roof hatch</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption class="mt-2 text-xs text-[var(--slate)]">Drone imagery: multi-class labels on a rooftop</figcaption>
+        </figure>
+        </div>
+        <p class="text-sm text-[var(--slate)] leading-relaxed mt-auto">Tight bounding boxes, occlusion flags, 10–20% second review.<br><span class="text-xs">Sample annotations on stock photos (Pexels), not client data.</span></p>
       </article>
 
     </div>
