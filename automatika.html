@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tehneo Automatika — pametna automatizacija za svaki sustav</title>
+<meta name="description" content="Tehneo Automatika razvija i izrađuje pametne sustave upravljanja za sunčane elektrane, domove, navodnjavanje i druge procese, temeljene na vlastitom Tehneo kontroleru.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/favicon-192.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0F2A1E;
+    --forest-deep:#091A12;
+    --green:#2F6E4E;
+    --sage:#9CC5A8;
+    --paper:#F6F6F3;
+    --paper-dim:#EDEEE9;
+    --ink:#15201A;
+    --slate:#5B6660;
+    --div-auto:#C8D86A;
+  }
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); }
+  .font-display{ font-family:'Space Grotesk', sans-serif; }
+
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0%; height:1px;
+    background:currentColor; opacity:.6; transition:width .2s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* ---- Hero ---- */
+  .hero{ position:relative; overflow:hidden; isolation:isolate; background:var(--forest-deep); }
+  .hero-photo{
+    position:absolute; inset:0; z-index:-2;
+    background-image:
+      linear-gradient(90deg, rgba(9,26,18,0.97) 0%, rgba(9,26,18,0.88) 45%, rgba(9,26,18,0.55) 100%),
+      url('https://images.unsplash.com/photo-1780034766312-73825064806c?w=2400&q=80&auto=format&fit=crop');
+    background-size:cover; background-position:center;
+  }
+  .hero svg.traces{ position:absolute; inset:0; width:100%; height:100%; z-index:-1; }
+
+  .status{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-size:.75rem; font-weight:500; line-height:1; letter-spacing:.02em; white-space:nowrap;
+    padding:.45rem .7rem; border:1px solid currentColor;
+  }
+  .status::before{ content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+  /* ---- Kartice ---- */
+  .card-focus{ border-top:2px solid var(--green); transition:border-color .25s ease; }
+  .card-focus:hover{ border-top-color:var(--div-auto); }
+  .card-photo{ aspect-ratio:16/9; overflow:hidden; margin:-2rem -2rem 2rem; }
+  .card-photo img{ width:100%; height:100%; object-fit:cover; transition:transform .8s ease; }
+  .card-focus:hover .card-photo img{ transform:scale(1.04); }
+  @media (min-width:768px){ .card-photo{ margin:-2.5rem -2.5rem 2.5rem; } }
+
+  /* ---- Tok podataka ---- */
+  .flow-node{ border:1px solid rgba(156,197,168,0.28); background:rgba(156,197,168,0.05); }
+  .flow-arrow{ color:var(--div-auto); }
+
+  .step-num{ font-variant-numeric:tabular-nums; }
+
+  .footer-divider{ border-color: rgba(156,197,168,0.22); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-[rgba(246,246,243,0.95)] backdrop-blur border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo, naslovnica">
+      <img src="assets/tehneo-symbol.svg" alt="" class="h-[30px] w-auto">
+      <span class="font-display text-xl font-semibold tracking-tight">TEHNEO</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-9 text-sm text-[var(--forest)]" aria-label="Glavna navigacija">
+      <a href="#kontroler" class="nav-link">Kontroler</a>
+      <a href="#primjena" class="nav-link">Primjena</a>
+      <a href="#kako-radimo" class="nav-link">Kako radimo</a>
+      <a href="index.html" class="nav-link">Tehneo</a>
+    </nav>
+    <a href="#kontakt" class="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-medium text-[var(--paper)] bg-[var(--forest)] hover:bg-[var(--green)] transition-colors">
+      Kontaktirajte nas
+    </a>
+    <button id="menu-btn" class="md:hidden w-11 h-11 flex flex-col justify-center items-center gap-[5px]" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
+      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden border-t border-black/5">
+    <div class="px-5 py-4 flex flex-col text-[var(--ink)]">
+      <a href="#kontroler" class="py-3 border-b border-black/5">Kontroler</a>
+      <a href="#primjena" class="py-3 border-b border-black/5">Primjena</a>
+      <a href="#kako-radimo" class="py-3 border-b border-black/5">Kako radimo</a>
+      <a href="index.html" class="py-3 border-b border-black/5">Tehneo</a>
+      <a href="#kontakt" class="py-3">Kontakt</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero text-[var(--paper)]">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <svg class="traces" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0H0V40" fill="none" stroke="#9CC5A8" stroke-opacity="0.06"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="640" fill="url(#grid)"/>
+    <g fill="none" stroke-width="2">
+      <path d="M720 120 H1080 V260 H1200" stroke="#9CC5A8" stroke-opacity="0.22"/>
+      <path d="M760 200 H960 V420 H1200" stroke="#C8D86A" stroke-opacity="0.45"/>
+      <path d="M840 520 V320 H1040 V160" stroke="#9CC5A8" stroke-opacity="0.18"/>
+      <path d="M640 600 H900 V480 H1200" stroke="#C8D86A" stroke-opacity="0.25"/>
+    </g>
+    <g fill="#C8D86A">
+      <circle cx="760" cy="200" r="5" fill-opacity="0.8"/><circle cx="960" cy="420" r="5" fill-opacity="0.6"/>
+      <circle cx="640" cy="600" r="4" fill-opacity="0.5"/><circle cx="900" cy="480" r="4" fill-opacity="0.5"/>
+    </g>
+    <g fill="#9CC5A8" fill-opacity="0.45">
+      <circle cx="720" cy="120" r="4"/><circle cx="1080" cy="260" r="4"/><circle cx="840" cy="520" r="4"/><circle cx="1040" cy="160" r="4"/>
+    </g>
+  </svg>
+  <div class="max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-20 md:pb-28">
+    <p class="text-[var(--div-auto)] text-sm mb-6 tracking-wide">03 · Odjel · Automation for a Smarter Tomorrow</p>
+    <h1 class="font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl font-medium tracking-tight max-w-4xl">
+      Pametna automatizacija za svaki sustav.
+    </h1>
+    <p class="mt-7 text-base md:text-lg text-[var(--paper)]/75 max-w-xl leading-relaxed">
+      Od doma do elektrane: povezujemo tehnologiju, učinkovitost i jednostavno
+      upravljanje. Temelj je naš vlastiti kontroler, koji svakodnevno upravlja
+      Tehneovom sunčanom elektranom.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a href="#primjena" class="inline-flex items-center px-6 py-3 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--div-auto)] transition-colors">
+        Što automatiziramo
+      </a>
+      <a href="#kontakt" class="inline-flex items-center px-6 py-3 border border-[var(--paper)]/30 text-sm font-medium hover:border-[var(--paper)]/70 transition-colors">
+        Razgovarajmo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- O ODJELU -->
+<section id="o-odjelu" class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16">
+  <div class="lg:col-span-5">
+    <p class="text-[var(--green)] text-sm mb-4">Tehneo Automatika</p>
+    <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">
+      Tehnologija koja radi u pozadini
+    </h2>
+  </div>
+  <div class="lg:col-span-7">
+    <p class="text-lg text-[var(--slate)] leading-relaxed">
+      Razvijamo i izrađujemo pametne sustave koji automatiziraju upravljanje
+      domovima, energetskim postrojenjima, navodnjavanjem i drugim procesima.
+      Naša rješenja pomažu da sustavi rade učinkovitije, pouzdanije i
+      jednostavnije, danas i u budućnosti.
+    </p>
+    <p class="mt-6 text-[var(--slate)] leading-relaxed">
+      Ne prodajemo kutiju s policom. Kontroler, softver i portal razvili smo
+      sami i prvo ih postavili na vlastitu elektranu. Svaki sustav zato
+      prilagođavamo opremi i navikama korisnika, a ne obrnuto.
+    </p>
+  </div>
+  <div class="lg:col-span-12 grid md:grid-cols-5 gap-3 md:gap-4">
+    <div class="md:col-span-3 aspect-[16/10] overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1758101755915-462eddc23f57?w=1600&q=80&auto=format&fit=crop" alt="Tehničar mjeri napon u elektroormaru s kontaktorima" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="md:col-span-2 aspect-[16/10] md:aspect-auto overflow-hidden">
+      <img src="assets/img/dron-elektrana.jpg" alt="Sunčana elektrana na krovu, snimljena dronom" class="w-full h-full object-cover" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- KONTROLER -->
+<section id="kontroler" class="bg-[var(--forest)] text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-16">
+      <div class="lg:col-span-5">
+        <p class="text-[var(--div-auto)] text-sm mb-4">Tehneo kontroler</p>
+        <h2 class="font-display text-3xl md:text-5xl font-medium leading-[1.08]">
+          Jedan mozak za cijeli sustav
+        </h2>
+      </div>
+      <p class="lg:col-span-7 text-[var(--paper)]/75 text-lg leading-relaxed lg:pt-2">
+        Kontroler radi lokalno, uz samu opremu, 24 sata dnevno. Čita uređaje,
+        odlučuje prema pravilima i podacima te upravlja samo onim što smije.
+        Sve što se događa vidite na portalu, s mobitela ili računala.
+      </p>
+    </div>
+
+    <!-- tok: oprema -> kontroler -> portal -->
+    <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-3 md:gap-4 mb-20">
+      <div class="flow-node p-6">
+        <p class="text-xs uppercase tracking-[0.16em] text-[var(--sage)] mb-3">Oprema</p>
+        <p class="font-display text-xl mb-2">Inverteri, pumpe, ventili, senzori</p>
+        <p class="text-sm text-[var(--paper)]/65 leading-relaxed">Povezivanje preko Modbus TCP/RTU, releja i mrežnih sučelja.</p>
+      </div>
+      <div class="flow-arrow hidden md:flex items-center" aria-hidden="true">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="flow-node p-6" style="border-color:rgba(200,216,106,0.55)">
+        <p class="text-xs uppercase tracking-[0.16em] text-[var(--div-auto)] mb-3">Kontroler</p>
+        <p class="font-display text-xl mb-2">Odluka svakih nekoliko sekundi</p>
+        <p class="text-sm text-[var(--paper)]/65 leading-relaxed">Pravila, cijene struje, vrijeme, prognoza i očitanja senzora.</p>
+      </div>
+      <div class="flow-arrow hidden md:flex items-center" aria-hidden="true">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="flow-node p-6">
+        <p class="text-xs uppercase tracking-[0.16em] text-[var(--sage)] mb-3">Portal</p>
+        <p class="font-display text-xl mb-2">Nadzor, postavke, izvještaji</p>
+        <p class="text-sm text-[var(--paper)]/65 leading-relaxed">Stanje uživo, povijest, uštede i mjesečni PDF izvještaj e-mailom.</p>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--sage)]/15">
+      <div class="bg-[var(--forest)] p-7">
+        <h3 class="font-display text-lg font-medium mb-2">Sigurnost na prvom mjestu</h3>
+        <p class="text-sm text-[var(--paper)]/70 leading-relaxed">
+          Piše samo u dopuštene registre i samo dopuštene vrijednosti, svaki
+          upis odmah provjerava, a kod greške vraća uređaj u sigurno stanje.
+        </p>
+      </div>
+      <div class="bg-[var(--forest)] p-7">
+        <h3 class="font-display text-lg font-medium mb-2">Radi i bez interneta</h3>
+        <p class="text-sm text-[var(--paper)]/70 leading-relaxed">
+          Odluke se donose lokalno. Oblak služi za prikaz i izvještaje, pa
+          prekid veze ne zaustavlja upravljanje.
+        </p>
+      </div>
+      <div class="bg-[var(--forest)] p-7">
+        <h3 class="font-display text-lg font-medium mb-2">Odluke prema podacima</h3>
+        <p class="text-sm text-[var(--paper)]/70 leading-relaxed">
+          Burzovne cijene struje u 15-minutnim intervalima, položaj sunca,
+          vlastita mjerenja sustava i po potrebi vremenska prognoza.
+        </p>
+      </div>
+      <div class="bg-[var(--forest)] p-7">
+        <h3 class="font-display text-lg font-medium mb-2">Sve je zabilježeno</h3>
+        <p class="text-sm text-[var(--paper)]/70 leading-relaxed">
+          Svako mjerenje, odluka i promjena postavki ostaje u bazi: tko je što
+          promijenio i kada, uz izvoz u Excel i PDF.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIMJENA -->
+<section id="primjena" class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32">
+  <div class="max-w-xl mb-16">
+    <p class="text-[var(--green)] text-sm mb-4">Primjena</p>
+    <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">
+      Od doma do elektrane
+    </h2>
+    <p class="mt-5 text-[var(--slate)] leading-relaxed">
+      Isti kontroler i portal, prilagođeni opremi i cilju. Elektrane su naše
+      prvo područje u radu, a ostala razvijamo s prvim korisnicima.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-px bg-black/10 border border-black/10">
+    <article class="card-focus bg-[var(--paper)] p-8 md:p-10">
+      <div class="card-photo"><img src="assets/img/robotika-redovi.jpg" alt="Redovi fotonaponskih panela snimljeni odozgo" loading="lazy"></div>
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <svg class="w-9 h-9 text-[var(--green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M3 18l3-10h12l3 10H3z" stroke-linejoin="round"/><path d="M9 8l-1 10M15 8l1 10M4.5 13h15" stroke-linecap="round"/>
+        </svg>
+        <span class="status text-[var(--green)]">U radu</span>
+      </div>
+      <h3 class="font-display text-2xl text-[var(--forest)] font-medium mb-3">Sunčane elektrane</h3>
+      <p class="text-[var(--slate)] leading-relaxed mb-6">
+        Kontroler koji već upravlja našom elektranom od 49,8 kWp u Višnjevcu.
+      </p>
+      <ul class="text-sm text-[var(--ink)] space-y-2.5">
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Automatsko ograničenje predaje kad je cijena struje negativna</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Nadzor svakog stringa i 3D prikaz krova s učinkom ploča</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Plan ograničenja za sutra prema objavljenim cijenama</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Mjesečni izvještaj o proizvodnji i uštedi e-mailom</li>
+      </ul>
+    </article>
+
+    <article class="card-focus bg-[var(--paper)] p-8 md:p-10">
+      <div class="card-photo"><img src="https://images.unsplash.com/photo-1770625467384-304e461ef1be?w=1200&q=80&auto=format&fit=crop" alt="Ruka podešava digitalni termostat na zidu" loading="lazy"></div>
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <svg class="w-9 h-9 text-[var(--green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 11l8-7 8 7v9H4v-9z" stroke-linejoin="round"/><path d="M10 20v-5h4v5" stroke-linejoin="round"/>
+        </svg>
+        <span class="status text-[var(--slate)]">Po narudžbi</span>
+      </div>
+      <h3 class="font-display text-2xl text-[var(--forest)] font-medium mb-3">Pametne kuće</h3>
+      <p class="text-[var(--slate)] leading-relaxed mb-6">
+        Dom koji troši struju onda kad je ima najviše i kad je najjeftinija.
+      </p>
+      <ul class="text-sm text-[var(--ink)] space-y-2.5">
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Grijanje, hlađenje i bojler prema proizvodnji panela i cijeni</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Punjenje baterije i električnog automobila u pravo vrijeme</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Rasvjeta, rolete i scenariji na jedan dodir</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Pregled potrošnje po uređaju na mobitelu</li>
+      </ul>
+    </article>
+
+    <article class="card-focus bg-[var(--paper)] p-8 md:p-10">
+      <div class="card-photo"><img src="https://images.unsplash.com/photo-1738598665698-7fd7af4b5e0c?w=1200&q=80&auto=format&fit=crop" alt="Prskalice navodnjavaju polje s mladim biljkama" loading="lazy"></div>
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <svg class="w-9 h-9 text-[var(--green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M12 3c3.5 4.2 5.5 7.4 5.5 10a5.5 5.5 0 01-11 0c0-2.6 2-5.8 5.5-10z" stroke-linejoin="round"/><path d="M9.5 14a2.5 2.5 0 002.5 2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="status text-[var(--slate)]">Po narudžbi</span>
+      </div>
+      <h3 class="font-display text-2xl text-[var(--forest)] font-medium mb-3">Navodnjavanje</h3>
+      <p class="text-[var(--slate)] leading-relaxed mb-6">
+        Voda točno kad i koliko treba, za vrt, voćnjak, vinograd ili plastenik.
+      </p>
+      <ul class="text-sm text-[var(--ink)] space-y-2.5">
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Raspored po vlazi tla i vremenskoj prognozi</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Upravljanje ventilima po zonama i pumpama</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Pumpa na sunčevu energiju kad paneli proizvode</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Upozorenje na curenje ili kvar pumpe</li>
+      </ul>
+    </article>
+
+    <article class="card-focus bg-[var(--paper)] p-8 md:p-10">
+      <div class="card-photo"><img src="https://images.unsplash.com/photo-1780034766295-43db0f2a0fb7?w=1200&q=80&auto=format&fit=crop" alt="Industrijski upravljački ormar s modulima i ožičenjem" loading="lazy"></div>
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <svg class="w-9 h-9 text-[var(--green)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke-linecap="round"/>
+        </svg>
+        <span class="status text-[var(--slate)]">Po narudžbi</span>
+      </div>
+      <h3 class="font-display text-2xl text-[var(--forest)] font-medium mb-3">Industrija i drugi procesi</h3>
+      <p class="text-[var(--slate)] leading-relaxed mb-6">
+        Ako uređaj ima sučelje, možemo ga povezati, nadzirati i automatizirati.
+      </p>
+      <ul class="text-sm text-[var(--ink)] space-y-2.5">
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Pumpne stanice, ventilacija, kompresori i hladnjače</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Prikupljanje mjerenja i nadzor na jednom mjestu</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Alarmi e-mailom kad nešto odstupa od normale</li>
+        <li class="flex gap-3"><span class="text-[var(--green)]">—</span>Povezivanje postojeće opreme bez zamjene</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- KAKO RADIMO -->
+<section id="kako-radimo" class="border-t border-black/10">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-16">
+      <div class="lg:col-span-6">
+        <p class="text-[var(--green)] text-sm mb-4">Kako radimo</p>
+        <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">
+          Od ideje do sustava koji radi sam
+        </h2>
+        <p class="mt-5 text-[var(--slate)] leading-relaxed max-w-md">
+          Kad je sustav pušten u rad, sve vidite na mobitelu: stanje uživo,
+          povijest i promjene postavki, bez odlaska na lokaciju.
+        </p>
+      </div>
+      <div class="lg:col-span-6 aspect-[16/10] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1783419036401-1c01c1039267?w=1400&q=80&auto=format&fit=crop" alt="Ruke drže mobitel s aplikacijom za nadzor sustava" class="w-full h-full object-cover" loading="lazy">
+      </div>
+    </div>
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/10 border border-black/10">
+      <li class="bg-[var(--paper)] p-7">
+        <p class="step-num font-display text-sm text-[var(--green)] mb-6">01</p>
+        <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Procjena</h3>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">Obiđemo lokaciju, popišemo opremu i dogovorimo što sustav treba postići.</p>
+      </li>
+      <li class="bg-[var(--paper)] p-7">
+        <p class="step-num font-display text-sm text-[var(--green)] mb-6">02</p>
+        <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Izvedba</h3>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">Prilagodimo kontroler i pravila, a sve prvo provjerimo na simulatoru opreme.</p>
+      </li>
+      <li class="bg-[var(--paper)] p-7">
+        <p class="step-num font-display text-sm text-[var(--green)] mb-6">03</p>
+        <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Puštanje u rad</h3>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">Sustav prvo samo prati, a upravljati počinje tek kad potvrdimo da sve radi ispravno.</p>
+      </li>
+      <li class="bg-[var(--paper)] p-7">
+        <p class="step-num font-display text-sm text-[var(--green)] mb-6">04</p>
+        <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Nadzor i podrška</h3>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">Pratimo rad na daljinu, šaljemo izvještaje i nadograđujemo sustav po potrebi.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="bg-[var(--forest)] text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-28 grid lg:grid-cols-12 gap-10 items-end">
+    <div class="lg:col-span-8">
+      <p class="text-[var(--div-auto)] text-sm mb-4">Kontakt</p>
+      <h2 class="font-display text-3xl md:text-5xl font-medium leading-[1.08]">
+        Imate sustav koji bi mogao raditi sam? Razgovarajmo.
+      </h2>
+      <p class="mt-6 text-[var(--paper)]/75 leading-relaxed max-w-xl">
+        Opišite nam opremu i što želite postići. Javit ćemo se e-mailom s
+        prijedlogom rješenja.
+      </p>
+    </div>
+    <div class="lg:col-span-4 lg:text-right">
+      <a href="mailto:info@tehneo.hr?subject=Tehneo%20Automatika" class="inline-flex items-center px-6 py-3.5 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--div-auto)] transition-colors">
+        info@tehneo.hr
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER / IMPRESSUM -->
+<footer class="bg-[var(--forest-deep)] text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-16 grid md:grid-cols-3 gap-12">
+    <div>
+      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
+        <img src="assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
+        TEHNEO
+      </p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/80">
+        <li><a href="energija.html" class="hover:text-[var(--sage)]">Tehneo Energija</a></li>
+        <li><a href="https://ai.tehneo.hr/" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
+        <li><a href="automatika.html" class="hover:text-[var(--sage)]">Tehneo Automatika</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>E-mail: <a href="mailto:info@tehneo.hr" class="hover:text-[var(--sage)] underline underline-offset-2">info@tehneo.hr</a></li>
+        <li><a href="privatnost/" class="hover:text-[var(--sage)] underline underline-offset-2">Politika privatnosti</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider border-t max-w-7xl mx-auto px-5 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
+    <p>Izrada web stranice: Tehneo d.o.o.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+</script>
+
+</body>
+</html>

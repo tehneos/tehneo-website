@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tehneo — energija i AI podaci</title>
-<meta name="description" content="Tehneo iz Višnjevca kraj Osijeka okuplja dva odjela: Tehneo Energija i Tehneo AI Data.">
+<title>Tehneo — energija, AI podaci i automatizacija</title>
+<meta name="description" content="Tehneo iz Višnjevca kraj Osijeka okuplja tri odjela: Tehneo Energija, Tehneo AI Data i Tehneo Automatika.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/favicon-192.png">
@@ -24,6 +24,7 @@
     --slate:#5B6660;
     --div-energija:#9CC5A8;
     --div-ai:#8DB7E8;
+    --div-auto:#C8D86A;
   }
   html{scroll-behavior:smooth;}
   body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); }
@@ -47,8 +48,8 @@
   .division .status{ background:rgba(9,26,18,0.72); backdrop-filter:blur(4px); }
   .division .bar{ height:3px; width:48px; transition:width .3s ease; }
   .division:hover .bar{ width:96px; }
-  .division-ai{ background:var(--forest-deep); }
-  .division-ai svg.pattern{ position:absolute; inset:0; width:100%; height:100%; z-index:-2; }
+  .division-ai, .division-auto{ background:var(--forest-deep); }
+  .division-ai svg.pattern, .division-auto svg.pattern{ position:absolute; inset:0; width:100%; height:100%; z-index:-2; }
 
   .status{
     display:inline-flex; align-items:center; gap:.5rem;
@@ -77,6 +78,7 @@
     <nav class="hidden md:flex items-center gap-9 text-sm text-[var(--forest)]" aria-label="Glavna navigacija">
       <a href="energija.html" class="nav-link">Energija</a>
       <a href="https://ai.tehneo.hr/" class="nav-link">AI Data</a>
+      <a href="automatika.html" class="nav-link">Automatika</a>
       <a href="#o-nama" class="nav-link">O nama</a>
     </nav>
     <a href="#kontakt" class="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-medium text-[var(--paper)] bg-[var(--forest)] hover:bg-[var(--green)] transition-colors">
@@ -91,6 +93,7 @@
     <div class="px-5 py-4 flex flex-col text-[var(--ink)]">
       <a href="energija.html" class="py-3 border-b border-black/5">Energija</a>
       <a href="https://ai.tehneo.hr/" class="py-3 border-b border-black/5">AI Data</a>
+      <a href="automatika.html" class="py-3 border-b border-black/5">Automatika</a>
       <a href="#o-nama" class="py-3 border-b border-black/5">O nama</a>
       <a href="#kontakt" class="py-3">Kontakt</a>
     </div>
@@ -104,13 +107,14 @@
     <div class="lg:col-span-8">
       <p class="text-[var(--green)] text-sm mb-6 tracking-wide">Tehneo · Osijek, Hrvatska</p>
       <h1 class="font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.4rem] font-medium tracking-tight text-[var(--forest)]">
-        Čista energija i podaci za umjetnu inteligenciju.
+        Čista energija, podaci za AI i pametna automatizacija.
       </h1>
     </div>
     <div class="lg:col-span-4 lg:pb-3">
       <p class="text-base md:text-lg text-[var(--slate)] leading-relaxed">
-        Tehneo okuplja dva odjela: ulaganje u sunčane
-        elektrane i pripremu podataka za AI modele.
+        Tehneo okuplja tri odjela: ulaganje u sunčane
+        elektrane, pripremu podataka za AI modele i
+        pametnu automatizaciju sustava.
       </p>
       <a href="#odjeli" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--forest)] border-b border-[var(--forest)]/30 pb-1 hover:border-[var(--forest)]">
         Upoznajte odjele
@@ -122,7 +126,7 @@
 
 <!-- TRIPTIH ODJELA -->
 <section id="odjeli" class="max-w-7xl mx-auto px-5 md:px-10 pb-24 md:pb-32" aria-label="Odjeli">
-  <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
     <a href="energija.html" class="division group flex flex-col justify-end min-h-[420px] md:min-h-[600px] p-7 md:p-8 text-[var(--paper)]">
       <img src="assets/img/dron-elektrana.jpg" alt="Sunčana elektrana na krovu, snimljena odozgo" loading="eager">
       <span class="status self-start mb-auto text-[var(--sage)]">Aktivno</span>
@@ -164,6 +168,31 @@
       </p>
       <span class="mt-6 text-sm font-medium inline-flex items-center gap-2">Posjetite odjel <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
     </a>
+
+    <a href="automatika.html" class="division division-auto group flex flex-col justify-end min-h-[420px] md:min-h-[600px] p-7 md:p-8 text-[var(--paper)]">
+      <svg class="pattern" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="400" height="600" fill="url(#ai-grid)"/>
+        <g fill="none" stroke-width="2">
+          <path d="M40 110 H300 V200 H400" stroke="#9CC5A8" stroke-opacity="0.3"/>
+          <path d="M70 170 H200 V330 H400" stroke="#C8D86A" stroke-opacity="0.6"/>
+          <path d="M120 400 V250 H330 V120" stroke="#9CC5A8" stroke-opacity="0.22"/>
+        </g>
+        <g fill="#C8D86A">
+          <circle cx="70" cy="170" r="5"/><circle cx="200" cy="330" r="5" fill-opacity="0.7"/>
+        </g>
+        <g fill="#9CC5A8" fill-opacity="0.55">
+          <circle cx="40" cy="110" r="4"/><circle cx="300" cy="200" r="4"/><circle cx="120" cy="400" r="4"/><circle cx="330" cy="120" r="4"/>
+        </g>
+      </svg>
+      <span class="status self-start mb-auto" style="color:var(--div-auto)">Novo</span>
+      <span class="bar mb-5" style="background:var(--div-auto)"></span>
+      <p class="text-xs uppercase tracking-[0.18em] text-[var(--paper)]/70 mb-2">03 · Odjel</p>
+      <h2 class="font-display text-3xl md:text-4xl font-medium mb-3">Tehneo Automatika</h2>
+      <p class="text-sm text-[var(--paper)]/80 leading-relaxed max-w-sm">
+        Pametna automatizacija za elektrane, domove, navodnjavanje i druge procese, na temelju vlastitog Tehneo kontrolera.
+      </p>
+      <span class="mt-6 text-sm font-medium inline-flex items-center gap-2">Posjetite odjel <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
+    </a>
   </div>
 </section>
 
@@ -173,14 +202,15 @@
     <div class="lg:col-span-5">
       <p class="text-[var(--green)] text-sm mb-4">O nama</p>
       <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">
-        Jedna tvrtka, dva odjela
+        Jedna tvrtka, tri odjela
       </h2>
     </div>
     <div class="lg:col-span-7">
       <p class="text-lg text-[var(--slate)] leading-relaxed">
         Tehneo je počeo kao ulagač u obnovljive izvore energije, a s
         ulaganja u sunčane elektrane proširio se na pripremu podataka za
-        umjetnu inteligenciju. Svaki odjel ima svoj fokus, a zajedničko im
+        umjetnu inteligenciju i na automatizaciju, razvijenu najprije za
+        vlastitu elektranu. Svaki odjel ima svoj fokus, a zajedničko im
         je dugoročno razmišljanje i pouzdana izvedba.
       </p>
       <dl class="mt-12 grid sm:grid-cols-2 gap-px bg-black/10 border border-black/10">
@@ -194,7 +224,7 @@
         </div>
         <div class="bg-[var(--paper)] p-6">
           <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Odjeli</dt>
-          <dd class="font-display text-xl text-[var(--forest)]">Energija · AI Data</dd>
+          <dd class="font-display text-xl text-[var(--forest)]">Energija · AI Data · Automatika</dd>
         </div>
         <div class="bg-[var(--paper)] p-6">
           <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Pravni subjekt</dt>
@@ -238,6 +268,7 @@
       <ul class="text-sm space-y-2 text-[var(--paper)]/80">
         <li><a href="energija.html" class="hover:text-[var(--sage)]">Tehneo Energija</a></li>
         <li><a href="https://ai.tehneo.hr/" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
+        <li><a href="automatika.html" class="hover:text-[var(--sage)]">Tehneo Automatika</a></li>
       </ul>
     </div>
 
