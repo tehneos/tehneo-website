@@ -329,10 +329,13 @@ h2 {
 }
 .contact__ui .eyebrow { margin-bottom: -12px; }
 .contact__ui a { pointer-events: auto; }
-.foot {
-  position: absolute; left: var(--gutter); right: var(--gutter); bottom: 22px;
-  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: 10px;
-}
+.legal { position: relative; z-index: 1; border-top: 1px solid var(--line); padding: 56px var(--gutter) 28px calc(var(--gutter) + 40px); color: var(--muted); font-size: 13px; line-height: 1.6; }
+.legal__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1400px; }
+.legal__label { color: var(--green); margin-bottom: 12px; }
+.legal b { color: var(--fg); font-weight: 600; }
+.legal a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; transition: text-decoration-color .3s; }
+.legal a:hover { text-decoration-color: var(--green); }
+.legal__bar { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 10px; max-width: 1400px; }
 
 /* ==========================================================================
    Responsive
@@ -360,7 +363,8 @@ h2 {
   .mod__head .mono { display: none; }
   .mod__logo { width: 58px; height: 58px; }
   .contact__ui { bottom: 18vh; }
-  .foot { justify-content: center; text-align: center; }
+  .legal { padding-left: var(--gutter); }
+  .legal__grid { grid-template-columns: 1fr; gap: 26px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

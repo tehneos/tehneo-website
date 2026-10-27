@@ -64,11 +64,21 @@ const HR = {
   e5: '05 — Kontakt',
   contactH: 'Spojimo vašu elektranu.',
   cta: 'Pošalji signal <span aria-hidden="true">→</span>',
-  handBuilt: 'Ručno izrađeno · bez frameworka',
+  lgCompany: 'Tvrtka',
+  lgFullName: 'za proizvodnju i usluge',
+  lgSeat: 'Sjedište',
+  lgCountry: 'Hrvatska',
+  lgRegister: 'Podaci o tvrtki',
+  lgCourt: 'Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230',
+  lgCapital: 'Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)',
+  lgContact: 'Kontakt',
+  lgPrivacy: 'Politika privatnosti',
+  lgRights: '© 2026 Tehneo d.o.o. Sva prava pridržana.',
+  lgMade: 'Izrada web stranice: Tehneo d.o.o.',
 };
 const CURSOR = {
   'POWER ON': 'UKLJUČI', TOP: 'VRH', 'SEND SIGNAL': 'POŠALJI SIGNAL', 'DRAG PRICE': 'POVUCI CIJENU',
-  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', LANGUAGE: 'JEZIK',
+  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', READ: 'ČITAJ', LANGUAGE: 'JEZIK',
 };
 const LABEL = { Power: 'Pogon', Signal: 'Signal', Market: 'Tržište', Stack: 'Slojevi', Patch: 'Spajanje', Connect: 'Kontakt' };
 
