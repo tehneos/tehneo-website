@@ -2,6 +2,7 @@
 // Wherever the price goes negative, export is clipped at the zero line and the avoided loss is tallied.
 
 import { onFrame } from './ticker.js';
+import { t as tr } from './i18n.js';
 import { fit, clamp, damp, inView, onResize } from './util.js';
 
 const N = 96;                 // quarter-hours in a day
@@ -86,7 +87,7 @@ export function initMarket(section) {
     shown += (saved - shown) * damp(6, dt);
     outSaved.textContent = `€${shown.toFixed(2)}`;
     outTime.textContent = `${(negCount * 15 / 60) | 0}h ${String((negCount * 15) % 60).padStart(2, '0')}m`;
-    outState.textContent = negCount ? `Limit 0% ${hhmm(first)}–${hhmm(last + 1)}` : 'Export 100%';
+    outState.textContent = negCount ? `Limit 0% ${hhmm(first)}–${hhmm(last + 1)}` : tr('export100');
 
     // playhead
     play = (play + dt * 4) % N;
@@ -121,7 +122,9 @@ export function initMarket(section) {
     ctx.fillStyle = 'rgba(244,246,241,.4)';
     ctx.fillText('€/MWh', 12, pad.t - 16);
     ctx.fillStyle = 'rgba(244,246,241,.4)';
-    ctx.fillText('→ GRID', W - pad.r - 52, H - pad.b + 20);
+    ctx.textAlign = 'right';
+    ctx.fillText(tr('grid'), W - pad.r, H - pad.b + 20);
+    ctx.textAlign = 'left';
 
     // production
     const bottom = pad.t + ch();
@@ -204,7 +207,7 @@ export function initMarket(section) {
     ctx.fillStyle = '#f4f6f1';
     ctx.beginPath(); ctx.arc(hx, Ye(prod(hi)), 3, 0, Math.PI * 2); ctx.fill();
 
-    const lines = [hhmm(hi), `${price[hi].toFixed(0)} €/MWh`, `${(KW * prod(hi)).toFixed(1)} kW`, neg ? 'LIMIT 0%' : 'EXPORT'];
+    const lines = [hhmm(hi), `${price[hi].toFixed(0)} €/MWh`, `${(KW * prod(hi)).toFixed(1)} kW`, neg ? 'LIMIT 0%' : tr('export')];
     const bw = 118, bh = 74;
     let bx = hx + 12; if (bx + bw > W - pad.r) bx = hx - 12 - bw;
     const by = pad.t + 6;

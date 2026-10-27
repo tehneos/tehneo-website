@@ -21,7 +21,7 @@
   <div class="boot__meta mono"><span id="boot-msg">Initialising board</span><span id="boot-pct">000</span></div>
   <div class="boot__bar"><i id="boot-bar"></i></div>
   <div class="boot__enter" id="boot-enter">
-    <button class="btn btn--solid btn--enter" data-enter data-cursor="POWER ON"><span class="btn__dot"></span>Enter</button>
+    <button class="btn btn--solid btn--enter" data-enter data-cursor="POWER ON" data-i18n="enter"><span class="btn__dot"></span>Enter</button>
   </div>
 </div>
 
@@ -34,6 +34,7 @@
   <a class="hud__brand" href="#hero" data-cursor="TOP"><span class="hud__mark" id="hud-mark"></span><span class="hud__name">TEHNEO</span></a>
   <div class="hud__right">
     <span class="mono hud__xy" id="hud-xy">X 0000 · Y 0000</span>
+    <div class="lang mono" id="lang" role="group" aria-label="Language" data-cursor="LANGUAGE"><button data-lang="hr" lang="hr">HR</button><button data-lang="en" lang="en">EN</button></div>
   </div>
 </header>
 
@@ -50,40 +51,40 @@
     <div class="hero__ui">
       <h1 class="hero__title"><span class="sr-only">Tehneo</span><span aria-hidden="true" data-scramble>TEHNEO</span></h1>
       <div class="hero__row">
-        <p class="hero__sub" data-reveal>Energy that thinks.<br><span class="muted">Solar control for a market that goes negative.</span></p>
-        <p class="mono hero__hint" data-reveal>[ Click the board — send a signal ]</p>
+        <p class="hero__sub" data-reveal data-i18n="heroSub">Energy that thinks.<br><span class="muted">Solar control for a market that goes negative.</span></p>
+        <p class="mono hero__hint" data-reveal data-i18n="heroHint">[ Click the board — send a signal ]</p>
       </div>
     </div>
-    <div class="hero__scroll mono" aria-hidden="true"><i></i>Scroll to route</div>
+    <div class="hero__scroll mono" aria-hidden="true" data-i18n="heroScroll"><i></i>Scroll to route</div>
   </section>
 
   <!-- 01 Signal -->
   <section class="signal" id="signal" data-label="Signal">
     <div class="signal__sticky">
-      <p class="mono eyebrow">01 — The problem</p>
-      <p class="signal__text" id="signal-text">Solar plants export blindly. Even when the price drops <em>below zero.</em> Tehneo reads the inverter, watches the day-ahead market and cuts export to <em>zero</em> — at exactly the right quarter-hour.</p>
+      <p class="mono eyebrow" data-i18n="e1">01 — The problem</p>
+      <p class="signal__text" id="signal-text" data-i18n="signal">Solar plants export blindly. Even when the price drops <em>below zero.</em> Tehneo reads the inverter, watches the day-ahead market and cuts export to <em>zero</em> — at exactly the right quarter-hour.</p>
     </div>
   </section>
 
   <!-- 02 Market -->
   <section class="market" id="market" data-label="Market">
     <header class="sec-head">
-      <p class="mono eyebrow" data-reveal>02 — The market</p>
-      <h2 data-scramble>Pull the price below zero.</h2>
-      <p class="muted sec-head__sub" data-reveal>Grab the green line and drag it. Tehneo clips export wherever the market turns negative.</p>
+      <p class="mono eyebrow" data-reveal data-i18n="e2">02 — The market</p>
+      <h2 data-scramble data-i18n="marketH">Pull the price below zero.</h2>
+      <p class="muted sec-head__sub" data-reveal data-i18n="marketSub">Grab the green line and drag it. Tehneo clips export wherever the market turns negative.</p>
     </header>
     <div class="market__panel" data-reveal>
       <canvas class="market__canvas" id="market-canvas" data-cursor="DRAG PRICE"></canvas>
       <div class="market__readout">
-        <div class="stat"><span class="mono">Avoided loss / day</span><b id="m-saved">€0.00</b></div>
-        <div class="stat"><span class="mono">Export limited</span><b id="m-time">0h 00m</b></div>
-        <div class="stat"><span class="mono">Controller</span><b id="m-state">Export 100%</b></div>
+        <div class="stat"><span class="mono" data-i18n="saved">Avoided loss / day</span><b id="m-saved">€0.00</b></div>
+        <div class="stat"><span class="mono" data-i18n="limited">Export limited</span><b id="m-time">0h 00m</b></div>
+        <div class="stat"><span class="mono" data-i18n="controller">Controller</span><b id="m-state">Export 100%</b></div>
       </div>
       <div class="market__controls">
-        <label class="mono" for="m-depth">Midday surplus</label>
+        <label class="mono" for="m-depth" data-i18n="surplus">Midday surplus</label>
         <input class="range" type="range" id="m-depth" min="0" max="100" value="55" data-cursor="SLIDE">
-        <button class="btn btn--ghost mono" id="m-reset" data-cursor="RESET">Reset</button>
-        <span class="mono muted market__note">Simulated · 50 kW plant · 15-min day-ahead</span>
+        <button class="btn btn--ghost mono" id="m-reset" data-cursor="RESET" data-i18n="reset">Reset</button>
+        <span class="mono muted market__note" data-i18n="note">Simulated · 50 kW plant · 15-min day-ahead</span>
       </div>
     </div>
   </section>
@@ -93,25 +94,25 @@
     <div class="stack__sticky">
       <canvas class="stack__canvas" id="stack-canvas"></canvas>
       <header class="stack__head">
-        <p class="mono eyebrow">03 — The stack</p>
-        <h2>Five layers.<br>One decision.</h2>
+        <p class="mono eyebrow" data-i18n="e3">03 — The stack</p>
+        <h2 data-i18n="stackH">Five layers.<br>One decision.</h2>
       </header>
-      <p class="mono stack__layer" id="stack-layer">Layer — / 04</p>
+      <p class="mono stack__layer" id="stack-layer" data-i18n="layerNone">Layer — / 04</p>
     </div>
   </section>
 
   <!-- 04 Patch -->
   <section class="patch" id="patch" data-label="Patch">
     <header class="sec-head">
-      <p class="mono eyebrow" data-reveal>04 — The patch</p>
-      <h2 data-scramble>Patch it into the line.</h2>
-      <p class="muted sec-head__sub" data-reveal>This plant exports blind. Drag the cables and route the power through Tehneo.</p>
+      <p class="mono eyebrow" data-reveal data-i18n="e4">04 — The patch</p>
+      <h2 data-scramble data-i18n="patchH">Patch it into the line.</h2>
+      <p class="muted sec-head__sub" data-reveal data-i18n="patchSub">This plant exports blind. Drag the cables and route the power through Tehneo.</p>
     </header>
     <div class="bay" id="bay" data-state="blind" data-reveal>
       <svg class="bay__cables" id="cables" aria-hidden="true"></svg>
 
       <article class="mod" data-mod="pv" style="--x:3%;--y:12%">
-        <header class="mod__head" data-cursor="MOVE"><span class="mono">PV-01</span><b>Array</b></header>
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">PV-01</span><b data-i18n="array">Array</b></header>
         <div class="mod__body">
           <svg viewBox="0 0 120 70" class="mod__icon"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 8h92l10 54H4z"/><path d="M38 8l-6 54M62 8v54M86 8l6 54M9 26h102M6 44h108"/></g></svg>
         </div>
@@ -132,13 +133,13 @@
       <article class="mod mod--brand" data-mod="tehneo" style="--x:51%;--y:8%">
         <header class="mod__head" data-cursor="MOVE"><span class="mono">TN-1</span><b>Tehneo</b></header>
         <div class="mod__body"><span class="mod__logo" id="mod-logo"></span></div>
-        <footer class="mod__foot mono">Price-aware limit</footer>
+        <footer class="mod__foot mono" data-i18n="priceLimit">Price-aware limit</footer>
         <button class="port port--in" data-port="tehneo:in" aria-label="Tehneo input" data-cursor="PATCH"></button>
         <button class="port port--out" data-port="tehneo:out" aria-label="Tehneo output" data-cursor="PATCH"></button>
       </article>
 
       <article class="mod mod--grid" data-mod="grid" style="--x:75%;--y:40%">
-        <header class="mod__head" data-cursor="MOVE"><span class="mono">HEP-ODS</span><b>Grid</b></header>
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">HEP-ODS</span><b data-i18n="grid">Grid</b></header>
         <div class="mod__body">
           <div class="meter" id="grid-meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           <p class="mono mod__status" id="grid-status">Blind export</p>
@@ -153,13 +154,13 @@
   <section class="contact" id="contact" data-label="Connect">
     <canvas class="contact__canvas" id="particles" data-cursor="DISTURB"></canvas>
     <div class="contact__ui">
-      <p class="mono eyebrow" data-reveal>05 — Connect</p>
-      <h2 data-scramble>Let's wire your plant.</h2>
-      <a class="btn btn--solid btn--xl" href="mailto:info@tehneo.hr" data-magnetic data-cursor="WRITE">Start a signal <span aria-hidden="true">→</span></a>
+      <p class="mono eyebrow" data-reveal data-i18n="e5">05 — Connect</p>
+      <h2 data-scramble data-i18n="contactH">Let's wire your plant.</h2>
+      <a class="btn btn--solid btn--xl" href="mailto:info@tehneo.hr" data-magnetic data-cursor="WRITE" data-i18n="cta">Start a signal <span aria-hidden="true">→</span></a>
     </div>
     <footer class="foot mono">
       <span>© 2026 Tehneo Energy</span>
-      <span>Hand-built · zero frameworks</span>
+      <span data-i18n="handBuilt">Hand-built · zero frameworks</span>
       <span>HR · ENTSO-E day-ahead</span>
     </footer>
   </section>

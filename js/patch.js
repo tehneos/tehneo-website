@@ -3,13 +3,9 @@
 
 import { onFrame } from './ticker.js';
 import { clamp, inView } from './util.js';
+import { t as tr } from './i18n.js';
 
-const STATES = {
-  off: ['No signal', 'Grid not reached'],
-  fault: ['Fault', 'DC on the AC bus'],
-  blind: ['Blind export', 'Selling at −€/MWh'],
-  smart: ['Smart export', 'Limit 0% below €0'],
-};
+const STATES = tr('states');
 
 export function initPatch(bay) {
   const svg = bay.querySelector('#cables');

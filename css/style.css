@@ -148,6 +148,11 @@ h2 {
 .hud__right { display: flex; align-items: center; gap: 22px; }
 .hud__xy { color: var(--muted); font-variant-numeric: tabular-nums; }
 
+.lang { display: flex; padding: 3px; border: 1px solid var(--line-2); border-radius: 999px; }
+.lang button { padding: 7px 11px; border-radius: 999px; color: var(--muted); letter-spacing: .1em; transition: color .3s, background .3s; }
+.lang button:hover { color: var(--fg); }
+.lang button.is-on { background: var(--green); color: var(--bg); }
+
 
 .spine { position: fixed; left: calc(var(--gutter) * .5); top: 50%; z-index: 55; height: 44vh; transform: translateY(-50%); }
 .spine__track { position: absolute; left: 3px; top: 0; bottom: 0; width: 1px; background: var(--line-2); }

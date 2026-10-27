@@ -4,15 +4,10 @@
 
 import { TRACES, NODES, STROKE, polyLength, pointAt } from './logo.js';
 import { pointer, onFrame } from './ticker.js';
+import { t as tr } from './i18n.js';
 import { fit, camera, clamp, smooth, damp, rng, inView, onResize, sectionProgress } from './util.js';
 
-const LAYERS = [
-  { id: 'L0', name: 'PV array', sub: '50 kWp · 12 strings' },
-  { id: 'L1', name: 'Inverter bus', sub: 'Modbus TCP · 1 s poll' },
-  { id: 'L2', name: 'Controller', sub: 'Reads · decides · limits' },
-  { id: 'L3', name: 'Price signal', sub: 'ENTSO-E · 15-min day-ahead' },
-  { id: 'L4', name: 'Portal', sub: 'Savings in five seconds' },
-];
+const LAYERS = tr('layers').map(([name, sub], i) => ({ id: `L${i}`, name, sub }));
 
 function roundedSquare(half, r, seg = 6) {
   const pts = [];
@@ -72,7 +67,7 @@ export function initStack(section) {
     const f = ex > 0.9 ? Math.min(4, Math.floor(smooth(0.4, 0.7, p) * 5)) : -1;
     if (f !== focus) {
       focus = f;
-      readout.textContent = f < 0 ? 'Layer — / 04' : `Layer ${String(f).padStart(2, '0')} / 04 — ${LAYERS[f].name}`;
+      readout.textContent = `${tr('layer')} ${f < 0 ? '—' : String(f).padStart(2, '0')} / 04${f < 0 ? '' : ` — ${LAYERS[f].name}`}`;
     }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
