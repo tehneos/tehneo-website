@@ -4,7 +4,6 @@
 
 import { TRACES, NODES, STROKE, polyLength, pointAt } from './logo.js';
 import { pointer, onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { fit, camera, clamp, smooth, damp, rng, inView, onResize, sectionProgress } from './util.js';
 
 const LAYERS = [
@@ -74,7 +73,6 @@ export function initStack(section) {
     if (f !== focus) {
       focus = f;
       readout.textContent = f < 0 ? 'Layer — / 04' : `Layer ${String(f).padStart(2, '0')} / 04 — ${LAYERS[f].name}`;
-      if (f >= 0) sound.blip(f * 2, 0.7);
     }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

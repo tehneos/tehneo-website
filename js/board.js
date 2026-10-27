@@ -5,7 +5,6 @@
 
 import { TRACES, NODES, STROKE, GREEN, WHITE, polyLength, pointAt } from './logo.js';
 import { pointer, onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { fit, rng, camera, clamp, damp, inView, onResize, reduced } from './util.js';
 
 const DIRS = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
@@ -280,7 +279,7 @@ export function initBoard(canvas) {
     const sx = e.clientX - r.left, sy = e.clientY - r.top;
     const onLogo = Math.hypot(sx - logo.cx, sy - logo.cy) < logo.size * 0.5;
     inject(sx + M - parX, sy + M - parY, onLogo ? 1.4 : 1);
-    if (onLogo) { charge = 1; sound.chord(); } else sound.zap();
+    if (onLogo) charge = 1;
   });
 
   // ------------------------------------------------------------------ draw: the mark
@@ -444,12 +443,10 @@ export function initBoard(canvas) {
         }
       }
       // pads light up as the front reaches them
-      let hits = 0;
       for (let i = 0; i < verts.length; i++) {
         const d = w.dist[i];
-        if (verts[i].deg === 1 && d >= w.prevR && d < R) { flashes.push({ x: verts[i].x, y: verts[i].y, t0: t }); hits++; }
+        if (verts[i].deg === 1 && d >= w.prevR && d < R) { flashes.push({ x: verts[i].x, y: verts[i].y, t0: t }); }
       }
-      if (hits) sound.blip(Math.min(10, Math.floor(R / 160)), 0.6);
       w.prevR = R;
     }
 

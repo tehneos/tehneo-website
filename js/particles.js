@@ -3,7 +3,6 @@
 
 import { drawLogo2D } from './logo.js';
 import { pointer, scroll, onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { fit, damp, inView, onResize, reduced } from './util.js';
 
 export function initParticles(section) {
@@ -46,7 +45,6 @@ export function initParticles(section) {
       p.vx += (dx / d) * f * (0.6 + Math.random() * 0.8);
       p.vy += (dy / d) * f * (0.6 + Math.random() * 0.8);
     }
-    sound.whoosh();
   });
 
   onFrame((dt, t) => {
@@ -99,6 +97,6 @@ export function initParticles(section) {
   onResize(canvas, build);
   inView(section, (v) => {
     visible = v;
-    if (v && !seen) { seen = true; sound.whoosh(); }
+    if (v) seen = true;
   }, '-20% 0px');
 }

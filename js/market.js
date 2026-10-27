@@ -2,7 +2,6 @@
 // Wherever the price goes negative, export is clipped at the zero line and the avoided loss is tallied.
 
 import { onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { fit, clamp, damp, inView, onResize } from './util.js';
 
 const N = 96;                 // quarter-hours in a day
@@ -24,7 +23,7 @@ export function initMarket(section) {
   const price = new Float32Array(N);
   let depth = depthIn.value / 100;
   let W, H, dpr, visible = false;
-  let drag = null, hoverI = -1, play = 0, shown = 0, lastNeg = false;
+  let drag = null, hoverI = -1, play = 0, shown = 0;
   const flow = [];
   let hatch;
 
@@ -48,8 +47,8 @@ export function initMarket(section) {
     hatch.setTransform(new DOMMatrix().scale(1 / dpr));
   }
 
-  depthIn.addEventListener('input', () => { depth = depthIn.value / 100; sound.tick(0.6); });
-  section.querySelector('#m-reset').addEventListener('click', () => { off.fill(0); depthIn.value = 55; depth = 0.55; sound.whoosh(); });
+  depthIn.addEventListener('input', () => { depth = depthIn.value / 100; });
+  section.querySelector('#m-reset').addEventListener('click', () => { off.fill(0); depthIn.value = 55; depth = 0.55; });
 
   const local = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
   canvas.addEventListener('pointerdown', (e) => {
@@ -57,7 +56,6 @@ export function initMarket(section) {
     const [x, y] = local(e);
     canvas.setPointerCapture(e.pointerId);
     drag = { i: I(x), y, base: Float32Array.from(off) };
-    sound.toneStart();
   });
   canvas.addEventListener('pointermove', (e) => {
     const [x, y] = local(e);
@@ -65,9 +63,8 @@ export function initMarket(section) {
     if (!drag) return;
     const dp = (-(y - drag.y) / ch()) * (PMAX - PMIN);
     for (let j = 0; j < N; j++) off[j] = drag.base[j] + dp * gauss(j, drag.i, 7);
-    sound.toneSet(clamp(240 + price[Math.round(drag.i)] * 1.4, 70, 900));
   });
-  const end = () => { if (drag) { drag = null; sound.toneStop(); } };
+  const end = () => { drag = null; };
   canvas.addEventListener('pointerup', end);
   canvas.addEventListener('pointercancel', end);
   canvas.addEventListener('pointerleave', () => { hoverI = -1; });
@@ -96,7 +93,6 @@ export function initMarket(section) {
     const head = hoverI >= 0 ? hoverI : play;
     const hi = Math.round(head) % N;
     const neg = price[hi] < 0 && prod(hi) > 0;
-    if (neg !== lastNeg) { lastNeg = neg; if (neg) sound.blip(2, 0.5); }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);

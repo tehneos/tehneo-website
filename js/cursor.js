@@ -2,7 +2,6 @@
 // with vias at every bend. Also drives magnetic elements and the HUD coordinate readout.
 
 import { pointer, onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { fit, damp, reduced } from './util.js';
 
 const LIFE = 0.75;    // seconds a trace segment survives
@@ -38,7 +37,6 @@ export function initCursor() {
     hoverEl = t;
     el.classList.toggle('is-hover', !!t);
     label.textContent = t ? (t.dataset.cursor || '') : '';
-    if (t && (t.matches('a, button'))) sound.tick(0.8);
   });
   document.addEventListener('pointerdown', () => el.classList.add('is-down'));
   document.addEventListener('pointerup', () => el.classList.remove('is-down'));

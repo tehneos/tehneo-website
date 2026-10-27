@@ -2,7 +2,6 @@
 // PV → inverter → grid exports blind; route it through Tehneo and export becomes price-aware.
 
 import { onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { clamp, inView } from './util.js';
 
 const STATES = {
@@ -54,14 +53,11 @@ export function initPatch(bay) {
     });
 
     if (next === state) return;
-    const first = !state;
     state = next;
     bay.dataset.state = next;
     statusEl.textContent = STATES[next][0];
     noteEl.textContent = STATES[next][1];
     meter.forEach((m, i) => { m.style.height = next === 'off' || next === 'fault' ? '20%' : `${30 + Math.abs(Math.sin(i * 1.7)) * 70}%`; });
-    if (first) return;
-    if (next === 'smart') sound.chord(); else if (next === 'off') sound.tick(); else sound.buzz();
   }
 
   // ------------------------------------------------------------------ cables
@@ -105,7 +101,6 @@ export function initPatch(bay) {
     links.set(inKey, outKey);
     const el = port(inKey);
     el.classList.remove('is-spark'); void el.offsetWidth; el.classList.add('is-spark');
-    sound.tick(1.2);
     evaluate();
   }
 
@@ -119,7 +114,7 @@ export function initPatch(bay) {
         if (armed) { connect(key, armed); port(armed).classList.remove('is-armed'); armed = null; return; }
         if (!links.has(key)) return;
         drag = { from: links.get(key), x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY };
-        links.delete(key); evaluate(); sound.tick(0.7);
+        links.delete(key); evaluate();
       } else {
         if (armed) port(armed).classList.remove('is-armed');
         armed = null;
@@ -150,7 +145,7 @@ export function initPatch(bay) {
     const target = document.elementFromPoint(e.clientX, e.clientY)?.closest('.port--in');
     if (target && bay.contains(target)) connect(target.dataset.port, drag.from);
     else if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) {
-      armed = drag.from; port(armed).classList.add('is-armed'); sound.tick(0.6); // tap-to-connect
+      armed = drag.from; port(armed).classList.add('is-armed'); // tap-to-connect
     }
     drag = null;
   });

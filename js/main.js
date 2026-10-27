@@ -1,5 +1,4 @@
 import { logoSVG } from './logo.js';
-import { setSound, onSound, soundOn, sound } from './audio.js';
 import { initCursor } from './cursor.js';
 import { initBoard } from './board.js';
 import { initReveals, initSignalText, initSpine, scramble } from './text.js';
@@ -24,12 +23,7 @@ initPatch($('#bay'));
 initParticles($('#contact'));
 initSpine($('.spine'), [...document.querySelectorAll('main > section')]);
 
-// sound toggle
-const toggle = $('#sound');
-toggle.addEventListener('click', () => setSound(!soundOn()));
-onSound((on) => toggle.setAttribute('aria-pressed', String(on)));
-
-// boot: count up while the mark draws itself, then ask how to enter
+// boot: count up while the mark draws itself, then show the Enter button
 const boot = $('#boot'), pct = $('#boot-pct'), bar = $('#boot-bar'), msg = $('#boot-msg');
 const MSGS = ['Initialising board', 'Routing traces', 'Reading inverter', 'Fetching day-ahead', 'Ready'];
 const start = performance.now(), DURATION = reduced ? 200 : 1500;
@@ -46,7 +40,6 @@ const start = performance.now(), DURATION = reduced ? 200 : 1500;
 boot.addEventListener('click', (e) => {
   const b = e.target.closest('[data-enter]');
   if (!b) return;
-  if (b.dataset.enter === 'sound') { setSound(true); sound.power(); }
   boot.classList.add('is-done');
   document.body.classList.remove('is-booting');
   board.start();

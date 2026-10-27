@@ -1,7 +1,6 @@
 // Text effects: decode-on-reveal headings, scroll-powered words, reveal-on-view.
 
 import { onFrame } from './ticker.js';
-import { sound } from './audio.js';
 import { sectionProgress, smooth, reduced } from './util.js';
 
 const GLYPHS = '01<>/\\_-+=#*[]';
@@ -62,7 +61,6 @@ export function initSignalText(section, el) {
     const p = sectionProgress(section);
     const n = Math.floor(smooth(0.04, 0.8, p) * (words.length + 0.999));
     if (n === lit) return;
-    if (n > lit && lit >= 0) sound.tick(0.5);
     lit = n;
     words.forEach((w, i) => {
       w.classList.toggle('on', i < n);
