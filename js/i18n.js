@@ -38,11 +38,11 @@ export const t = (key) => STR[key][I];
 // Croatian copy for elements tagged with data-i18n (innerHTML).
 const HR = {
   enter: '<span class="btn__dot"></span>Uđi',
-  heroSub: 'Energija koja razmišlja.<br><span class="muted">Upravljanje solarom za tržište koje odlazi u minus.</span>',
+  heroSub: 'Energija koja razmišlja.<br><span class="muted">Pametno upravljanje solarnom elektranom, čak i kad je cijena struje negativna.</span>',
   heroHint: '[ Klikni na ploču — pošalji signal ]',
   heroScroll: '<i></i>Skrolaj dalje',
   e1: '01 — Problem',
-  signal: 'Solarne elektrane izvoze naslijepo. Čak i kad cijena padne <em>ispod nule.</em> Tehneo čita inverter, prati day-ahead tržište i spušta izvoz na <em>nulu</em> — točno u pravih petnaest minuta.',
+  signal: 'Solarne elektrane izvoze naslijepo. Čak i kad cijena padne <em>ispod nule.</em> Tehneo čita inverter, prati day-ahead tržište i spušta izvoz na <em>nulu.</em>',
   e2: '02 — Tržište',
   marketH: 'Povuci cijenu ispod nule.',
   marketSub: 'Uhvati zelenu liniju i povuci je. Tehneo ograničava izvoz gdje god cijena ode u minus.',
