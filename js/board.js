@@ -476,7 +476,7 @@ export function initBoard(canvas) {
 
     // pad flashes
     for (let i = flashes.length - 1; i >= 0; i--) {
-      const f = flashes[i], age = t - f.t0, life = f.soft ? 0.5 : 0.9;
+      const f = flashes[i], age = Math.max(0, t - f.t0), life = f.soft ? 0.5 : 0.9;
       if (age > life) { flashes.splice(i, 1); continue; }
       const k = 1 - age / life;
       ctx.strokeStyle = `rgba(166,198,76,${k * (f.soft ? 0.4 : 0.9)})`; ctx.lineWidth = 1;
@@ -485,7 +485,7 @@ export function initBoard(canvas) {
 
     // click ripples (the probe tip)
     for (let i = ripples.length - 1; i >= 0; i--) {
-      const rp = ripples[i], age = t - rp.t0;
+      const rp = ripples[i], age = Math.max(0, t - rp.t0);
       if (age > 0.8) { ripples.splice(i, 1); continue; }
       const k = 1 - age / 0.8;
       ctx.strokeStyle = `rgba(244,246,241,${k * 0.6})`; ctx.lineWidth = 1;

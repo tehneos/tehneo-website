@@ -18,7 +18,11 @@ const subs = new Set();
 export const onFrame = (fn) => { subs.add(fn); return () => subs.delete(fn); };
 
 let last = performance.now(), px = pointer.x, py = pointer.y, sy = scrollY;
-function loop(now) {
+const failed = new Set();
+function loop() {
+  // performance.now(), not the rAF timestamp: event handlers stamp times with
+  // performance.now(), and the rAF timestamp can be slightly earlier than those.
+  const now = performance.now();
   const dt = Math.min(0.05, (now - last) / 1000) || 0.016;
   last = now;
   const k = 1 - Math.exp(-dt * 5);
@@ -30,7 +34,10 @@ function loop(now) {
   scroll.v += ((scrollY - sy) / dt - scroll.v) * (1 - Math.exp(-dt * 8));
   scroll.y = sy = scrollY;
   const t = now / 1000;
-  for (const fn of subs) fn(dt, t);
+  for (const fn of subs) {
+    // one failing effect must never stop the loop (and with it the cursor)
+    try { fn(dt, t); } catch (err) { if (!failed.has(fn)) { failed.add(fn); console.error(err); } }
+  }
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
