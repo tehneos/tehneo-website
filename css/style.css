@@ -208,7 +208,7 @@ h2 {
   font-size: clamp(30px, 5vw, 84px); font-weight: 600; font-stretch: 112%;
   line-height: 1.02; letter-spacing: -.025em; max-width: 21ch;
 }
-.signal__text .w { color: rgba(244, 246, 241, .1); transition: color .5s var(--ease), text-shadow .5s; }
+.signal__text .w { white-space: nowrap; color: rgba(244, 246, 241, .1); transition: color .5s var(--ease), text-shadow .5s; }
 .signal__text .w.on { color: var(--fg); }
 .signal__text .w.em.on { color: var(--green); text-shadow: 0 0 40px rgba(166, 198, 76, .45); }
 .signal__text .w.live { color: var(--green); text-shadow: 0 0 24px rgba(166, 198, 76, .8); }

@@ -41,7 +41,7 @@ const HR = {
   heroSub: 'Energija koja razmišlja.<br><span class="muted">Pametno upravljanje solarnom elektranom, čak i kad je cijena struje negativna.</span>',
   heroScroll: '<i></i>Skrolaj dalje',
   e1: '01 — Problem',
-  signal: 'Solarne elektrane izvoze naslijepo. Čak i kad cijena padne <em>ispod nule.</em> Tehneo čita inverter, prati day-ahead tržište i spušta izvoz na <em>nulu.</em>',
+  signal: 'Solarne elektrane izvoze naslijepo, čak i kad cijena struje padne <em>ispod nule.</em> Tehneo čita inverter, prati day-ahead tržište i automatski spušta izvoz na <em>nulu</em> kad se to financijski najviše isplati.',
   e2: '02 — Tržište',
   marketH: 'Povuci cijenu ispod nule.',
   marketSub: 'Uhvati zelenu liniju i povuci je. Tehneo ograničava izvoz gdje god cijena ode u minus.',
