@@ -1,316 +1,171 @@
-<!DOCTYPE html>
-<html lang="hr">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tehneo — energija, AI podaci i automatizacija</title>
-<meta name="description" content="Tehneo iz Višnjevca kraj Osijeka okuplja tri odjela: Tehneo Energija, Tehneo AI Data i Tehneo Automatika.">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
-<link rel="apple-touch-icon" href="assets/favicon-192.png">
-<script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tehneo — Energy that thinks</title>
+<meta name="description" content="Tehneo reads your inverter, watches the day-ahead market and stops exporting the moment the price turns negative.">
+<meta name="theme-color" content="#0b0d0f">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --forest:#0F2A1E;
-    --forest-deep:#091A12;
-    --green:#2F6E4E;
-    --sage:#9CC5A8;
-    --paper:#F6F6F3;
-    --paper-dim:#EDEEE9;
-    --ink:#15201A;
-    --slate:#5B6660;
-    --div-energija:#9CC5A8;
-    --div-ai:#8DB7E8;
-    --div-auto:#C8D86A;
-  }
-  html{scroll-behavior:smooth;}
-  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); }
-  .font-display{ font-family:'Space Grotesk', sans-serif; }
-
-  .nav-link{ position:relative; }
-  .nav-link::after{
-    content:''; position:absolute; left:0; bottom:-4px; width:0%; height:1px;
-    background:currentColor; opacity:.6; transition:width .2s ease;
-  }
-  .nav-link:hover::after{ width:100%; }
-
-  /* Triptih odjela */
-  .division{ position:relative; overflow:hidden; isolation:isolate; }
-  .division img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; transition:transform .8s ease; }
-  .division::before{
-    content:''; position:absolute; inset:0; z-index:-1;
-    background:linear-gradient(180deg, rgba(9,26,18,0.15) 0%, rgba(9,26,18,0.55) 45%, rgba(9,26,18,0.94) 100%);
-  }
-  .division:hover img{ transform:scale(1.04); }
-  .division .status{ background:rgba(9,26,18,0.72); backdrop-filter:blur(4px); }
-  .division .bar{ height:3px; width:48px; transition:width .3s ease; }
-  .division:hover .bar{ width:96px; }
-  .division-ai, .division-auto{ background:var(--forest-deep); }
-  .division-ai svg.pattern, .division-auto svg.pattern{ position:absolute; inset:0; width:100%; height:100%; z-index:-2; }
-
-  .status{
-    display:inline-flex; align-items:center; gap:.5rem;
-    font-size:.75rem; font-weight:500; line-height:1; letter-spacing:.02em; white-space:nowrap;
-    padding:.45rem .7rem; border:1px solid currentColor;
-  }
-  .status::before{ content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
-
-  .footer-divider{ border-color: rgba(156,197,168,0.22); }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *{ transition:none !important; }
-  }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script type="module" src="js/main.js"></script>
 </head>
-<body class="antialiased">
+<body class="is-booting">
 
-<!-- HEADER -->
-<header class="sticky top-0 z-50 bg-[rgba(246,246,243,0.95)] backdrop-blur border-b border-black/5">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo, naslovnica">
-      <img src="assets/tehneo-symbol.svg" alt="" class="h-[30px] w-auto">
-      <span class="font-display text-xl font-semibold tracking-tight">TEHNEO</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-9 text-sm text-[var(--forest)]" aria-label="Glavna navigacija">
-      <a href="energija.html" class="nav-link">Energija</a>
-      <a href="https://ai.tehneo.hr/" class="nav-link">AI Data</a>
-      <a href="automatika.html" class="nav-link">Automatika</a>
-      <a href="#o-nama" class="nav-link">O nama</a>
-    </nav>
-    <a href="#kontakt" class="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-medium text-[var(--paper)] bg-[var(--forest)] hover:bg-[var(--green)] transition-colors">
-      Kontaktirajte nas
-    </a>
-    <button id="menu-btn" class="md:hidden w-11 h-11 flex flex-col justify-center items-center gap-[5px]" aria-label="Otvori izbornik" aria-expanded="false" aria-controls="mobile-menu">
-      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
-      <span class="block w-6 h-[1.5px] bg-[var(--forest)]"></span>
-    </button>
+<!-- Boot -->
+<div class="boot" id="boot">
+  <div class="boot__logo" id="boot-logo"></div>
+  <div class="boot__meta mono"><span id="boot-msg">Initialising board</span><span id="boot-pct">000</span></div>
+  <div class="boot__bar"><i id="boot-bar"></i></div>
+  <div class="boot__enter" id="boot-enter">
+    <button class="btn btn--solid" data-enter="sound" data-cursor="ON"><span class="btn__dot"></span>Enter with sound</button>
+    <button class="btn" data-enter="silent" data-cursor="OFF">Enter silent</button>
   </div>
-  <div id="mobile-menu" class="md:hidden hidden border-t border-black/5">
-    <div class="px-5 py-4 flex flex-col text-[var(--ink)]">
-      <a href="energija.html" class="py-3 border-b border-black/5">Energija</a>
-      <a href="https://ai.tehneo.hr/" class="py-3 border-b border-black/5">AI Data</a>
-      <a href="automatika.html" class="py-3 border-b border-black/5">Automatika</a>
-      <a href="#o-nama" class="py-3 border-b border-black/5">O nama</a>
-      <a href="#kontakt" class="py-3">Kontakt</a>
-    </div>
+</div>
+
+<!-- Cursor -->
+<canvas class="trail" id="trail" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"><i class="cursor__dot"></i><i class="cursor__ring"></i><span class="cursor__label mono"></span></div>
+
+<!-- HUD -->
+<header class="hud">
+  <a class="hud__brand" href="#hero" data-cursor="TOP"><span class="hud__mark" id="hud-mark"></span><span class="hud__name">TEHNEO</span></a>
+  <div class="hud__right">
+    <span class="mono hud__xy" id="hud-xy">X 0000 · Y 0000</span>
+    <button class="sound" id="sound" aria-pressed="false" aria-label="Toggle sound" data-cursor="SOUND"><i></i><i></i><i></i><i></i><i></i></button>
   </div>
 </header>
 
+<nav class="spine" aria-label="Sections">
+  <div class="spine__track"><i class="spine__fill" id="spine-fill"></i></div>
+  <ol class="spine__list" id="spine-list"></ol>
+</nav>
+
 <main>
-<!-- HERO -->
-<section class="max-w-7xl mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-12 md:pb-16">
-  <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
-    <div class="lg:col-span-8">
-      <p class="text-[var(--green)] text-sm mb-6 tracking-wide">Tehneo · Osijek, Hrvatska</p>
-      <h1 class="font-display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.4rem] font-medium tracking-tight text-[var(--forest)]">
-        Čista energija, podaci za AI i pametna automatizacija.
-      </h1>
+
+  <!-- 00 Power -->
+  <section class="hero" id="hero" data-label="Power">
+    <canvas class="hero__board" id="board" data-cursor="SEND SIGNAL"></canvas>
+    <div class="hero__ui">
+      <h1 class="hero__title"><span class="sr-only">Tehneo</span><span aria-hidden="true" data-scramble>TEHNEO</span></h1>
+      <div class="hero__row">
+        <p class="hero__sub" data-reveal>Energy that thinks.<br><span class="muted">Solar control for a market that goes negative.</span></p>
+        <p class="mono hero__hint" data-reveal>[ Click the board — send a signal ]</p>
+      </div>
     </div>
-    <div class="lg:col-span-4 lg:pb-3">
-      <p class="text-base md:text-lg text-[var(--slate)] leading-relaxed">
-        Tehneo okuplja tri odjela: ulaganje u sunčane
-        elektrane, pripremu podataka za AI modele i
-        pametnu automatizaciju sustava.
-      </p>
-      <a href="#odjeli" class="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--forest)] border-b border-[var(--forest)]/30 pb-1 hover:border-[var(--forest)]">
-        Upoznajte odjele
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <div class="hero__scroll mono" aria-hidden="true"><i></i>Scroll to route</div>
+  </section>
+
+  <!-- 01 Signal -->
+  <section class="signal" id="signal" data-label="Signal">
+    <div class="signal__sticky">
+      <p class="mono eyebrow">01 — The problem</p>
+      <p class="signal__text" id="signal-text">Solar plants export blindly. Even when the price drops <em>below zero.</em> Tehneo reads the inverter, watches the day-ahead market and cuts export to <em>zero</em> — at exactly the right quarter-hour.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TRIPTIH ODJELA -->
-<section id="odjeli" class="max-w-7xl mx-auto px-5 md:px-10 pb-24 md:pb-32" aria-label="Odjeli">
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-    <a href="energija.html" class="division group flex flex-col justify-end min-h-[420px] md:min-h-[600px] p-7 md:p-8 text-[var(--paper)]">
-      <img src="assets/img/dron-elektrana.jpg" alt="Sunčana elektrana na krovu, snimljena odozgo" loading="eager">
-      <span class="status self-start mb-auto text-[var(--sage)]">Aktivno</span>
-      <span class="bar mb-5" style="background:var(--div-energija)"></span>
-      <p class="text-xs uppercase tracking-[0.18em] text-[var(--paper)]/70 mb-2">01 · Odjel</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium mb-3">Tehneo Energija</h2>
-      <p class="text-sm text-[var(--paper)]/80 leading-relaxed max-w-xs">
-        Razvoj i dugoročno vlasništvo sunčanih elektrana.
-      </p>
-      <span class="mt-6 text-sm font-medium inline-flex items-center gap-2">Posjetite odjel <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
-    </a>
-
-    <a href="https://ai.tehneo.hr/" class="division division-ai group flex flex-col justify-end min-h-[420px] md:min-h-[600px] p-7 md:p-8 text-[var(--paper)]">
-      <svg class="pattern" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <pattern id="ai-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M40 0H0V40" fill="none" stroke="#9CC5A8" stroke-opacity="0.08"/>
-          </pattern>
-        </defs>
-        <rect width="400" height="600" fill="url(#ai-grid)"/>
-        <g fill="none" stroke="#8DB7E8" stroke-width="1.5">
-          <rect x="60" y="90" width="150" height="96" stroke-opacity="0.75"/>
-          <rect x="230" y="150" width="110" height="130" stroke-opacity="0.45" stroke-dasharray="5 5"/>
-          <rect x="110" y="230" width="90" height="70" stroke-opacity="0.35"/>
-        </g>
-        <g font-family="Inter, sans-serif" font-size="11" fill="#8DB7E8">
-          <rect x="60" y="72" width="64" height="18" fill="#8DB7E8" fill-opacity="0.18"/>
-          <text x="66" y="85">label · hr</text>
-          <rect x="230" y="132" width="58" height="18" fill="#8DB7E8" fill-opacity="0.12"/>
-          <text x="236" y="145" fill-opacity="0.8">review</text>
-        </g>
-      </svg>
-      <span class="status self-start mb-auto" style="color:var(--div-ai)">Aktivno</span>
-      <span class="bar mb-5" style="background:var(--div-ai)"></span>
-      <p class="text-xs uppercase tracking-[0.18em] text-[var(--paper)]/70 mb-2">02 · Odjel</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium mb-3">Tehneo AI Data</h2>
-      <p class="text-sm text-[var(--paper)]/80 leading-relaxed max-w-sm">
-        Priprema podataka za umjetnu inteligenciju: označavanje, ocjenjivanje i provjera AI modela na hrvatskom i jezicima regije, uz stručnjake za matematiku i agronomiju.
-      </p>
-      <span class="mt-6 text-sm font-medium inline-flex items-center gap-2">Posjetite odjel <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
-    </a>
-
-    <a href="automatika.html" class="division division-auto group flex flex-col justify-end min-h-[420px] md:min-h-[600px] p-7 md:p-8 text-[var(--paper)]">
-      <svg class="pattern" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <rect width="400" height="600" fill="url(#ai-grid)"/>
-        <g fill="none" stroke-width="2">
-          <path d="M40 110 H300 V200 H400" stroke="#9CC5A8" stroke-opacity="0.3"/>
-          <path d="M70 170 H200 V330 H400" stroke="#C8D86A" stroke-opacity="0.6"/>
-          <path d="M120 400 V250 H330 V120" stroke="#9CC5A8" stroke-opacity="0.22"/>
-        </g>
-        <g fill="#C8D86A">
-          <circle cx="70" cy="170" r="5"/><circle cx="200" cy="330" r="5" fill-opacity="0.7"/>
-        </g>
-        <g fill="#9CC5A8" fill-opacity="0.55">
-          <circle cx="40" cy="110" r="4"/><circle cx="300" cy="200" r="4"/><circle cx="120" cy="400" r="4"/><circle cx="330" cy="120" r="4"/>
-        </g>
-      </svg>
-      <span class="status self-start mb-auto" style="color:var(--div-auto)">Novo</span>
-      <span class="bar mb-5" style="background:var(--div-auto)"></span>
-      <p class="text-xs uppercase tracking-[0.18em] text-[var(--paper)]/70 mb-2">03 · Odjel</p>
-      <h2 class="font-display text-3xl md:text-4xl font-medium mb-3">Tehneo Automatika</h2>
-      <p class="text-sm text-[var(--paper)]/80 leading-relaxed max-w-sm">
-        Pametna automatizacija za elektrane, domove, navodnjavanje i druge procese, na temelju vlastitog Tehneo kontrolera.
-      </p>
-      <span class="mt-6 text-sm font-medium inline-flex items-center gap-2">Posjetite odjel <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
-    </a>
-  </div>
-</section>
-
-<!-- O NAMA -->
-<section id="o-nama" class="border-t border-black/10">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-12 gap-12 lg:gap-16">
-    <div class="lg:col-span-5">
-      <p class="text-[var(--green)] text-sm mb-4">O nama</p>
-      <h2 class="font-display text-3xl md:text-5xl text-[var(--forest)] font-medium leading-[1.08]">
-        Jedna tvrtka, tri odjela
-      </h2>
+  <!-- 02 Market -->
+  <section class="market" id="market" data-label="Market">
+    <header class="sec-head">
+      <p class="mono eyebrow" data-reveal>02 — The market</p>
+      <h2 data-scramble>Pull the price below zero.</h2>
+      <p class="muted sec-head__sub" data-reveal>Grab the green line and drag it. Tehneo clips export wherever the market turns negative.</p>
+    </header>
+    <div class="market__panel" data-reveal>
+      <canvas class="market__canvas" id="market-canvas" data-cursor="DRAG PRICE"></canvas>
+      <div class="market__readout">
+        <div class="stat"><span class="mono">Avoided loss / day</span><b id="m-saved">€0.00</b></div>
+        <div class="stat"><span class="mono">Export limited</span><b id="m-time">0h 00m</b></div>
+        <div class="stat"><span class="mono">Controller</span><b id="m-state">Export 100%</b></div>
+      </div>
+      <div class="market__controls">
+        <label class="mono" for="m-depth">Midday surplus</label>
+        <input class="range" type="range" id="m-depth" min="0" max="100" value="55" data-cursor="SLIDE">
+        <button class="btn btn--ghost mono" id="m-reset" data-cursor="RESET">Reset</button>
+        <span class="mono muted market__note">Simulated · 50 kW plant · 15-min day-ahead</span>
+      </div>
     </div>
-    <div class="lg:col-span-7">
-      <p class="text-lg text-[var(--slate)] leading-relaxed">
-        Tehneo je počeo kao ulagač u obnovljive izvore energije, a s
-        ulaganja u sunčane elektrane proširio se na pripremu podataka za
-        umjetnu inteligenciju i na automatizaciju, razvijenu najprije za
-        vlastitu elektranu. Svaki odjel ima svoj fokus, a zajedničko im
-        je dugoročno razmišljanje i pouzdana izvedba.
-      </p>
-      <dl class="mt-12 grid sm:grid-cols-2 gap-px bg-black/10 border border-black/10">
-        <div class="bg-[var(--paper)] p-6">
-          <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Sjedište</dt>
-          <dd class="font-display text-xl text-[var(--forest)]">Višnjevac, Osijek</dd>
+  </section>
+
+  <!-- 03 Stack -->
+  <section class="stack" id="stack" data-label="Stack">
+    <div class="stack__sticky">
+      <canvas class="stack__canvas" id="stack-canvas"></canvas>
+      <header class="stack__head">
+        <p class="mono eyebrow">03 — The stack</p>
+        <h2>Five layers.<br>One decision.</h2>
+      </header>
+      <p class="mono stack__layer" id="stack-layer">Layer — / 04</p>
+    </div>
+  </section>
+
+  <!-- 04 Patch -->
+  <section class="patch" id="patch" data-label="Patch">
+    <header class="sec-head">
+      <p class="mono eyebrow" data-reveal>04 — The patch</p>
+      <h2 data-scramble>Patch it into the line.</h2>
+      <p class="muted sec-head__sub" data-reveal>This plant exports blind. Drag the cables and route the power through Tehneo.</p>
+    </header>
+    <div class="bay" id="bay" data-state="blind" data-reveal>
+      <svg class="bay__cables" id="cables" aria-hidden="true"></svg>
+
+      <article class="mod" data-mod="pv" style="--x:3%;--y:12%">
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">PV-01</span><b>Array</b></header>
+        <div class="mod__body">
+          <svg viewBox="0 0 120 70" class="mod__icon"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 8h92l10 54H4z"/><path d="M38 8l-6 54M62 8v54M86 8l6 54M9 26h102M6 44h108"/></g></svg>
         </div>
-        <div class="bg-[var(--paper)] p-6">
-          <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Područje rada</dt>
-          <dd class="font-display text-xl text-[var(--forest)]">Europska unija</dd>
-        </div>
-        <div class="bg-[var(--paper)] p-6">
-          <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Odjeli</dt>
-          <dd class="font-display text-xl text-[var(--forest)]">Energija · AI Data · Automatika</dd>
-        </div>
-        <div class="bg-[var(--paper)] p-6">
-          <dt class="text-xs uppercase tracking-[0.16em] text-[var(--slate)] mb-2">Pravni subjekt</dt>
-          <dd class="font-display text-xl text-[var(--forest)]">Tehneo d.o.o.</dd>
-        </div>
-      </dl>
-    </div>
-  </div>
-</section>
+        <footer class="mod__foot mono">50 kWp · DC</footer>
+        <button class="port port--out" data-port="pv:out" aria-label="Array output" data-cursor="PATCH"></button>
+      </article>
 
-<!-- KONTAKT -->
-<section id="kontakt" class="bg-[var(--forest)] text-[var(--paper)]">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-28 grid lg:grid-cols-12 gap-10 items-end">
-    <div class="lg:col-span-8">
-      <p class="text-[var(--sage)] text-sm mb-4">Kontakt</p>
-      <h2 class="font-display text-3xl md:text-5xl font-medium leading-[1.08]">
-        Suradnja, partnerstvo ili ulaganje? Razgovarajmo.
-      </h2>
-      <p class="mt-6 text-[var(--paper)]/75 leading-relaxed max-w-xl">
-        Za upite o pojedinom odjelu, pilot-projektima ili zajedničkim projektima
-        pišite nam na jednu adresu. Odgovaramo e-mailom.
-      </p>
+      <article class="mod" data-mod="inv" style="--x:27%;--y:48%">
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">SUN2000</span><b>Inverter</b></header>
+        <div class="mod__body">
+          <svg viewBox="0 0 120 70" class="mod__icon"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 35h108" opacity=".25"/><path class="wave" d="M6 35c10 0 10-24 20-24s10 48 20 48 10-48 20-48 10 48 20 48 10-24 20-24h8"/></g></svg>
+        </div>
+        <footer class="mod__foot mono">DC → AC · Modbus</footer>
+        <button class="port port--in" data-port="inv:in" aria-label="Inverter input" data-cursor="PATCH"></button>
+        <button class="port port--out" data-port="inv:out" aria-label="Inverter output" data-cursor="PATCH"></button>
+      </article>
+
+      <article class="mod mod--brand" data-mod="tehneo" style="--x:51%;--y:8%">
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">TN-1</span><b>Tehneo</b></header>
+        <div class="mod__body"><span class="mod__logo" id="mod-logo"></span></div>
+        <footer class="mod__foot mono">Price-aware limit</footer>
+        <button class="port port--in" data-port="tehneo:in" aria-label="Tehneo input" data-cursor="PATCH"></button>
+        <button class="port port--out" data-port="tehneo:out" aria-label="Tehneo output" data-cursor="PATCH"></button>
+      </article>
+
+      <article class="mod mod--grid" data-mod="grid" style="--x:75%;--y:40%">
+        <header class="mod__head" data-cursor="MOVE"><span class="mono">HEP-ODS</span><b>Grid</b></header>
+        <div class="mod__body">
+          <div class="meter" id="grid-meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="mono mod__status" id="grid-status">Blind export</p>
+        </div>
+        <footer class="mod__foot mono" id="grid-note">Selling at −€/MWh</footer>
+        <button class="port port--in" data-port="grid:in" aria-label="Grid input" data-cursor="PATCH"></button>
+      </article>
     </div>
-    <div class="lg:col-span-4 lg:text-right">
-      <a href="mailto:info@tehneo.hr" class="inline-flex items-center px-6 py-3.5 bg-[var(--paper)] text-[var(--forest)] text-sm font-medium hover:bg-[var(--sage)] transition-colors">
-        info@tehneo.hr
-      </a>
+  </section>
+
+  <!-- 05 Connect -->
+  <section class="contact" id="contact" data-label="Connect">
+    <canvas class="contact__canvas" id="particles" data-cursor="DISTURB"></canvas>
+    <div class="contact__ui">
+      <p class="mono eyebrow" data-reveal>05 — Connect</p>
+      <h2 data-scramble>Let's wire your plant.</h2>
+      <a class="btn btn--solid btn--xl" href="mailto:info@tehneo.hr" data-magnetic data-cursor="WRITE">Start a signal <span aria-hidden="true">→</span></a>
     </div>
-  </div>
-</section>
+    <footer class="foot mono">
+      <span>© 2026 Tehneo Energy</span>
+      <span>Hand-built · zero frameworks</span>
+      <span>HR · ENTSO-E day-ahead</span>
+    </footer>
+  </section>
+
 </main>
-
-<!-- FOOTER / IMPRESSUM -->
-<footer class="bg-[var(--forest-deep)] text-[var(--paper)]">
-  <div class="max-w-7xl mx-auto px-5 md:px-10 py-16 grid md:grid-cols-3 gap-12">
-    <div>
-      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
-        <img src="assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
-        TEHNEO
-      </p>
-      <ul class="text-sm space-y-2 text-[var(--paper)]/80">
-        <li><a href="energija.html" class="hover:text-[var(--sage)]">Tehneo Energija</a></li>
-        <li><a href="https://ai.tehneo.hr/" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
-        <li><a href="automatika.html" class="hover:text-[var(--sage)]">Tehneo Automatika</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
-      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
-        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
-        <li>OIB: 84386741609</li>
-        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
-        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
-        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
-      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
-        <li>E-mail: <a href="mailto:info@tehneo.hr" class="hover:text-[var(--sage)] underline underline-offset-2">info@tehneo.hr</a></li>
-        <li><a href="privatnost/" class="hover:text-[var(--sage)] underline underline-offset-2">Politika privatnosti</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-divider border-t max-w-7xl mx-auto px-5 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
-    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
-    <p>Izrada web stranice: Tehneo d.o.o.</p>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  menuBtn.addEventListener('click', () => {
-    const isHidden = mobileMenu.classList.contains('hidden');
-    mobileMenu.classList.toggle('hidden');
-    menuBtn.setAttribute('aria-expanded', String(isHidden));
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-  });
-</script>
-
 </body>
 </html>
