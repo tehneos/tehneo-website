@@ -1,8 +1,100 @@
 {
-  "routes": [
-    { "src": "/", "has": [{ "type": "host", "value": "ai.tehneo.hr" }], "status": 307, "headers": { "Location": "https://www.tehneo.hr/" } },
-    { "src": "/(solar|ai-data|tehneo-energy)(/.*)?", "status": 307, "headers": { "Location": "/" } },
-    { "src": "/(automatika|robotika|dron|energija|potpis)(\.html)?", "status": 307, "headers": { "Location": "/" } },
-    { "src": "/privatnost", "status": 308, "headers": { "Location": "/privatnost/" } }
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "ai.tehneo.hr"
+        }
+      ],
+      "destination": "https://www.tehneo.hr/",
+      "permanent": false
+    },
+    {
+      "source": "/solar",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/solar/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ai-data",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ai-data/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/tehneo-energy",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/tehneo-energy/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/automatika.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/automatika",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/robotika.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/robotika",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/dron.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/dron",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/energija.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/energija",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/potpis.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/potpis",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/privatnost",
+      "destination": "/privatnost/",
+      "permanent": true
+    }
   ]
 }
