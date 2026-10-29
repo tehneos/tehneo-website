@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tehneo Energy — aplikacija za solarne elektrane</title>
+<meta name="description" content="Tehneo Energy: proizvodnja solarne elektrane uživo, burzovne cijene struje i ušteda kod negativnih cijena. Za Android, Windows i iPhone.">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon-192.png">
+<link rel="apple-touch-icon" href="../assets/favicon-192.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#0F2A1E;
+    --forest-deep:#091A12;
+    --green:#2F6E4E;
+    --sage:#9CC5A8;
+    --paper:#F6F6F3;
+    --paper-dim:#EDEEE9;
+    --ink:#15201A;
+    --slate:#5B6660;
+  }
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); }
+  .font-display{ font-family:'Space Grotesk', sans-serif; }
+  .footer-divider{ border-color: rgba(156,197,168,0.22); }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body class="antialiased">
+
+<header class="sticky top-0 z-50 bg-[rgba(246,246,243,0.95)] backdrop-blur border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 h-20 flex items-center justify-between">
+    <a href="../" class="flex items-center gap-3 text-[var(--forest)]" aria-label="Tehneo, naslovnica">
+      <img src="../assets/tehneo-symbol.svg" alt="" class="h-[30px] w-auto">
+      <span class="font-display text-xl font-semibold tracking-tight">TEHNEO</span>
+    </a>
+    <a href="../" class="text-sm font-medium text-[var(--forest)] hover:text-[var(--green)]">← Naslovnica</a>
+  </div>
+</header>
+
+<main>
+  <!-- preuzimanje: aplikacija se instalira na portalu (app.tehneo.hr/preuzmi), ne s ove stranice -->
+  <section class="max-w-6xl mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-20 md:pb-28 grid md:grid-cols-[1fr_auto] gap-14 md:gap-20 items-center">
+    <div class="max-w-xl">
+      <p class="text-[var(--green)] text-sm mb-4">Aplikacija</p>
+      <h1 class="font-display text-4xl md:text-6xl text-[var(--forest)] font-medium leading-[1.05] tracking-tight">Tehneo Energy</h1>
+      <p class="mt-6 text-lg text-[var(--slate)] leading-relaxed">
+        Vaša solarna elektrana na dlanu: proizvodnja uživo, burzovne cijene struje
+        i ušteda kad je cijena negativna, a kontroler zaustavi predaju u mrežu.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="https://app.tehneo.hr/preuzmi" class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--forest)] text-[var(--paper)] text-sm font-medium hover:bg-[var(--green)] transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Preuzmi aplikaciju
+        </a>
+        <a href="https://app.tehneo.hr/prijava" class="inline-flex items-center px-6 py-3 border border-[var(--forest)]/25 text-[var(--forest)] text-sm font-medium hover:border-[var(--forest)]/60 transition-colors">
+          Prijava u portal
+        </a>
+      </div>
+      <p class="mt-6 text-sm text-[var(--slate)]">Android · Windows · iPhone i iPad</p>
+    </div>
+    <div class="hidden md:block text-center">
+      <img src="../assets/qr-aplikacija.svg" alt="QR kod za preuzimanje aplikacije Tehneo Energy" width="192" height="192" class="w-48 h-48 bg-white p-3 ring-1 ring-black/5">
+      <p class="mt-3 text-xs text-[var(--slate)]">Skenirajte mobitelom</p>
+    </div>
+  </section>
+
+  <section class="bg-[var(--paper-dim)]">
+    <div class="max-w-6xl mx-auto px-5 md:px-10 py-20 md:py-28">
+      <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight max-w-xl">Što vidite u aplikaciji</h2>
+      <div class="mt-12 grid sm:grid-cols-2 md:grid-cols-4 gap-px bg-black/5">
+        <div class="bg-[var(--paper)] p-8">
+          <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"/><circle cx="12" cy="12" r="4.5"/></svg>
+          <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Proizvodnja uživo</h3>
+          <p class="text-sm text-[var(--slate)] leading-relaxed">Snaga elektrane svakih 10 sekundi, današnja proizvodnja i usporedba s mogućom.</p>
+        </div>
+        <div class="bg-[var(--paper)] p-8">
+          <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 17l5-5 4 4 8-8M15 8h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Cijene struje</h3>
+          <p class="text-sm text-[var(--slate)] leading-relaxed">Burzovne cijene za danas i sutra po 15 minuta, s upozorenjem na negativne cijene.</p>
+        </div>
+        <div class="bg-[var(--paper)] p-8">
+          <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c4.5-2.2 7-5.8 7-10V6l-7-3-7 3v5c0 4.2 2.5 7.8 7 10z" stroke-linejoin="round"/><path d="M9.5 12l1.8 1.8L15 10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Ušteda</h3>
+          <p class="text-sm text-[var(--slate)] leading-relaxed">Koliko ste uštedjeli jer elektrana nije predavala struju dok se za predaju plaćalo.</p>
+        </div>
+        <div class="bg-[var(--paper)] p-8">
+          <svg class="w-8 h-8 text-[var(--green)] mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7zm0 0v10m9-5l-9 5-9-5" stroke-linejoin="round"/></svg>
+          <h3 class="font-display text-lg text-[var(--forest)] font-medium mb-2">Elektrana 3D</h3>
+          <p class="text-sm text-[var(--slate)] leading-relaxed">Krov s pločama po stringovima: odmah se vidi radi li svaki dio elektrane kako treba.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-5 md:px-10 py-20 md:py-28">
+    <h2 class="font-display text-3xl md:text-4xl text-[var(--forest)] font-medium leading-tight max-w-xl">Kako instalirati</h2>
+    <p class="mt-4 text-[var(--slate)] leading-relaxed max-w-xl">Otvorite stranicu za preuzimanje na uređaju na koji želite aplikaciju i slijedite upute – instalacija traje nekoliko sekundi.</p>
+    <div class="mt-12 grid md:grid-cols-3 gap-px bg-black/5">
+      <a href="https://app.tehneo.hr/preuzmi" class="group bg-[var(--paper)] p-8 hover:bg-white transition-colors">
+        <p class="text-xs uppercase tracking-wide text-[var(--green)] mb-3">Android</p>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">U Chromeu: <strong class="text-[var(--ink)] font-medium">Instaliraj aplikaciju</strong>.</p>
+        <p class="mt-6 text-sm font-medium text-[var(--forest)] group-hover:text-[var(--green)]">Preuzmi →</p>
+      </a>
+      <a href="https://app.tehneo.hr/preuzmi" class="group bg-[var(--paper)] p-8 hover:bg-white transition-colors">
+        <p class="text-xs uppercase tracking-wide text-[var(--green)] mb-3">Windows</p>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">U Edgeu ili Chromeu: ikona <strong class="text-[var(--ink)] font-medium">Instaliraj</strong> u adresnoj traci.</p>
+        <p class="mt-6 text-sm font-medium text-[var(--forest)] group-hover:text-[var(--green)]">Preuzmi →</p>
+      </a>
+      <a href="https://app.tehneo.hr/preuzmi" class="group bg-[var(--paper)] p-8 hover:bg-white transition-colors">
+        <p class="text-xs uppercase tracking-wide text-[var(--green)] mb-3">iPhone i iPad</p>
+        <p class="text-sm text-[var(--slate)] leading-relaxed">U Safariju: <strong class="text-[var(--ink)] font-medium">Dijeli → Dodaj na početni zaslon</strong>.</p>
+        <p class="mt-6 text-sm font-medium text-[var(--forest)] group-hover:text-[var(--green)]">Preuzmi →</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-[var(--forest-deep)] text-[var(--paper)]">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 py-16 grid md:grid-cols-3 gap-12">
+    <div>
+      <p class="font-display text-lg text-[var(--paper)] font-semibold mb-4 flex items-center gap-2.5">
+        <img src="../assets/tehneo-symbol-reversed.svg" alt="Tehneo" class="h-7 w-auto">
+        TEHNEO
+      </p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/80">
+        <li><a href="../energija.html" class="hover:text-[var(--sage)]">Tehneo Energija</a></li>
+        <li><a href="https://ai.tehneo.hr/" class="hover:text-[var(--sage)]">Tehneo AI Data</a></li>
+        <li><a href="../automatika.html" class="hover:text-[var(--sage)]">Tehneo Automatika</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Podaci o tvrtki</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>Tehneo d.o.o. za proizvodnju i usluge</li>
+        <li>OIB: 84386741609</li>
+        <li>Sjedište: Ulica Ivana Mažuranića 25, 31220 Višnjevac</li>
+        <li>Upisano u sudski registar Trgovačkog suda u Osijeku, MBS: 030268230</li>
+        <li>Temeljni kapital: 2.654,46 € (uplaćen u cijelosti)</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--sage)] mb-4">Kontakt</p>
+      <ul class="text-sm space-y-2 text-[var(--paper)]/90">
+        <li>E-mail: <a href="mailto:info@tehneo.hr" class="hover:text-[var(--sage)] underline underline-offset-2">info@tehneo.hr</a></li>
+        <li><a href="../privatnost/" class="hover:text-[var(--sage)] underline underline-offset-2">Politika privatnosti</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider border-t max-w-7xl mx-auto px-5 md:px-10 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-[var(--paper)]/60">
+    <p>&copy; <span id="year"></span> Tehneo d.o.o. Sva prava pridržana.</p>
+    <p>Izrada web stranice: Tehneo d.o.o.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
