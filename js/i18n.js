@@ -38,11 +38,26 @@ export const t = (key) => STR[key][I];
 // Croatian copy for elements tagged with data-i18n (innerHTML).
 const HR = {
   enter: '<span class="btn__dot"></span>Uđi',
-  heroSub: 'Energija koja razmišlja.<br><span class="muted">Pametno upravljanje solarnom elektranom, čak i kad je cijena struje negativna.</span>',
+  heroSub: 'Autonomni sustavi po mjeri.<br><span class="muted">Pametna rješenja za bolje sutra.</span>',
   heroScroll: '<i></i>Skrolaj dalje',
-  e1: '01 — Problem',
+  e1: '01 — Što gradimo',
+  workH: 'Sustavi koji odlučuju sami.',
+  workSub: 'Projektiramo i gradimo autonomne i pametne sustave po mjeri, od pločice kontrolera do odluke. Pet područja, jedan način rada.',
+  wAuto: 'Automatika',
+  wAutoDesc: 'Pametni sustavi upravljanja za sunčane elektrane, domove, navodnjavanje i industriju, na našem Tehneo kontroleru.',
+  wRobo: 'Robotika',
+  wRoboDesc: 'Autonomna električna kosilica za vinograde, voćnjake i sunčane elektrane te mini bageri na daljinsko i autonomno upravljanje.',
+  wRoboTag: 'U razvoju',
+  wDrone: 'Dron',
+  wDroneDesc: 'Multispektralne karte zona za vinograde i voćnjake: vigor, vođeno uzorkovanje i berba po zonama.',
+  wDroneTag: 'Pilot 2027',
+  wEnergy: 'Energija',
+  wEnergyDesc: 'Razvijamo, gradimo i dugoročno upravljamo vlastitim sunčanim elektranama.',
+  wAi: 'AI Data',
+  wAiDesc: 'Anotacija, evaluacija LLM-ova i RLHF na hrvatskom, srpskom i bosanskom, uz stručnjake za pojedina područja.',
+  e2: '02 — Istaknuti projekt · Tehneo kontroler',
   signal: 'Solarne elektrane izvoze naslijepo, čak i kad cijena struje padne <em>ispod nule.</em> Tehneo čita inverter, prati day-ahead tržište i automatski spušta izvoz na <em>nulu</em> kad se to financijski najviše isplati.',
-  e2: '02 — Tržište',
+  e3: '03 — Tržište',
   marketH: 'Povuci cijenu ispod nule.',
   marketSub: 'Uhvati zelenu liniju i povuci je. Tehneo ograničava izvoz gdje god cijena ode u minus.',
   saved: 'Izbjegnuti gubitak / dan',
@@ -51,17 +66,17 @@ const HR = {
   surplus: 'Podnevni višak',
   reset: 'Vrati',
   note: 'Simulacija · elektrana 50 kW · 15-min day-ahead',
-  e3: '03 — Slojevi',
+  e4: '04 — Slojevi',
   stackH: 'Pet slojeva.<br>Jedna odluka.',
   layerNone: 'Sloj — / 04',
-  e4: '04 — Spajanje',
+  e5: '05 — Spajanje',
   patchH: 'Spoji ga u liniju.',
   patchSub: 'Ova elektrana izvozi naslijepo. Prespoji kabele i provedi struju kroz Tehneo.',
   array: 'Paneli',
   grid: 'Mreža',
   priceLimit: 'Limit prema cijeni',
-  e5: '05 — Kontakt',
-  contactH: 'Spojimo vašu elektranu.',
+  e6: '06 — Kontakt',
+  contactH: 'Izgradimo vaš sustav.',
   cta: 'Pošalji signal <span aria-hidden="true">→</span>',
   lgCompany: 'Tvrtka',
   lgFullName: 'za proizvodnju i usluge',
@@ -77,9 +92,9 @@ const HR = {
 };
 const CURSOR = {
   'POWER ON': 'UKLJUČI', TOP: 'VRH', 'SEND SIGNAL': 'POŠALJI SIGNAL', 'DRAG PRICE': 'POVUCI CIJENU',
-  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', READ: 'ČITAJ', LANGUAGE: 'JEZIK',
+  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', READ: 'ČITAJ', OPEN: 'OTVORI', LANGUAGE: 'JEZIK',
 };
-const LABEL = { Power: 'Pogon', Signal: 'Signal', Market: 'Tržište', Stack: 'Slojevi', Patch: 'Spajanje', Connect: 'Kontakt' };
+const LABEL = { Power: 'Pogon', Work: 'Područja', Signal: 'Signal', Market: 'Tržište', Stack: 'Slojevi', Patch: 'Spajanje', Connect: 'Kontakt' };
 
 export function applyLanguage() {
   document.documentElement.lang = lang;
@@ -95,9 +110,9 @@ export function applyLanguage() {
   });
   if (lang !== 'hr') return;
 
-  document.title = 'Tehneo — Energija koja razmišlja';
+  document.title = 'Tehneo — Autonomni sustavi po mjeri';
   document.querySelector('meta[name="description"]').content =
-    'Tehneo čita vaš inverter, prati day-ahead tržište i zaustavlja izvoz čim cijena struje padne u minus.';
+    'Tehneo projektira i gradi autonomne i pametne sustave po mjeri: automatika, robotika, dronovi, energija i AI podaci. Pametna rješenja za bolje sutra.';
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = HR[el.dataset.i18n]; });
   document.querySelectorAll('[data-cursor]').forEach((el) => { el.dataset.cursor = CURSOR[el.dataset.cursor] ?? el.dataset.cursor; });
   document.querySelectorAll('[data-label]').forEach((el) => { el.dataset.label = LABEL[el.dataset.label] ?? el.dataset.label; });

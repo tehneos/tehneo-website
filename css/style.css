@@ -196,7 +196,52 @@ h2 {
 @keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
 
 /* ==========================================================================
-   01 Signal
+   01 Work
+   ========================================================================== */
+.cards {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+  margin: 0 var(--gutter) 0 calc(var(--gutter) + 40px);
+}
+.card {
+  --mx: 50%; --my: 50%;
+  position: relative; grid-column: span 2; min-height: 320px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 22px; padding: 26px;
+  border: 1px solid var(--line); border-radius: 20px;
+  background: linear-gradient(180deg, var(--panel), var(--bg-2));
+  transition: border-color .5s var(--ease), opacity 1s var(--ease), transform 1.2s var(--ease);
+  transition-delay: 0s, var(--d, 0s), var(--d, 0s);
+}
+.card:nth-child(-n+2) { grid-column: span 3; min-height: 360px; }
+.card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .5s;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(166, 198, 76, .13), transparent 60%);
+}
+.card::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  transform: scaleX(0); transition: transform .8s var(--ease);
+}
+.card:hover { border-color: rgba(166, 198, 76, .35); }
+.card:hover::before { opacity: 1; }
+.card:hover::after { transform: scaleX(1); }
+.card__top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
+.card__tag { padding: 5px 10px; border: 1px solid var(--line-2); border-radius: 999px; font-size: 9px; color: var(--fg); }
+.card__glyph { width: 64px; height: 64px; color: var(--muted); transition: color .5s; }
+.card:hover .card__glyph { color: var(--green); }
+.card:hover .card__glyph * { stroke-dasharray: 1; animation: draw-in 1s var(--ease) both; }
+@keyframes draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.card__text { margin-top: auto; max-width: 42ch; padding-right: 34px; }
+.card h3 { font-size: clamp(26px, 2.6vw, 42px); font-weight: 700; font-stretch: 115%; letter-spacing: -.02em; line-height: 1; margin-bottom: 12px; }
+.card p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.card__arrow {
+  position: absolute; right: 26px; bottom: 24px; font-size: 22px; color: var(--muted);
+  transition: transform .5s var(--ease), color .5s;
+}
+.card:hover .card__arrow { color: var(--green); transform: translateX(6px); }
+.card:nth-child(-n+2) .card__text { max-width: 48ch; }
+
+/* ==========================================================================
+   02 Signal
    ========================================================================== */
 .signal { height: 260vh; position: relative; }
 .signal__sticky {
@@ -342,13 +387,19 @@ h2 {
 @media (max-width: 900px) {
   .spine { display: none; }
   .signal__sticky, .sec-head { padding-left: var(--gutter); }
-  .market__panel, .bay { margin-left: var(--gutter); }
+  .market__panel, .bay, .cards { margin-left: var(--gutter); }
+  .cards { grid-template-columns: 1fr 1fr; }
+  .card, .card:nth-child(-n+2) { grid-column: span 1; min-height: 300px; }
+  .card:first-child { grid-column: 1 / -1; }
   .stack__head, .stack__layer { left: var(--gutter); }
 }
 @media (max-width: 760px) {
   .hud__xy { display: none; }
   .hero__row { flex-direction: column; align-items: flex-start; gap: 12px; }
   .hero__scroll { display: none; }
+  .cards { grid-template-columns: 1fr; gap: 12px; }
+  .card, .card:nth-child(-n+2), .card:first-child { grid-column: auto; min-height: 0; padding: 22px; }
+  .card__text { margin-top: 0; }
   .market__readout { grid-template-columns: 1fr 1fr; }
   .market__readout .stat:last-child { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); }
   .market__note { margin-left: 0; }
