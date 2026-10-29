@@ -17,6 +17,11 @@
       "permanent": false
     },
     {
+      "source": "/solar/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/solar/:path*",
       "destination": "/",
       "permanent": false
@@ -27,12 +32,22 @@
       "permanent": false
     },
     {
+      "source": "/ai-data/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/ai-data/:path*",
       "destination": "/",
       "permanent": false
     },
     {
       "source": "/tehneo-energy",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/tehneo-energy/",
       "destination": "/",
       "permanent": false
     },
