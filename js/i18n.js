@@ -75,6 +75,12 @@ const HR = {
   array: 'Paneli',
   grid: 'Mreža',
   priceLimit: 'Limit prema cijeni',
+  appEyebrow: 'Aplikacija Tehneo Energy',
+  appH: 'Vaša elektrana na dlanu.',
+  appSub: 'Proizvodnja uživo, burzovne cijene struje i ušteda dok kontroler drži izvoz na nuli. Za Android, Windows i iPhone.',
+  appGet: 'Preuzmi aplikaciju',
+  appLogin: 'Prijava u portal',
+  appScan: 'Skenirajte mobitelom',
   e6: '06 — Kontakt',
   contactH: 'Izgradimo vaš sustav.',
   cta: 'Pošalji signal <span aria-hidden="true">→</span>',
@@ -92,7 +98,7 @@ const HR = {
 };
 const CURSOR = {
   'POWER ON': 'UKLJUČI', TOP: 'VRH', 'SEND SIGNAL': 'POŠALJI SIGNAL', 'DRAG PRICE': 'POVUCI CIJENU',
-  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', READ: 'ČITAJ', OPEN: 'OTVORI', LANGUAGE: 'JEZIK',
+  SLIDE: 'POMAKNI', RESET: 'VRATI', MOVE: 'POMAKNI', PATCH: 'SPOJI', DISTURB: 'POREMETI', WRITE: 'PIŠI', READ: 'ČITAJ', OPEN: 'OTVORI', DOWNLOAD: 'PREUZMI', 'LOG IN': 'PRIJAVA', LANGUAGE: 'JEZIK',
 };
 const LABEL = { Power: 'Pogon', Work: 'Područja', Signal: 'Signal', Market: 'Tržište', Stack: 'Slojevi', Patch: 'Spajanje', Connect: 'Kontakt' };
 

@@ -34,6 +34,7 @@
   <a class="hud__brand" href="#hero" data-cursor="TOP"><span class="hud__mark" id="hud-mark"></span><span class="hud__name">TEHNEO</span></a>
   <div class="hud__right">
     <span class="mono hud__xy" id="hud-xy">X 0000 · Y 0000</span>
+    <a class="hud__portal mono" href="https://app.tehneo.hr/prijava" data-cursor="LOG IN">Portal</a>
     <div class="lang mono" id="lang" role="group" aria-label="Language" data-cursor="LANGUAGE"><button data-lang="hr" lang="hr">HR</button><button data-lang="en" lang="en">EN</button></div>
   </div>
 </header>
@@ -121,7 +122,7 @@
     </div>
   </section>
 
-  <!-- 02 Market -->
+  <!-- 03 Market -->
   <section class="market" id="market" data-label="Market">
     <header class="sec-head">
       <p class="mono eyebrow" data-reveal data-i18n="e3">03 — The market</p>
@@ -144,7 +145,7 @@
     </div>
   </section>
 
-  <!-- 03 Stack -->
+  <!-- 04 Stack -->
   <section class="stack" id="stack" data-label="Stack">
     <div class="stack__sticky">
       <canvas class="stack__canvas" id="stack-canvas"></canvas>
@@ -156,7 +157,7 @@
     </div>
   </section>
 
-  <!-- 04 Patch -->
+  <!-- 05 Patch -->
   <section class="patch" id="patch" data-label="Patch">
     <header class="sec-head">
       <p class="mono eyebrow" data-reveal data-i18n="e5">05 — The patch</p>
@@ -203,9 +204,25 @@
         <button class="port port--in" data-port="grid:in" aria-label="Grid input" data-cursor="PATCH"></button>
       </article>
     </div>
+
+    <div class="app" data-reveal>
+      <div class="app__text">
+        <p class="mono eyebrow" data-i18n="appEyebrow">Tehneo Energy app</p>
+        <h3 data-i18n="appH">Your plant in your pocket.</h3>
+        <p class="muted" data-i18n="appSub">Live production, day-ahead prices and what you saved while the controller held export at zero. For Android, Windows and iPhone.</p>
+        <div class="app__actions">
+          <a class="btn btn--solid" href="tehneo-energy/" data-magnetic data-cursor="DOWNLOAD" data-i18n="appGet">Download the app</a>
+          <a class="btn" href="https://app.tehneo.hr/prijava" data-cursor="LOG IN" data-i18n="appLogin">Portal log in</a>
+        </div>
+      </div>
+      <figure class="app__qr">
+        <img src="assets/qr-aplikacija.svg" width="150" height="150" alt="QR code: app.tehneo.hr/preuzmi">
+        <figcaption class="mono" data-i18n="appScan">Scan with your phone</figcaption>
+      </figure>
+    </div>
   </section>
 
-  <!-- 05 Connect -->
+  <!-- 06 Connect -->
   <section class="contact" id="contact" data-label="Connect">
     <canvas class="contact__canvas" id="particles" data-cursor="DISTURB"></canvas>
     <div class="contact__ui">
