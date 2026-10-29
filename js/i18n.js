@@ -25,7 +25,7 @@ const STR = {
   layers: [
     [['PV array', '50 kWp · 12 strings'], ['Inverter bus', 'Modbus TCP · 1 s poll'], ['Controller', 'Reads · decides · limits'],
       ['Price signal', 'ENTSO-E · 15-min day-ahead'], ['Portal', 'Savings in five seconds']],
-    [['Solarna polja', '50 kWp · 12 stringova'], ['Veza s inverterom', 'Modbus TCP · očitanje 1 s'], ['Kontroler', 'Čita · odlučuje · ograničava'],
+    [['Solarna polja', '50 kWp · 12 stringova'], ['Inverter', 'Modbus TCP · očitanje 1 s'], ['Kontroler', 'Čita · odlučuje · ograničava'],
       ['Cjenovni signal', 'ENTSO-E · 15-min day-ahead'], ['Portal', 'Ušteda u pet sekundi']],
   ],
   states: [

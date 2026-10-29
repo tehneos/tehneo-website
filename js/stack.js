@@ -55,11 +55,16 @@ export function initStack(section) {
     mrx += (pointer.ny * 0.14 - mrx) * damp(3, dt);
     mry += (pointer.nx * 0.3 - mry) * damp(3, dt);
 
-    const size = mobile ? Math.min(W * 0.66, H * 0.34) : Math.min(W * 0.34, H * 0.46);
+    // phones: reserve a column on the right for the layer names and fit the stack beside it
+    ctx.font = `500 ${mobile ? 9 : 10}px "JetBrains Mono", monospace`;
+    const labelW = mobile ? 26 + Math.max(...LAYERS.map((L) => ctx.measureText(L.name.toUpperCase()).width)) : 0;
+    const labelX = mobile ? W - 14 - labelW : 0;
+    const room = labelX - 30;
+    const size = mobile ? Math.min(room / 1.3, H * 0.32) : Math.min(W * 0.34, H * 0.46);
     const S = size / 512;
-    const cx = mobile ? W * 0.5 : W * 0.56, cy = H * (mobile ? 0.58 : 0.56);
+    const cx = mobile ? 10 + room / 2 : W * 0.56, cy = H * (mobile ? 0.58 : 0.56);
     const proj = camera(tilt * 1.02 + mrx * tilt, mry * (0.3 + tilt), -tilt * 0.62 + (p - 0.5) * 0.3 * tilt, 1400, cx, cy);
-    const gap = ex * size * (mobile ? 0.2 : 0.24);
+    const gap = ex * size * (mobile ? 0.3 : 0.24);
     const zOf = (i) => (i - 2) * gap;
     const contentA = 0.08 + 0.92 * ex;
 
@@ -185,10 +190,9 @@ export function initStack(section) {
       });
     }
 
-    // leader-line labels (desktop only; on phones they would cover the stack,
-    // and the readout at the bottom already names the layer in focus)
-    if (ex > 0.05 && !mobile) {
-      const colX = mobile ? W - 16 : Math.min(cx + size * 0.95, W - 230);
+    // leader-line labels (phones: name only, in the reserved column)
+    if (ex > 0.05) {
+      const colX = mobile ? labelX : Math.min(cx + size * 0.95, W - 230);
       ctx.font = `500 ${mobile ? 9 : 10}px "JetBrains Mono", monospace`;
       ctx.textBaseline = 'middle';
       LAYERS.forEach((L, i) => {
@@ -201,8 +205,8 @@ export function initStack(section) {
         const a = ex * (focus < 0 ? 0.8 : on ? 1 : 0.35);
         ctx.strokeStyle = on ? `rgba(166,198,76,${a})` : `rgba(244,246,241,${a * 0.4})`;
         ctx.lineWidth = 1;
-        const lx = mobile ? colX - 92 : colX;
-        ctx.beginPath(); ctx.moveTo(ax + 6, ay); ctx.lineTo(lx - 8, ay); ctx.stroke();
+        const lx = colX;
+        if (lx - 8 > ax + 6) { ctx.beginPath(); ctx.moveTo(ax + 6, ay); ctx.lineTo(lx - 8, ay); ctx.stroke(); }
         ctx.fillStyle = on ? '#a6c64c' : `rgba(244,246,241,${a})`;
         ctx.beginPath(); ctx.arc(ax + 6, ay, 2, 0, Math.PI * 2); ctx.fill();
         ctx.textAlign = 'left';
