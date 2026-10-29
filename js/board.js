@@ -288,6 +288,7 @@ export function initBoard(canvas) {
     const tx = -pointer.ny * 0.42 + Math.sin(t * 0.5) * 0.06;
     const ty = pointer.nx * 0.62 + Math.cos(t * 0.37) * 0.08;
     rx += (tx - rx) * damp(3, dt); ry += (ty - ry) * damp(3, dt);
+    if (!Number.isFinite(rx) || !Number.isFinite(ry)) rx = ry = 0;
     charge = Math.max(0, charge - dt * 0.9);
 
     const s = logo.s;

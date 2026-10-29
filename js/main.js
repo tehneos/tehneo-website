@@ -2,11 +2,7 @@ import { logoSVG } from './logo.js';
 import { t, applyLanguage, consumeSkipBoot } from './i18n.js';
 import { initCursor } from './cursor.js';
 import { initBoard } from './board.js';
-import { initReveals, initSignalText, initSpine, scramble } from './text.js';
-import { initMarket } from './market.js';
-import { initStack } from './stack.js';
-import { initPatch } from './patch.js';
-import { initParticles } from './particles.js';
+import { initReveals, scramble } from './text.js';
 import { reduced } from './util.js';
 
 const $ = (s) => document.querySelector(s);
@@ -15,23 +11,9 @@ applyLanguage();
 
 $('#boot-logo').innerHTML = logoSVG();
 $('#hud-mark').innerHTML = logoSVG();
-$('#mod-logo').innerHTML = logoSVG();
 
 initCursor();
 const board = initBoard($('#board'));
-initSignalText($('#signal'), $('#signal-text'));
-initMarket($('#market'));
-initStack($('#stack'));
-initPatch($('#bay'));
-initParticles($('#contact'));
-initSpine($('.spine'), [...document.querySelectorAll('main > section')]);
-
-// area cards: the hover glow follows the pointer
-document.querySelectorAll('.card').forEach((card) => card.addEventListener('pointermove', (e) => {
-  const r = card.getBoundingClientRect();
-  card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-  card.style.setProperty('--my', `${e.clientY - r.top}px`);
-}));
 
 // boot: count up while the mark draws itself, then show the Enter button
 const boot = $('#boot'), pct = $('#boot-pct'), bar = $('#boot-bar'), msg = $('#boot-msg');
@@ -52,7 +34,8 @@ function enter() {
   document.body.classList.remove('is-booting');
   board.start();
   scramble($('.hero__title [data-scramble]'), 1200);
-  setTimeout(initReveals, 350);
+  // the hero is always on screen: reveal it directly rather than waiting on an observer
+  setTimeout(() => { document.querySelectorAll('.hero [data-reveal]').forEach((el) => el.classList.add('is-in')); initReveals(); }, 350);
   setTimeout(() => boot.remove(), 1400);
 }
 boot.addEventListener('click', (e) => { if (e.target.closest('[data-enter]')) enter(); });

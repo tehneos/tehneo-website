@@ -26,8 +26,12 @@ function loop() {
   const dt = Math.min(0.05, (now - last) / 1000) || 0.016;
   last = now;
   const k = 1 - Math.exp(-dt * 5);
-  pointer.nx += ((pointer.x / innerWidth) * 2 - 1 - pointer.nx) * k;
-  pointer.ny += ((pointer.y / innerHeight) * 2 - 1 - pointer.ny) * k;
+  // a hidden or resizing window can report a zero size; a NaN here would stick forever
+  if (innerWidth > 0 && innerHeight > 0) {
+    pointer.nx += ((pointer.x / innerWidth) * 2 - 1 - pointer.nx) * k;
+    pointer.ny += ((pointer.y / innerHeight) * 2 - 1 - pointer.ny) * k;
+  }
+  if (!Number.isFinite(pointer.nx) || !Number.isFinite(pointer.ny)) pointer.nx = pointer.ny = 0;
   const v = Math.hypot(pointer.x - px, pointer.y - py) / dt;
   pointer.speed += (v - pointer.speed) * (1 - Math.exp(-dt * 10));
   px = pointer.x; py = pointer.y;

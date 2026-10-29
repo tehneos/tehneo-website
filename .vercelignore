@@ -1,2 +1,10 @@
 # Not deployed: archived pages kept only in git
 _arhiva
+# Coming-soon mode (restore: git tag prije-coming-soon)
+automatika.html
+robotika.html
+dron.html
+energija.html
+potpis.html
+ai-data
+tehneo-energy

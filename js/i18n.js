@@ -39,7 +39,7 @@ export const t = (key) => STR[key][I];
 const HR = {
   enter: '<span class="btn__dot"></span>Uđi',
   heroSub: 'Autonomni sustavi po mjeri.<br><span class="muted">Pametna rješenja za bolje sutra.</span>',
-  heroScroll: '<i></i>Skrolaj dalje',
+  soon: '<i></i>Uskoro',
   e1: '01 — Što gradimo',
   workH: 'Sustavi koji odlučuju sami.',
   workSub: 'Projektiramo i gradimo autonomne i pametne sustave po mjeri, od pločice kontrolera do odluke. Pet područja, jedan način rada.',
@@ -116,7 +116,7 @@ export function applyLanguage() {
   });
   if (lang !== 'hr') return;
 
-  document.title = 'Tehneo — Autonomni sustavi po mjeri';
+  document.title = 'Tehneo — Uskoro';
   document.querySelector('meta[name="description"]').content =
     'Tehneo projektira i gradi autonomne i pametne sustave po mjeri: automatika, robotika, dronovi, energija i AI podaci. Pametna rješenja za bolje sutra.';
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.innerHTML = HR[el.dataset.i18n]; });

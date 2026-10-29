@@ -1,9 +1,8 @@
 {
   "routes": [
-    { "src": "/solar/?", "status": 307, "headers": { "Location": "/energija.html" } },
-    { "src": "/ai-data", "status": 308, "headers": { "Location": "/ai-data/" } },
-    { "src": "/privatnost", "status": 308, "headers": { "Location": "/privatnost/" } },
-    { "src": "/tehneo-energy", "status": 308, "headers": { "Location": "/tehneo-energy/" } },
-    { "src": "/", "has": [{ "type": "host", "value": "ai.tehneo.hr" }], "dest": "/ai-data/index.html" }
+    { "src": "/", "has": [{ "type": "host", "value": "ai.tehneo.hr" }], "status": 307, "headers": { "Location": "https://www.tehneo.hr/" } },
+    { "src": "/(solar|ai-data|tehneo-energy)(/.*)?", "status": 307, "headers": { "Location": "/" } },
+    { "src": "/(automatika|robotika|dron|energija|potpis)(\.html)?", "status": 307, "headers": { "Location": "/" } },
+    { "src": "/privatnost", "status": 308, "headers": { "Location": "/privatnost/" } }
   ]
 }
