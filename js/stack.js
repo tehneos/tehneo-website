@@ -55,9 +55,9 @@ export function initStack(section) {
     mrx += (pointer.ny * 0.14 - mrx) * damp(3, dt);
     mry += (pointer.nx * 0.3 - mry) * damp(3, dt);
 
-    const size = mobile ? Math.min(W * 0.6, H * 0.34) : Math.min(W * 0.34, H * 0.46);
+    const size = mobile ? Math.min(W * 0.66, H * 0.34) : Math.min(W * 0.34, H * 0.46);
     const S = size / 512;
-    const cx = mobile ? W * 0.4 : W * 0.56, cy = H * (mobile ? 0.58 : 0.56);
+    const cx = mobile ? W * 0.5 : W * 0.56, cy = H * (mobile ? 0.58 : 0.56);
     const proj = camera(tilt * 1.02 + mrx * tilt, mry * (0.3 + tilt), -tilt * 0.62 + (p - 0.5) * 0.3 * tilt, 1400, cx, cy);
     const gap = ex * size * (mobile ? 0.2 : 0.24);
     const zOf = (i) => (i - 2) * gap;
@@ -185,8 +185,9 @@ export function initStack(section) {
       });
     }
 
-    // leader-line labels
-    if (ex > 0.05) {
+    // leader-line labels (desktop only; on phones they would cover the stack,
+    // and the readout at the bottom already names the layer in focus)
+    if (ex > 0.05 && !mobile) {
       const colX = mobile ? W - 16 : Math.min(cx + size * 0.95, W - 230);
       ctx.font = `500 ${mobile ? 9 : 10}px "JetBrains Mono", monospace`;
       ctx.textBaseline = 'middle';
