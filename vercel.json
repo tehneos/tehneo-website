@@ -127,6 +127,11 @@
       "permanent": false
     },
     {
+      "source": "/eksperiment/:path*/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/usluga",
       "destination": "/",
       "permanent": false
@@ -138,6 +143,11 @@
     },
     {
       "source": "/usluga/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/usluga/:path*/",
       "destination": "/",
       "permanent": false
     },
@@ -157,6 +167,11 @@
       "permanent": false
     },
     {
+      "source": "/blog/:path*/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/o-nama",
       "destination": "/",
       "permanent": false
@@ -168,6 +183,11 @@
     },
     {
       "source": "/o-nama/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/o-nama/:path*/",
       "destination": "/",
       "permanent": false
     },
@@ -187,6 +207,11 @@
       "permanent": false
     },
     {
+      "source": "/kontakt/:path*/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/en",
       "destination": "/",
       "permanent": false
@@ -198,6 +223,11 @@
     },
     {
       "source": "/en/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/en/:path*/",
       "destination": "/",
       "permanent": false
     }
