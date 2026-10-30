@@ -8,7 +8,7 @@ const r = (key, lang) => ROUTES[key][lang];
 export const META = {
   hr: {
     home: ['AI vidljivost za male firme u Hrvatskoj | Tehneo', 'Tehneo mjeri, popravlja i prati kako vašu firmu vide ChatGPT, Gemini, Perplexity i Google. Besplatna provjera vidljivosti za male firme u Hrvatskoj.'],
-    experiment: ['Agent uživo: javni eksperiment AI vidljivosti | Tehneo', 'AI agent preuzima vidljivost Tehnea. Svaki tjedan mjerimo rezultat i objavljujemo stvarne zbirne brojke i dnevnik promjena.'],
+    experiment: ['Agent uživo: javni eksperiment AI vidljivosti | Tehneo', 'AI agent mjeri vidljivost Tehnea i priprema izmjene, a čovjek ih odobrava. Objavljujemo stvarne zbirne brojke i dnevnik promjena.'],
     service: ['Usluga AI vidljivosti za male firme | Tehneo', 'Što radi Tehneo agent: mjeri vidljivost u AI odgovorima, popravlja web, piše sadržaj i izvještava. Suradnja počinje besplatnom provjerom.'],
     blog: ['Blog o AI vidljivosti | Tehneo', 'Savjeti i rezultati eksperimenata o tome kako male firme u Hrvatskoj postaju vidljive u odgovorima AI asistenata.'],
     about: ['O nama | Tehneo d.o.o.', 'Tehneo je hrvatska tehnološka tvrtka iz Osijeka specijalizirana za AI vidljivost malih firmi: da ih AI asistenti pronađu, razumiju i preporuče.'],
@@ -18,7 +18,7 @@ export const META = {
   },
   en: {
     home: ['AI visibility for small businesses in Croatia | Tehneo', 'Tehneo measures, fixes and tracks how ChatGPT, Gemini, Perplexity and Google see your business. Free visibility check for small businesses in Croatia.'],
-    experiment: ['Live agent: a public AI visibility experiment | Tehneo', 'An AI agent takes over Tehneo\'s visibility. We measure the result every week and publish the real numbers and a change log.'],
+    experiment: ['Live agent: a public AI visibility experiment | Tehneo', 'An AI agent measures Tehneo\'s visibility and prepares changes, and a person approves them. We publish the real numbers and a change log.'],
     service: ['AI visibility service for small businesses | Tehneo', 'What the Tehneo agent does: measures visibility in AI answers, fixes your website, writes content and reports. Work starts with a free check.'],
     blog: ['Blog about AI visibility | Tehneo', 'Advice and experiment results on how small Croatian businesses become visible in the answers of AI assistants.'],
     about: ['About us | Tehneo d.o.o.', 'Tehneo is a Croatian technology company from Osijek specialising in AI visibility for small businesses: found, understood and recommended by AI assistants.'],
@@ -46,9 +46,9 @@ const T = {
       ['Pišemo', 'Pripremamo sadržaj koji odgovara na stvarna pitanja vaših kupaca. Čovjek ga pregleda prije objave.'],
       ['Izvještavamo', 'Jasno vam pokažemo što se promijenilo, što je napravljeno i što slijedi.'],
     ],
-    whoE: 'Za koga', whoH: 'Za male firme u Hrvatskoj.',
+    whoE: 'Za koga', whoH: 'Za male firme u Hrvatskoj.', whoP: 'Sjedište nam je u Višnjevcu kraj Osijeka. Usluga je namijenjena firmama i obrtima iz Osijeka, Slavonije i cijele Hrvatske, a sve se može obaviti na daljinu.',
     who: ['Male firme', 'Obrti', 'Webshopovi', 'OPG-ovi', 'Ordinacije'],
-    expE: 'Eksperiment', expH: 'Prvi klijent smo mi sami.', expP: 'Naš AI agent radi na vlastitom webu, a svaki tjedan javno objavljujemo stvarne brojeve i popis svih promjena.', expCta: 'Agent uživo',
+    expE: 'Eksperiment', expH: 'Prvi klijent smo mi sami.', expP: 'Naš AI agent mjeri vidljivost Tehnea i priprema izmjene, čovjek ih odobrava, a stvarne brojeve i popis svih promjena objavljujemo javno.', expCta: 'Agent uživo',
     blogE: 'Blog', blogH: 'Najnoviji tekstovi', blogAll: 'Svi tekstovi', blogEmpty: 'Prvi tekstovi stižu uskoro.',
   },
   en: {
@@ -68,9 +68,9 @@ const T = {
       ['Write', 'We prepare content that answers your customers\' real questions. A person reviews it before it is published.'],
       ['Report', 'We show you clearly what changed, what was done and what comes next.'],
     ],
-    whoE: 'Who it is for', whoH: 'Small businesses in Croatia.',
+    whoE: 'Who it is for', whoH: 'Small businesses in Croatia.', whoP: 'We are based in Višnjevac near Osijek. The service is for businesses and sole traders in Osijek, Slavonia and across Croatia, and everything can be done remotely.',
     who: ['Small businesses', 'Sole traders', 'Webshops', 'Family farms', 'Medical and dental practices'],
-    expE: 'Experiment', expH: 'Our first client is us.', expP: 'Our AI agent works on our own website, and every week we publish the real numbers and a list of every change.', expCta: 'Live agent',
+    expE: 'Experiment', expH: 'Our first client is us.', expP: 'Our AI agent measures Tehneo\'s visibility and prepares changes, a person approves them, and we publish the real numbers and a list of every change.', expCta: 'Live agent',
     blogE: 'Blog', blogH: 'Latest articles', blogAll: 'All articles', blogEmpty: 'The first articles are coming soon.',
   },
 };
@@ -113,6 +113,7 @@ export function home(lang, posts) {
   ${eyebrow(t.whoE)}
   <h2>${t.whoH}</h2>
   <ul class="chips mono">${t.who.map((w) => `<li>${w}</li>`).join('')}</ul>
+  <p class="limits">${t.whoP}</p>
 </section>
 <section class="sec">
   <div class="band">
@@ -129,16 +130,16 @@ export function home(lang, posts) {
 
 const EXP = {
   hr: {
-    h1: 'Agent uživo', lead: 'AI agent preuzima vidljivost Tehnea, a mi svaki tjedan mjerimo rezultat. Svi brojevi na ovoj stranici su stvarni.',
+    h1: 'Agent uživo', lead: 'AI agent mjeri vidljivost Tehnea i priprema izmjene, čovjek ih odobrava, a rezultate objavljujemo ovdje. Svi brojevi na ovoj stranici su stvarni.',
     note: 'Ovu stranicu i promjene u dnevniku stvara ili pomaže stvarati AI agent. Sve izmjene odobrava čovjek.',
     status: (w, done) => (w ? `Tjedan ${w}` : done ? 'Tjedan 0 – polazno mjerenje' : 'Tjedan 0 – mjerenje u tijeku'),
     engines: 'Rezultati po sustavu', engine: 'Sustav', measured: 'Izmjerenih odgovora', mentioned: 'Spominje Tehneo', ofQuestions: (n) => `od ${n} pitanja`,
-    enginesNote: 'Mjerimo preko službenih API-ja s uključenim web pretraživanjem. Odgovori se mogu razlikovati od onoga što korisnik vidi u aplikaciji. ChatGPT je tek započet, a Gemini i Perplexity još nisu izmjereni.',
+    enginesNote: 'Mjerimo preko službenih API-ja s uključenim web pretraživanjem. Odgovori se mogu razlikovati od onoga što korisnik vidi u aplikaciji. Claude je izmjeren prije objave ovog weba, a ChatGPT dio dovršavamo nakon nje, pa polazno mjerenje nije napravljeno u istim uvjetima. Gemini i Perplexity još nisu izmjereni.',
     updated: 'Zadnje ažuriranje', how: 'Kako eksperiment radi',
     howList: [
-      ['Agent preuzima.', 'AI agent predlaže i priprema promjene na webu i sadržaju Tehnea.'],
+      ['Agent predlaže.', 'AI agent predlaže i priprema promjene na webu i sadržaju Tehnea.'],
       ['Čovjek odobrava.', 'Ništa se ne objavljuje bez ljudske potvrde.'],
-      ['Tjedno mjerimo.', 'Ista pitanja postavljamo AI asistentima i pratimo Google pozicije te upite s weba.'],
+      ['Redovito mjerimo.', 'Ista pitanja postavljamo AI asistentima. Google pozicije i upite s weba dodajemo čim ih počnemo mjeriti.'],
       ['Objavljujemo rezultate.', 'I dobre i loše, zbirno, uz kratak popis svih promjena.'],
     ],
     limits: 'Ograničenja: odgovori AI asistenata razlikuju se od pokušaja do pokušaja, pa brojke pokazuju smjer, a ne točnu vrijednost. Objavljujemo broj i vrstu pitanja i zbirne rezultate, a ne točna pitanja, upute agentu ni sirove odgovore, pa mjerenje nije moguće izvana točno ponoviti.',
@@ -148,16 +149,16 @@ const EXP = {
     cta: 'Želite li znati gdje stoji vaša firma?', ctaBtn: 'Besplatna provjera vidljivosti',
   },
   en: {
-    h1: 'Live agent', lead: 'An AI agent takes over Tehneo\'s visibility and we measure the result every week. All numbers on this page are real.',
+    h1: 'Live agent', lead: 'An AI agent measures Tehneo\'s visibility and prepares changes, a person approves them, and we publish the results here. All numbers on this page are real.',
     note: 'This page and the changes in the log are created or assisted by an AI agent. A person approves every change.',
     status: (w, done) => (w ? `Week ${w}` : done ? 'Week 0 – baseline measurement' : 'Week 0 – measurement in progress'),
     engines: 'Results by system', engine: 'System', measured: 'Answers measured', mentioned: 'Mentions Tehneo', ofQuestions: (n) => `of ${n} questions`,
-    enginesNote: 'We measure through official APIs with web search enabled. Answers can differ from what a user sees in the app. ChatGPT has only just started, and Gemini and Perplexity have not been measured yet.',
+    enginesNote: 'We measure through official APIs with web search enabled. Answers can differ from what a user sees in the app. Claude was measured before this website went live and ChatGPT is being completed after it, so the baseline was not taken under identical conditions. Gemini and Perplexity have not been measured yet.',
     updated: 'Last updated', how: 'How the experiment works',
     howList: [
-      ['The agent takes over.', 'An AI agent proposes and prepares changes to Tehneo\'s website and content.'],
+      ['The agent proposes.', 'An AI agent proposes and prepares changes to Tehneo\'s website and content.'],
       ['A person approves.', 'Nothing is published without human confirmation.'],
-      ['We measure weekly.', 'We ask AI assistants the same questions and track Google positions and website enquiries.'],
+      ['We measure regularly.', 'We ask AI assistants the same questions. Google positions and website enquiries are added once we start measuring them.'],
       ['We publish the results.', 'Good and bad alike, in aggregate, with a short list of every change.'],
     ],
     limits: 'Limitations: AI answers vary from one attempt to the next, so the numbers show a direction rather than an exact value. We publish the number and type of questions and aggregate results, not the exact questions, agent instructions or raw answers, so the measurement cannot be repeated exactly from outside.',
@@ -242,7 +243,7 @@ const SVC = {
       ['Piše', 'Priprema tekstove koji odgovaraju na stvarna pitanja kupaca. Uz AI sadržaj stoji jasna oznaka, a čovjek ga pregleda prije objave.'],
       ['Izvještava', 'Jednom mjesečno dobivate pregled: što se promijenilo, što je napravljeno i što je sljedeće.'],
     ],
-    whoH: 'Za koga', whoP: 'Za male firme, obrte, webshopove, OPG-ove i ordinacije u Hrvatskoj, kojima kupci dolaze preko interneta ili preporuke.',
+    whoH: 'Za koga', whoP: 'Za male firme, obrte, webshopove, OPG-ove i ordinacije u Hrvatskoj, kojima kupci dolaze preko interneta ili preporuke. Sjedište nam je u Višnjevcu kraj Osijeka, a usluga je namijenjena firmama iz Osijeka, Slavonije i cijele Hrvatske.',
     flowH: 'Kako izgleda suradnja',
     flow: [
       ['Besplatna provjera', 'Pošaljete nam web, a mi provjerimo kako vas vide AI asistenti i Google.'],
@@ -251,6 +252,16 @@ const SVC = {
     ],
     honestH: 'Što ne obećavamo', honestP: 'Nitko ne može jamčiti mjesto u odgovorima AI asistenata. Možemo jamčiti da ćemo mjeriti pošteno, raditi ono što je dokazivo korisno i pokazati vam stvarne brojeve.',
     priceH: 'Cijene', priceP: 'Cijene na upit.', cta: 'Besplatna provjera vidljivosti',
+    faqH: 'Česta pitanja',
+    faq: [
+      ['Što je AI vidljivost?', 'AI vidljivost znači da vas ChatGPT, Gemini, Perplexity i Google spominju i preporučuju kad kupac pita za ono što nudite. Za malu firmu to je sve važnije, jer kupac često dobije jedan odgovor s nekoliko imena umjesto popisa poveznica.'],
+      ['Što je GEO i po čemu se razlikuje od SEO-a?', 'GEO (Generative Engine Optimization) je prilagodba weba i sadržaja da vas AI asistenti razumiju i navode u odgovorima. SEO cilja na pozicije u rezultatima pretrage. Temelji su zajednički: jasan sadržaj, dostupan web i točni podaci o firmi. GEO ih nadopunjuje, a ne zamjenjuje.'],
+      ['Kako da moja firma bude vidljiva u ChatGPT-u?', 'Web mora jasno reći što radite, za koga i gdje. Tekst mora biti čitljiv bez JavaScripta, podaci o firmi usklađeni na svim mjestima, a sadržaj mora odgovarati na stvarna pitanja kupaca. Zatim treba mjeriti spominje li vas ChatGPT i ispravljati ono što nedostaje.'],
+      ['Zašto ChatGPT ne zna za moju firmu?', 'Najčešći su razlozi malo sadržaja o firmi na internetu, nejasan opis usluge, tehničke prepreke na webu ili neusklađeni podaci. Nov web treba i vremena da ga sustavi pronađu. Besplatna provjera pokazuje što se događa u vašem slučaju.'],
+      ['Što je llms.txt i treba li ga moja web stranica?', 'llms.txt je kratka tekstualna datoteka koja AI sustavima opisuje vaš web. Mi je koristimo, ali to je mali dodatak: ne jamči spominjanje i ne zamjenjuje dobar sadržaj.'],
+      ['Koliko košta usluga AI vidljivosti?', 'Provjera vidljivosti je besplatna. Cijenu mjesečnog praćenja dogovaramo na upit, nakon što vidimo što vašem webu treba.'],
+      ['Radite li s firmama iz Osijeka i Slavonije?', 'Da. Sjedište nam je u Višnjevcu kraj Osijeka, a usluga je namijenjena firmama i obrtima iz Osijeka, Slavonije i cijele Hrvatske. Sve se može obaviti na daljinu.'],
+    ],
   },
   en: {
     h1: 'AI visibility for small businesses', lead: 'The agent tracks how ChatGPT, Gemini, Perplexity and Google see you, then fixes what keeps you from being found and recommended.',
@@ -261,7 +272,7 @@ const SVC = {
       ['Writes', 'It prepares articles that answer real customer questions. AI content is clearly labelled and a person reviews it before publication.'],
       ['Reports', 'Once a month you get an overview of what changed, what was done and what comes next.'],
     ],
-    whoH: 'Who it is for', whoP: 'Small businesses, sole traders, webshops, family farms and medical or dental practices in Croatia whose customers arrive through the internet or recommendations.',
+    whoH: 'Who it is for', whoP: 'Small businesses, sole traders, webshops, family farms and medical or dental practices in Croatia whose customers arrive through the internet or recommendations. We are based in Višnjevac near Osijek, and the service is for businesses in Osijek, Slavonia and across Croatia.',
     flowH: 'How working together looks',
     flow: [
       ['Free check', 'You send us your website and we check how AI assistants and Google see you.'],
@@ -270,6 +281,16 @@ const SVC = {
     ],
     honestH: 'What we do not promise', honestP: 'Nobody can guarantee a place in the answers of AI assistants. We can guarantee honest measurement, work that is demonstrably useful and real numbers.',
     priceH: 'Pricing', priceP: 'Pricing on request.', cta: 'Free visibility check',
+    faqH: 'Frequently asked questions',
+    faq: [
+      ['What is AI visibility?', 'AI visibility means that ChatGPT, Gemini, Perplexity and Google mention and recommend you when a customer asks about what you offer. It matters more and more for small businesses, because customers often get one answer with a few names instead of a list of links.'],
+      ['What is GEO and how does it differ from SEO?', 'GEO (Generative Engine Optimization) means adapting your website and content so AI assistants understand and cite you in their answers. SEO targets positions in search results. The foundations are shared: clear content, an accessible website and accurate business details. GEO adds to SEO rather than replacing it.'],
+      ['How can my business become visible in ChatGPT?', 'Your website must say clearly what you do, for whom and where. The text must be readable without JavaScript, your business details consistent everywhere, and your content must answer real customer questions. Then you measure whether ChatGPT mentions you and fix what is missing.'],
+      ['Why does ChatGPT not know about my business?', 'The most common reasons are little content about the business online, a vague service description, technical barriers on the website or inconsistent details. A new website also needs time to be discovered. A free check shows what is happening in your case.'],
+      ['What is llms.txt and does my website need it?', 'llms.txt is a short text file that describes your website to AI systems. We use one, but it is a small addition: it does not guarantee mentions and does not replace good content.'],
+      ['How much does the AI visibility service cost?', 'The visibility check is free. Monthly tracking is priced on request, once we see what your website needs.'],
+      ['Do you work with businesses in Osijek and Slavonia?', 'Yes. We are based in Višnjevac near Osijek, and the service is for businesses and sole traders in Osijek, Slavonia and across Croatia. Everything can be done remotely.'],
+    ],
   },
 };
 
@@ -280,12 +301,20 @@ export function service(lang) {
 <section class="sec prose"><h2 class="h2--s">${t.whoH}</h2><p>${t.whoP}</p></section>
 <section class="sec"><h2 class="h2--s">${t.flowH}</h2><ol class="grid grid--3 steps">${t.flow.map(([h, p]) => `<li class="panel"><h3>${h}</h3><p>${p}</p></li>`).join('')}</ol></section>
 <section class="sec prose"><h2 class="h2--s">${t.honestH}</h2><p>${t.honestP}</p></section>
+<section class="sec prose"><h2 class="h2--s">${t.faqH}</h2>${t.faq.map(([q, a]) => `<h3>${q}</h3><p>${a}</p>`).join('')}</section>
 <section class="sec"><div class="band"><div><h2 class="h2--s">${t.priceH}</h2><p>${t.priceP}</p></div><a class="btn btn--solid" href="${r('contact', lang)}">${t.cta}</a></div></section>`;
 }
 
 export const serviceSchema = (lang, orgId) => ({
   '@type': 'Service', name: SVC[lang].h1, serviceType: 'AI visibility', description: SVC[lang].lead,
-  provider: { '@id': orgId }, areaServed: { '@type': 'Country', name: 'Croatia' }, url: `${SITE}${r('service', lang)}`, inLanguage: lang,
+  provider: { '@id': orgId },
+  areaServed: [{ '@type': 'City', name: 'Osijek' }, { '@type': 'AdministrativeArea', name: 'Osijek-Baranja County' }, { '@type': 'Place', name: 'Slavonia' }, { '@type': 'Country', name: 'Croatia' }],
+  url: `${SITE}${r('service', lang)}`, inLanguage: lang,
+});
+
+export const faqSchema = (lang) => ({
+  '@type': 'FAQPage', url: `${SITE}${r('service', lang)}`, inLanguage: lang,
+  mainEntity: SVC[lang].faq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
 });
 
 export function blog(lang, posts) {
@@ -314,7 +343,7 @@ export function about(lang) {
   <p>Način na koji ljudi traže firme mijenja se brže nego što ga većina firmi stigne pratiti. Sve više odluka počinje pitanjem postavljenim AI asistentu, a ne klasičnom pretragom. Velike tvrtke za to imaju timove i budžete, a mala firma obično ni ne zna što ti asistenti o njoj govore.</p>
   <p>Mi to mijenjamo: složenu tehnologiju pretvaramo u jasne korake i rezultate koje vlasnik firme može pratiti bez tehničkog predznanja.</p>
   <h2 class="h2--s">Kako radimo</h2>
-  <p>Spajamo AI agente i ljudsku procjenu. Agenti neumorno mjere, uspoređuju i pripremaju izmjene, a čovjek odlučuje što se objavljuje. Tako dobivate brzinu automatizacije i sigurnost da svaka promjena ima smisla za vašu firmu.</p>
+  <p>Spajamo AI agente i ljudsku procjenu. Agenti mjere, uspoređuju i pripremaju izmjene, a čovjek odlučuje što se objavljuje. Tako dobivate brzinu automatizacije i sigurnost da svaka promjena ima smisla za vašu firmu.</p>
   <h2 class="h2--s">Dokazujemo na sebi</h2>
   <p>Ne tražimo da nam vjerujete na riječ. Uslugu smo prvo pustili na vlastiti web, a rezultate objavljujemo u javnom <a href="${r('experiment', lang)}">eksperimentu</a>, sa stvarnim brojevima.</p>
   <p>Tehneo razvija i autonomne sustave i AI data usluge.</p>
@@ -327,7 +356,7 @@ export function about(lang) {
   <p>The way people look for businesses is changing faster than most businesses can follow. More and more decisions start with a question to an AI assistant rather than a classic search. Large companies have teams and budgets for this, while a small business usually does not even know what those assistants say about it.</p>
   <p>We change that by turning complex technology into clear steps and results an owner can follow without technical knowledge.</p>
   <h2 class="h2--s">How we work</h2>
-  <p>We combine AI agents with human judgement. Agents tirelessly measure, compare and prepare changes, and a person decides what gets published. You get the speed of automation and the confidence that every change makes sense for your business.</p>
+  <p>We combine AI agents with human judgement. Agents measure, compare and prepare changes, and a person decides what gets published. You get the speed of automation and the confidence that every change makes sense for your business.</p>
   <h2 class="h2--s">We prove it on ourselves</h2>
   <p>We do not ask you to take our word for it. We ran the service on our own website first and publish the results in a public <a href="${r('experiment', lang)}">experiment</a>, with real numbers.</p>
   <p>Tehneo also develops autonomous systems and AI data services.</p>

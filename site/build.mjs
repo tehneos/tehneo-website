@@ -48,7 +48,7 @@ mkdirSync(dist);
 for (const lang of ['hr', 'en']) {
   page('home', lang, P.home(lang, postsIn(lang)), { script: '/js/hero.js' });
   page('experiment', lang, P.experiment(lang, experimentData));
-  page('service', lang, P.service(lang), { schema: [P.serviceSchema(lang, ORG_ID)] });
+  page('service', lang, P.service(lang), { schema: [P.serviceSchema(lang, ORG_ID), P.faqSchema(lang)] });
   page('blog', lang, P.blog(lang, postsIn(lang)));
   page('about', lang, P.about(lang));
   page('contact', lang, P.contact(lang));
@@ -93,17 +93,17 @@ Sitemap: ${SITE}/sitemap.xml
 
 writeFileSync(join(dist, 'llms.txt'), `# Tehneo
 
-> Tehneo d.o.o. je hrvatska tvrtka iz Osijeka koja malim firmama pomaže da ih AI asistenti (ChatGPT, Gemini, Perplexity) i Google pronađu i preporuče.
+> Tehneo d.o.o. je hrvatska tvrtka iz Višnjevca kraj Osijeka koja malim firmama pomaže da ih AI asistenti (ChatGPT, Gemini, Perplexity) i Google pronađu i preporuče.
 
-Usluga: AI vidljivost za male firme, obrte, webshopove, OPG-ove i ordinacije u Hrvatskoj. Mjerimo vidljivost, popravljamo web, pišemo sadržaj i izvještavamo. Suradnja počinje besplatnom provjerom. Cijene na upit.
+Usluga: AI vidljivost (GEO) za male firme, obrte, webshopove, OPG-ove i ordinacije u Osijeku, Slavoniji i cijeloj Hrvatskoj. Mjerimo vidljivost, popravljamo web, pišemo sadržaj i izvještavamo. Suradnja počinje besplatnom provjerom. Cijene na upit.
 
-Tehneo je vlastiti prvi klijent: AI agent radi na ovom webu, sve izmjene odobrava čovjek, a rezultate objavljujemo javno.
+Tehneo je vlastiti prvi klijent: AI agent mjeri vidljivost i priprema izmjene, sve izmjene odobrava čovjek, a rezultate objavljujemo javno.
 
 ## Ključne stranice
 
 - [Početna](${SITE}/): pregled usluge
-- [Eksperiment](${SITE}/eksperiment/): javni tjedni rezultati i dnevnik promjena
-- [Usluga](${SITE}/usluga/): što agent radi i kako izgleda suradnja
+- [Eksperiment](${SITE}/eksperiment/): javni rezultati i dnevnik promjena
+- [Usluga](${SITE}/usluga/): što agent radi, kako izgleda suradnja i česta pitanja
 - [Blog](${SITE}/blog/): savjeti i rezultati
 - [O nama](${SITE}/o-nama/): o tvrtki
 - [Kontakt](${SITE}/kontakt/): besplatna provjera vidljivosti, info@tehneo.hr
