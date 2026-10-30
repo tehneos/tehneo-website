@@ -12,7 +12,7 @@ const M = 40;          // overscan around the viewport for parallax
 const SPEED = 760;     // signal wavefront, px/s
 const TAIL = 150;
 
-export function initBoard(canvas, place = {}) {
+export function initBoard(canvas) {
   const ctx = canvas.getContext('2d');
   const layer = document.createElement('canvas');
   const lctx = layer.getContext('2d');
@@ -37,10 +37,10 @@ export function initBoard(canvas, place = {}) {
     const occ = new Uint8Array(cols * rows);
     const rand = rng(1907);
 
-    logo.size = (mobile ? Math.min(W * 0.72, H * 0.42) : Math.min(W * 0.36, H * 0.52, 560)) * (place.scale ?? 1);
+    logo.size = mobile ? Math.min(W * 0.72, H * 0.42) : Math.min(W * 0.36, H * 0.52, 560);
     logo.s = logo.size / 512;
-    logo.cx = W * (place.cx ?? 0.5);
-    logo.cy = H * (place.cy ?? (mobile ? 0.36 : 0.42));
+    logo.cx = W / 2;
+    logo.cy = mobile ? H * 0.36 : H * 0.42;
 
     // keep the area behind the mark clear
     const half = logo.size * 0.6;
