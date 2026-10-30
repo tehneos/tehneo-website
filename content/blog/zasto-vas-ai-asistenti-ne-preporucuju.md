@@ -6,7 +6,7 @@ description: Pet čestih razloga zbog kojih ChatGPT, Gemini i Perplexity ne spom
 author: Tehneo
 category: Savjeti
 ai_assisted: true
-draft: true
+draft: false
 ---
 Kad netko pita ChatGPT tko u njegovu gradu radi ono što radite vi, asistent ne pretražuje internet kao čovjek. Skuplja ono što je pročitao, spaja izvore i bira nekoliko imena u koja je dovoljno siguran. Ako vaša firma nije među njima, razlog je najčešće prilično prizeman. Evo pet koje najčešće vrijedi provjeriti.
 

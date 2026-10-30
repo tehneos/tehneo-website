@@ -6,7 +6,7 @@ description: Tehneo postaje vlastiti prvi klijent. AI agent preuzima našu vidlj
 author: Tehneo
 category: Eksperiment
 ai_assisted: true
-draft: true
+draft: false
 ---
 Nudimo uslugu AI vidljivosti za male firme u Hrvatskoj. Prije nego što je ponudimo ikome drugome, isprobavamo je na sebi. Tehneo je klijent nula: naš AI agent preuzima vidljivost našeg weba, a rezultate objavljujemo javno, i dobre i loše.
 
