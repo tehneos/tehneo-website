@@ -1,4 +1,7 @@
 {
+  "buildCommand": "node site/build.mjs",
+  "outputDirectory": "dist",
+  "trailingSlash": true,
   "redirects": [
     {
       "source": "/",
@@ -105,11 +108,6 @@
       "source": "/potpis",
       "destination": "/",
       "permanent": false
-    },
-    {
-      "source": "/privatnost",
-      "destination": "/privatnost/",
-      "permanent": true
     }
   ]
 }
