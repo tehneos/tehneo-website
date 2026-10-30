@@ -11,7 +11,7 @@ export const META = {
     experiment: ['Agent uživo: javni eksperiment AI vidljivosti | Tehneo', 'AI agent preuzima vidljivost Tehnea. Svaki tjedan mjerimo rezultat i objavljujemo stvarne zbirne brojke i dnevnik promjena.'],
     service: ['Usluga AI vidljivosti za male firme | Tehneo', 'Što radi Tehneo agent: mjeri vidljivost u AI odgovorima, popravlja web, piše sadržaj i izvještava. Suradnja počinje besplatnom provjerom.'],
     blog: ['Blog o AI vidljivosti | Tehneo', 'Savjeti i rezultati eksperimenata o tome kako male firme u Hrvatskoj postaju vidljive u odgovorima AI asistenata.'],
-    about: ['O nama | Tehneo d.o.o.', 'Tehneo d.o.o. je hrvatska tvrtka iz Osijeka koja malim firmama pomaže da ih AI asistenti pronađu i preporuče.'],
+    about: ['O nama | Tehneo d.o.o.', 'Tehneo je hrvatska tehnološka tvrtka iz Osijeka specijalizirana za AI vidljivost malih firmi: da ih AI asistenti pronađu, razumiju i preporuče.'],
     contact: ['Besplatna provjera vidljivosti | Tehneo', 'Pošaljite nam web svoje firme i javit ćemo vam kako vas vide ChatGPT, Gemini, Perplexity i Google. Kontakt: info@tehneo.hr.'],
     thanks: ['Poruka je poslana | Tehneo', 'Vaša poruka je poslana. Javit ćemo vam se e-poštom.'],
     failed: ['Poruka nije poslana | Tehneo', 'Poruku nije bilo moguće poslati. Pišite nam izravno na info@tehneo.hr.'],
@@ -21,7 +21,7 @@ export const META = {
     experiment: ['Live agent: a public AI visibility experiment | Tehneo', 'An AI agent takes over Tehneo\'s visibility. We measure the result every week and publish the real numbers and a change log.'],
     service: ['AI visibility service for small businesses | Tehneo', 'What the Tehneo agent does: measures visibility in AI answers, fixes your website, writes content and reports. Work starts with a free check.'],
     blog: ['Blog about AI visibility | Tehneo', 'Advice and experiment results on how small Croatian businesses become visible in the answers of AI assistants.'],
-    about: ['About us | Tehneo d.o.o.', 'Tehneo d.o.o. is a Croatian company from Osijek that helps small businesses get found and recommended by AI assistants.'],
+    about: ['About us | Tehneo d.o.o.', 'Tehneo is a Croatian technology company from Osijek specialising in AI visibility for small businesses: found, understood and recommended by AI assistants.'],
     contact: ['Free visibility check | Tehneo', 'Send us your business website and we will tell you how ChatGPT, Gemini, Perplexity and Google see you. Contact: info@tehneo.hr.'],
     thanks: ['Message sent | Tehneo', 'Your message has been sent. We will reply by email.'],
     failed: ['Message not sent | Tehneo', 'Your message could not be sent. Please write to info@tehneo.hr directly.'],
@@ -296,19 +296,27 @@ export function post(lang, p) {
 export function about(lang) {
   if (lang === 'hr') return `<section class="sec sec--head prose">
   <h1>O nama</h1>
-  <p class="lead">Tehneo d.o.o. je hrvatska tvrtka iz Osijeka. Vlasnik je Marko Balikić.</p>
-  <h2 class="h2--s">Zašto radimo ovo</h2>
-  <p>Ljudi sve češće pitaju AI asistente koga angažirati i gdje kupiti. Velike tvrtke za to imaju timove i budžete, a mala firma obično ni ne zna što ti asistenti o njoj govore.</p>
-  <p>Zato smo uslugu prvo pustili na sebe. Naš AI agent radi na webu Tehnea, a rezultate objavljujemo u javnom <a href="${r('experiment', lang)}">eksperimentu</a>, sa stvarnim brojevima.</p>
+  <p class="lead">Tehneo je hrvatska tehnološka tvrtka iz Osijeka specijalizirana za AI vidljivost. Pomažemo malim firmama da ih ChatGPT, Gemini, Perplexity i Google pronađu, razumiju i preporuče.</p>
+  <h2 class="h2--s">Zašto AI vidljivost</h2>
+  <p>Način na koji ljudi traže firme mijenja se brže nego što ga većina firmi stigne pratiti. Sve više odluka počinje pitanjem postavljenim AI asistentu, a ne klasičnom pretragom. Velike tvrtke za to imaju timove i budžete, a mala firma obično ni ne zna što ti asistenti o njoj govore.</p>
+  <p>Mi to mijenjamo: složenu tehnologiju pretvaramo u jasne korake i rezultate koje vlasnik firme može pratiti bez tehničkog predznanja.</p>
+  <h2 class="h2--s">Kako radimo</h2>
+  <p>Spajamo AI agente i ljudsku procjenu. Agenti neumorno mjere, uspoređuju i pripremaju izmjene, a čovjek odlučuje što se objavljuje. Tako dobivate brzinu automatizacije i sigurnost da svaka promjena ima smisla za vašu firmu.</p>
+  <h2 class="h2--s">Dokazujemo na sebi</h2>
+  <p>Ne tražimo da nam vjerujete na riječ. Uslugu smo prvo pustili na vlastiti web, a rezultate objavljujemo u javnom <a href="${r('experiment', lang)}">eksperimentu</a>, sa stvarnim brojevima.</p>
   <p>Tehneo razvija i autonomne sustave i AI data usluge.</p>
   <p><a class="btn btn--solid" href="${r('contact', lang)}">Kontaktirajte nas</a></p>
 </section>`;
   return `<section class="sec sec--head prose">
   <h1>About us</h1>
-  <p class="lead">Tehneo d.o.o. is a Croatian company from Osijek, owned by Marko Balikić.</p>
-  <h2 class="h2--s">Why we do this</h2>
-  <p>People increasingly ask AI assistants whom to hire and where to buy. Large companies have teams and budgets for this, while a small business usually does not even know what those assistants say about it.</p>
-  <p>So we tried the service on ourselves first. Our AI agent works on Tehneo's website and we publish the results in a public <a href="${r('experiment', lang)}">experiment</a>, with real numbers.</p>
+  <p class="lead">Tehneo is a Croatian technology company from Osijek specialising in AI visibility. We help small businesses get found, understood and recommended by ChatGPT, Gemini, Perplexity and Google.</p>
+  <h2 class="h2--s">Why AI visibility</h2>
+  <p>The way people look for businesses is changing faster than most businesses can follow. More and more decisions start with a question to an AI assistant rather than a classic search. Large companies have teams and budgets for this, while a small business usually does not even know what those assistants say about it.</p>
+  <p>We change that by turning complex technology into clear steps and results an owner can follow without technical knowledge.</p>
+  <h2 class="h2--s">How we work</h2>
+  <p>We combine AI agents with human judgement. Agents tirelessly measure, compare and prepare changes, and a person decides what gets published. You get the speed of automation and the confidence that every change makes sense for your business.</p>
+  <h2 class="h2--s">We prove it on ourselves</h2>
+  <p>We do not ask you to take our word for it. We ran the service on our own website first and publish the results in a public <a href="${r('experiment', lang)}">experiment</a>, with real numbers.</p>
   <p>Tehneo also develops autonomous systems and AI data services.</p>
   <p><a class="btn btn--solid" href="${r('contact', lang)}">Contact us</a></p>
 </section>`;
