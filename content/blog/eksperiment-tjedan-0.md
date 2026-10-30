@@ -14,7 +14,7 @@ Ovo je tjedan 0, polazna točka. Još nema rezultata i namjerno ih ne nagađamo.
 
 ## Zašto to radimo
 
-Sve više ljudi umjesto pretraživanja postavi pitanje ChatGPT-u, Geminiju ili Perplexityju i dobije odgovor s nekoliko imena. Za malu firmu to je novi problem: teško je znati pojavljuje li se u tim odgovorima, a još teže što na to stvarno utječe.
+Sve više ljudi umjesto pretraživanja postavi pitanje AI asistentu i dobije odgovor s nekoliko imena. Za malu firmu to je novi problem: teško je znati pojavljuje li se u tim odgovorima, a još teže što na to stvarno utječe.
 
 O tome se puno govori, a malo pokazuje. Zato smo odlučili pokazati. Ako metoda radi na našem webu, imat ćemo dokaz. Ako ne radi, to ćemo znati prije nego što je prodamo drugima, a znat ćete i vi.
 
@@ -23,8 +23,8 @@ O tome se puno govori, a malo pokazuje. Zato smo odlučili pokazati. Ako metoda 
 Svaki tjedan ponavljamo isto mjerenje, istim postupkom:
 
 - **Fiksni skup pitanja.** Pitanja kakva bi postavio stvaran kupac. Skup se ne mijenja usred eksperimenta, kako bismo mogli uspoređivati tjedne.
-- **AI asistenti.** Ista pitanja postavljamo ChatGPT-u, Geminiju i Perplexityju i bilježimo spominje li odgovor Tehneo.
-- **Google.** Pratimo pozicije našeg weba za ta pitanja.
+- **AI asistenti.** Ista pitanja postavljamo AI asistentima preko službenih API-ja, s uključenim web pretraživanjem, i bilježimo spominje li odgovor Tehneo. Polazno mjerenje obuhvatilo je Claude i početak ChatGPT-a, a Gemini i Perplexity tek dodajemo.
+- **Google.** Pratit ćemo pozicije našeg weba čim prikupimo dovoljno podataka.
 - **Stvarni upiti.** Brojimo upite koji stignu preko weba, jer je to na kraju jedini broj koji firmi nešto znači.
 
 Glavni pokazatelj je udio AI odgovora koji spominju Tehneo. Uz njega objavljujemo broj pitanja u testu, Google pozicije i broj upita. Sve je na stranici [Eksperiment](/eksperiment/).
@@ -53,6 +53,6 @@ Eksperiment vrijedi samo ako se pravila poštuju:
 
 ## Što slijedi
 
-Prvi korak je polazno mjerenje. Čim završi, brojevi će se pojaviti na stranici [Eksperiment](/eksperiment/), a agent kreće s prvim promjenama.
+Polazno mjerenje je napravljeno, a rezultate smo objavili u tekstu [Tjedan 0: krećemo od nule](/blog/eksperiment-tjedan-0-rezultati/) i na stranici [Eksperiment](/eksperiment/).
 
 Ako vas zanima gdje vaša firma stoji u odgovorima AI asistenata, [zatražite besplatnu provjeru vidljivosti](/kontakt/).

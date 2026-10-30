@@ -131,7 +131,9 @@ const EXP = {
   hr: {
     h1: 'Agent uživo', lead: 'AI agent preuzima vidljivost Tehnea, a mi svaki tjedan mjerimo rezultat. Svi brojevi na ovoj stranici su stvarni.',
     note: 'Ovu stranicu i promjene u dnevniku stvara ili pomaže stvarati AI agent. Sve izmjene odobrava čovjek.',
-    status: (w) => (w ? `Tjedan ${w}` : 'Tjedan 0 – mjerenje u tijeku'),
+    status: (w, done) => (w ? `Tjedan ${w}` : done ? 'Tjedan 0 – polazno mjerenje' : 'Tjedan 0 – mjerenje u tijeku'),
+    engines: 'Rezultati po sustavu', engine: 'Sustav', measured: 'Izmjerenih odgovora', mentioned: 'Spominje Tehneo', ofQuestions: (n) => `od ${n} pitanja`,
+    enginesNote: 'Mjerimo preko službenih API-ja s uključenim web pretraživanjem. Odgovori se mogu razlikovati od onoga što korisnik vidi u aplikaciji. ChatGPT je tek započet, a Gemini i Perplexity još nisu izmjereni.',
     updated: 'Zadnje ažuriranje', how: 'Kako eksperiment radi',
     howList: [
       ['Agent preuzima.', 'AI agent predlaže i priprema promjene na webu i sadržaju Tehnea.'],
@@ -148,7 +150,9 @@ const EXP = {
   en: {
     h1: 'Live agent', lead: 'An AI agent takes over Tehneo\'s visibility and we measure the result every week. All numbers on this page are real.',
     note: 'This page and the changes in the log are created or assisted by an AI agent. A person approves every change.',
-    status: (w) => (w ? `Week ${w}` : 'Week 0 – measurement in progress'),
+    status: (w, done) => (w ? `Week ${w}` : done ? 'Week 0 – baseline measurement' : 'Week 0 – measurement in progress'),
+    engines: 'Results by system', engine: 'System', measured: 'Answers measured', mentioned: 'Mentions Tehneo', ofQuestions: (n) => `of ${n} questions`,
+    enginesNote: 'We measure through official APIs with web search enabled. Answers can differ from what a user sees in the app. ChatGPT has only just started, and Gemini and Perplexity have not been measured yet.',
     updated: 'Last updated', how: 'How the experiment works',
     howList: [
       ['The agent takes over.', 'An AI agent proposes and prepares changes to Tehneo\'s website and content.'],
@@ -178,7 +182,7 @@ function chart(points, t) {
       <polyline points="${points.map((p, i) => `${x(i)},${y(p.aiMentionShare)}`).join(' ')}"/>
       ${points.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.aiMentionShare)}" r="4"/><text x="${x(i)}" y="${H - 10}" text-anchor="middle">${p.week}</text>`).join('')}
     </svg>
-    <figcaption class="mono">${t.chart} (${t.week.toLowerCase()} 1–${points.at(-1).week})</figcaption>
+    <figcaption class="mono">${t.chart} (${t.week.toLowerCase()} ${points[0].week}–${points.at(-1).week})</figcaption>
   </figure>`;
 }
 
@@ -189,6 +193,7 @@ export function experiment(lang, data) {
     const v = data.metrics[key];
     return `<li class="metric"><p class="metric__value">${v === null ? '—' : esc(fmt[key](v))}</p><p class="metric__label">${label}</p></li>`;
   }).join('');
+  const engines = (data.engines || []).map((e) => `<tr><td>${esc(e.name)}</td><td>${e.measured} ${t.ofQuestions(data.metrics.questions)}</td><td>${e.mentioned}</td></tr>`).join('');
   const rows = [...data.changelog].reverse().map((c) => `<tr><td><time datetime="${esc(c.date)}">${formatDate(c.date, lang)}</time></td><td>${esc(c.change[lang] ?? c.change.hr)}</td></tr>`).join('')
     || `<tr><td colspan="2" class="empty">${t.logEmpty}</td></tr>`;
   return `<section class="sec sec--head">
@@ -197,10 +202,18 @@ export function experiment(lang, data) {
   ${aiNote(t.note)}
 </section>
 <section class="sec">
-  <p class="status mono"><i></i>${t.status(data.week)}${data.updated ? ` · ${t.updated}: ${formatDate(data.updated, lang)}` : ''}</p>
+  <p class="status mono"><i></i>${t.status(data.week, Boolean(data.updated))}${data.updated ? ` · ${t.updated}: ${formatDate(data.updated, lang)}` : ''}</p>
   <ul class="grid grid--4 metrics">${cards}</ul>
 </section>
-<section class="sec">
+${engines ? `<section class="sec">
+  <h2 class="h2--s">${t.engines}</h2>
+  <div class="table"><table>
+    <thead><tr><th scope="col">${t.engine}</th><th scope="col">${t.measured}</th><th scope="col">${t.mentioned}</th></tr></thead>
+    <tbody>${engines}</tbody>
+  </table></div>
+  <p class="limits">${t.enginesNote}</p>
+</section>
+` : ''}<section class="sec">
   <h2 class="h2--s">${t.chart}</h2>
   ${chart(data.weekly, t)}
 </section>

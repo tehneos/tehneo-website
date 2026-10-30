@@ -1,12 +1,18 @@
 {
   "week": 0,
-  "updated": null,
+  "updated": "2026-10-30",
   "metrics": {
-    "aiMentionShare": null,
-    "questions": null,
+    "aiMentionShare": 0,
+    "questions": 27,
     "googlePosition": null,
     "leads": null
   },
-  "weekly": [],
+  "engines": [
+    { "name": "Claude", "measured": 27, "mentioned": 0 },
+    { "name": "ChatGPT", "measured": 2, "mentioned": 0 }
+  ],
+  "weekly": [
+    { "week": 0, "aiMentionShare": 0 }
+  ],
   "changelog": []
 }
