@@ -283,7 +283,7 @@ export function blog(lang, posts) {
 }
 
 export function post(lang, p) {
-  const label = 'Pisano uz pomoć AI-ja. Tekst je pregledao čovjek.';
+  const label = p.category === 'Savjeti' ? 'Pripremljeno uz pomoć AI-ja, uredio Tehneo.' : 'Pisano uz pomoć AI-ja. Tekst je pregledao čovjek.';
   return `<article class="sec sec--head article">
   ${p.draft ? '<p class="draft mono">Nacrt – nije objavljeno</p>' : ''}
   <p class="mono post-card__meta">${esc(p.category)} · <time datetime="${p.date}">${formatDate(p.date, lang)}</time> · ${esc(p.author)}</p>
