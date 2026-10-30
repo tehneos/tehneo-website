@@ -334,7 +334,7 @@ export function contact(lang) {
   const field = (name, label, type, extra = '') => `<div class="field"><label for="${name}">${label}</label><input id="${name}" name="${name}" type="${type}" ${extra}></div>`;
   return `<section class="sec sec--head"><h1>${t.h1}</h1><p class="lead">${t.lead}</p></section>
 <section class="sec contact">
-  <form class="form" action="/api/contact" method="post">
+  <form class="form" action="/api/contact/" method="post">
     <input type="hidden" name="lang" value="${lang}">
     <div class="field field--trap" aria-hidden="true"><label for="website2">Website 2</label><input id="website2" name="website2" tabindex="-1" autocomplete="off"></div>
     ${field('name', t.name, 'text', 'required maxlength="120" autocomplete="name"')}
